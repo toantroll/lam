@@ -5,6 +5,7 @@
 package manageuser.dao;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 /**
  * Chứa phương thức kết nối với csdl
@@ -32,6 +33,6 @@ public interface BaseDao {
 	 * lấy kết nối sử dụng Transaction
 	 * @return kết nối 
 	 */
-	public Connection getConnectionTransaction();
+	public Connection getConnectionTransaction() throws SQLException ;
 	
 }

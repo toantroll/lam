@@ -21,6 +21,7 @@ public class BaseDaoImpl implements BaseDao{
 	private String dirver;
 	private String user;
 	private String pass;
+	Connection conn = null;
 	protected static Connection connTransaction = null; 
 	
 	/**
@@ -39,23 +40,17 @@ public class BaseDaoImpl implements BaseDao{
 	 */
 	@Override
 	public Connection getConnection() {
-		Connection conn = null;
 		try {		
 			Class.forName(dirver);
 			conn = DriverManager.getConnection(url, user, pass);
-			if(conn != null){
-				Class.forName(dirver);
-				conn = DriverManager.getConnection(url, user, pass);
-			}
+			
 		} catch (ClassNotFoundException e) {
 			System.out.println("Có lỗi xảy ra ClassNotFoundException");
 		} catch (SQLException e) {
 			System.out.println("Có lỗi xảy ra SQLException");
 		}
-		
 		return conn;
 	}
-
 
 	/* (non-Javadoc)
 	 * @see manageuser.dao.BaseDao#closeConnectionTrasaction(java.sql.Connection)
@@ -91,16 +86,10 @@ public class BaseDaoImpl implements BaseDao{
 	 * @see manageuser.dao.BaseDao#getConnectionTransection()
 	 */
 	@Override
-	public Connection getConnectionTransaction() {
-		try {		
-			if(connTransaction != null){
-				Class.forName(dirver);
-				connTransaction = DriverManager.getConnection(url, user, pass);
-			}
-		} catch (ClassNotFoundException e) {
-			System.out.println("Có lỗi xảy ra ClassNotFoundException");
-		} catch (SQLException e) {
-			System.out.println("Có lỗi xảy ra SQLException");
+	public Connection getConnectionTransaction() throws SQLException {
+		if(connTransaction == null) {			
+			connTransaction = getConnection();
+			connTransaction.setAutoCommit(false);
 		}
 		return connTransaction;
 	}
