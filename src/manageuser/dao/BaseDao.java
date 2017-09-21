@@ -22,7 +22,7 @@ public interface BaseDao {
 	 * Thực hiện xóa connection
 	 * @param conn tham số kiểu Connection
 	 */
-	public void closeConnection(Connection conn);
+	public void closeConnection();
 	
 	/**
 	 * Thực hiện rollback connection

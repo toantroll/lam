@@ -19,11 +19,17 @@ public interface UserDao {
 	 * @param user đối tượng đăng nhập
 	 * @return true nếu thêm thành false nếu thêm không thành công
 	 */
-	public void createUser(Users user) throws SQLException; 
+	public void insertUser(Users user) throws SQLException; 
 	/**
 	 * chỉnh sửa user 
 	 * @param user đối tượng use cần thay đổi 
 	 * @return
 	 */
-	public boolean editUser(Users user);
+	public void editUser(Users user) throws SQLException;
+	/**
+	 * khóa khả năng đăng nhập
+	 * @param studentId
+	 * @throws SQLException ném ngoại lệ nếu update không thành công 
+	 */
+	public void deleteUser(int studentId) throws SQLException;
 }
