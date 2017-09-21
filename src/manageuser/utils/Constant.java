@@ -12,5 +12,8 @@ package manageuser.utils;
 public class Constant {
 	public static final String FILE_NAME_PROPERTIES = "database.properties";
 	public static final String ERR_MESS_PROPERTIES = "error_message.properties";
+	public static final int ROLE_UNACTIVE = 5;
+	public static final int STATUS_DELETE = 0;
+	
 }
 	
