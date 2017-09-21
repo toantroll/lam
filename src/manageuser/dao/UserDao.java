@@ -5,6 +5,8 @@
  */
 package manageuser.dao;
 
+import java.sql.SQLException;
+
 import manageuser.entities.Users;
 
 /**
@@ -17,6 +19,11 @@ public interface UserDao {
 	 * @param user đối tượng đăng nhập
 	 * @return true nếu thêm thành false nếu thêm không thành công
 	 */
-	public boolean addUser(Users user); 
+	public void createUser(Users user) throws SQLException; 
+	/**
+	 * chỉnh sửa user 
+	 * @param user đối tượng use cần thay đổi 
+	 * @return
+	 */
 	public boolean editUser(Users user);
 }

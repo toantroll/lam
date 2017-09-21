@@ -93,4 +93,13 @@ public class BaseDaoImpl implements BaseDao{
 		}
 		return connTransaction;
 	}
+
+
+	/* (non-Javadoc)
+	 * @see manageuser.dao.BaseDao#Commit()
+	 */
+	@Override
+	public void Commit() throws SQLException {
+		connTransaction.commit();
+	}
 }

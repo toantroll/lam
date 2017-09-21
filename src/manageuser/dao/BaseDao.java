@@ -34,5 +34,10 @@ public interface BaseDao {
 	 * @return kết nối 
 	 */
 	public Connection getConnectionTransaction() throws SQLException ;
+	/**
+	 * lưu dữ liệu Transaction vào dataBase
+	 * @throws SQLException ném ngoại lệ nếu commit lỗi 
+	 */
+	public void Commit() throws SQLException;
 	
 }

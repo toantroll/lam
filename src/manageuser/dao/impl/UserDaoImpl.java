@@ -21,22 +21,14 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 	 * @see manageuser.dao.UserDao#addUser(manageuser.entities.Users)
 	 */
 	@Override
-	public boolean addUser(Users user) {
+	public void createUser(Users user) throws SQLException {
 		String sql = "INSERT INTO Users (id, username, password, role_id) Values (?,?,?,?)";
-		try {
-			int count = 1;
-			PreparedStatement preparedStatement = conn.prepareStatement(sql);
-			preparedStatement.setString(count++,user.getUserID());
-			preparedStatement.setString(count++,user.getUserName());
-			preparedStatement.setInt(count++, user.getRoleId());
-			preparedStatement.executeUpdate(sql);
-			return true;
-		} catch (SQLException e) {
-			System.out.println("Lỗi thêm User");
-			return false;
-		} finally {
-			closeConnection(conn);
-		}
+		int count = 1;
+		PreparedStatement preparedStatement = getConnectionTransaction().prepareStatement(sql);
+		preparedStatement.setString(count++,user.getUserID());
+		preparedStatement.setString(count++,user.getUserName());
+		preparedStatement.setInt(count++, user.getRoleId());
+		preparedStatement.executeUpdate(sql);
 	}
 
 	/* (non-Javadoc)
