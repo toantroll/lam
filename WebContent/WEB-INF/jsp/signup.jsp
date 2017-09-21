@@ -15,9 +15,21 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/bootstrap-datepicker.js"></script>
     <script src="js/la-management.js"></script>
+    <style type="text/css">
+    	.err{
+    		color: red;
+    	}
+    </style>
 </head>
 <body class="login">
-
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.10&appId=1460539560694186";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 <div class="reg-container">
     <div class="g-row">
         <div class="one-half centered">
@@ -53,12 +65,7 @@
             <div class="box-content">
                 <div class="tab-content" id="tab1">
                     <h3>This is tab1!</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <div class="fb-comments" data-href="http://localhost:8081/LA_Management/RegisterController" data-width="600px" data-numposts="5"></div>
                 </div>
                 <div class="tab-content" id="tab2">
                     <h3>This is tab2!</h3>
@@ -75,6 +82,9 @@
                     cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
                     proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                 </div>
+                <div class="tab-content" id="tab3">
+                	<div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-width="600px" data-numposts="5"></div>
+            	</div>
             </div>
 
             <div class="reg-content register">
@@ -88,10 +98,11 @@
                         <ul>
                             <li>
                                 <input id="txtHoTen" name="full_name" type="text" placeholder="Họ và tên" autofocus>
-                                <div>
-                                	<c:forEach var = "error" items = "${listError}">
-                                		${error.value }
-                                	</c:forEach>
+                                <div class = "err">
+                                	<c:if test="${listError.containsKey('full_name')}">${listError.get('full_name')}</c:if>
+                                	<%-- <c:forEach var = "error" items = "${listError}">
+                                		${error.key == 'full_name' }
+                                	</c:forEach> --%>
                                 </div>
                             </li>
                             
@@ -119,8 +130,11 @@
                             <li>
                                 <label class="lbl-slb">
                                     <select>
-                                        <option selected>Chưa tốt nghiệp</option>
-                                        <option>Đã tốt nghiệp</option>
+                                    	<option >--Trạng thái tốt nghiệp--</option>
+                                    	<c:forEach var = "status" items = "${listStatus}">
+                                    		<option value = "${status.id}">${status.nameStatus}</option>
+                                    	</c:forEach>
+                                        
                                     </select>
                                 </label>
                             </li>

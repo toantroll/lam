@@ -40,7 +40,7 @@ public class StatusStudentDaoImpl extends BaseDaoImpl implements StatusStudentDa
 		} catch (SQLException e) {
 			System.out.println("Lỗi sql statusStudent " + e.getMessage());
 		}finally {
-			closeConnection(conn);
+			closeConnection();
 		}
 		return listStatus;
 	}

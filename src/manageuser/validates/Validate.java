@@ -15,7 +15,7 @@ import manageuser.utils.ErrorMessageProperties;
  */
 public class Validate {
 	public static HashMap<String, String> validateRegister(Register register){
-		HashMap<String, String> listError = null;
+		HashMap<String, String> listError = new HashMap<>();
 		if(Common.checkEmpty(register.getFullName())){
 			listError.put("full_name", ErrorMessageProperties.getErrorMessage("ERR_FULLNAME_EMPTY"));
 		}

@@ -42,7 +42,7 @@ public class RegisterDaoImpl extends BaseDaoImpl implements RegisterDao{
 			System.out.println("Lỗi câu lệnh sql " + e.getMessage());
 			return false;
 		}finally {
-			closeConnection(conn);
+			closeConnection();
 		}
 	}
 

@@ -5,6 +5,7 @@ package manageuser.logic.impl;
 
 import java.util.ArrayList;
 
+import manageuser.dao.impl.StatusStudentDaoImpl;
 import manageuser.entities.StatusStudent;
 import manageuser.logic.StatusStudentLogic;
 
@@ -19,7 +20,7 @@ public class StatusStudentLogicImpl implements StatusStudentLogic{
 	 */
 	@Override
 	public ArrayList<StatusStudent> getStatus() {
-		StatusStudentLogicImpl statusStudentLogicImpl = new StatusStudentLogicImpl();
+		StatusStudentDaoImpl statusStudentLogicImpl = new StatusStudentDaoImpl();
 		return statusStudentLogicImpl.getStatus();
 	}
 	

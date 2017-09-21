@@ -43,11 +43,12 @@ public class RegisterController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		setDataLogic(request, response);
 		Register register = new Register();
 		String fullName = request.getParameter("full_name");
 		register.setFullName(fullName);
 		HashMap<String, String> listError = Validate.validateRegister(register);
-		if(listError != null){
+		if(listError.size() != 0){
 			request.setAttribute("listError", listError);
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/signup.jsp");
