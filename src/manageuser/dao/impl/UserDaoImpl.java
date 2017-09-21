@@ -22,10 +22,9 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 	 */
 	@Override
 	public void createUser(Users user) throws SQLException {
-		String sql = "INSERT INTO Users (id, username, password, role_id) Values (?,?,?,?)";
+		String sql = "INSERT INTO Users (username, password, role_id) Values (?,?,?)";
 		int count = 1;
 		PreparedStatement preparedStatement = getConnectionTransaction().prepareStatement(sql);
-		preparedStatement.setString(count++,user.getUserID());
 		preparedStatement.setString(count++,user.getUserName());
 		preparedStatement.setInt(count++, user.getRoleId());
 		preparedStatement.executeUpdate(sql);
@@ -36,7 +35,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 	 */
 	@Override
 	public boolean editUser(Users user) {
-		// TODO Auto-generated method stub
+		String sql = "Update Users Set password";
 		return false;
 	}
 
