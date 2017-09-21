@@ -12,11 +12,11 @@ public class StudentDetailDaoImpl extends BaseDaoImpl implements StudentDetailDa
 
 	/* (non-Javadoc)
 	 * @see manageuser.dao.StudentDetailDao#createStudentInfor(manageuser.entities.StudentDetail)
+	 * 
 	 */
 	public boolean createStudentInfor(StudentDetail studentInfor) {
 		String sql = "INSERT INTO `student_detail` (`student_id`, `course_id`, `name`, `email`, `tel`, `id_card`, `address`, `school`, `major`, `graduated_year`, `gender`, `birthday`, `IQ`, `note`, `japan_level`, `interview`, `status`, `created_at`, `updated_at`) VALUES (LAST_INSERT_ID(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
 		PreparedStatement pre;
-		
 		int rs;
 		int i = 1;
 		try {
