@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="db-container">
+        <div class="db-head">
+            <div class="g-row">
+                <div class="one-half">
+                    <h1 class="logo"><img src="../img/logo.png" alt=""/></h1>
+                </div>
+                <div class="one-half">
+                    <div class="db-head-control">
+                        <div class="db-head-mess">Xin chào, <span>administrator</span>. Bạn có <a href="#">... thông báo</a> chưa đọc.</div>
+                        <div class="db-head-nav">
+                            <a href="/login"><i class="fa fa-home"></i>Trang chủ</a>                                    
+                            <a href="#"><i class="fa fa-gears"></i> Cài đặt</a> |
+                            <a href="/users/logout"><i class="fa fa-sign-out"></i>Đăng xuất</a>                                </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- .db-head -->
+
+        <div class="db-breadcrums">
+            <ul>
+                <li><a href="/users/login">Dashboard </a></li>
+                <li><i class="fa fa-angle-double-right"> Danh sách bài viết</i></li>
+            </ul>
+        </div><!-- .db-breadcrums -->
+
+        <div class="db-main">
+            <div class="db-main-search-form">
+                <form id="search-form" action="search" method="GET">
+                    <div class="g-row">
+                        <div class="input-component">
+                            <div class="one-quarter no-pad">
+                                <label for="txtTitle">Tiêu đề: </label>
+                            </div>
+                            <div class="three-quarters no-pad">
+                                <input type="text" name="txtTitle" id="txtTitle" value="">
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+
+                        <div class="input-component">
+                            <div class="one-quarter no-pad">
+                                <label for="txtTitle">Nội dung: </label>
+                            </div>
+                            <div class="three-quarters no-pad">
+                                <textarea></textarea>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="input-component">
+                            <div class="one-quarter no-pad">
+                                <label for="slbUser">Người đăng: </label>
+                            </div>
+                            <div class="three-quarters no-pad">
+                                <label class="lbl-slb">
+                                    <select name="slbUser" id="slbUser">
+                                        <option value="" selected="selected">Lựa chọn người đăng</option>
+                                    </select>
+                                </label>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="input-component">
+                            <div class="one-quarter no-pad">
+                                &nbsp
+                            </div>
+                            <div class="three-quarters no-pad">
+                                <button class="btnSubmit btn" type="submit" style="width:20%;"><span>Upload</span></button>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="input-component">
+                            <div class="one-quarter no-pad">
+                                &nbsp
+                            </div>
+                            <div class="three-quarters no-pad">
+                                <button class="btnSubmit btn" type="submit" style="width:20%;"><span>Thêm mới</span></button>
+                                <button class="btnSubmit btn" type="submit" style="width:20%;"><span>Xem trước</span></button>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+
+                        <div class="clear"></div>
+                    </div>
+                </form>
+            </div><!-- .db-main-search-form -->
+
+            <div class="db-main-table-results">
+                <!-- <div class="full-width no-pad">
+                    <a href="#" class="deleteAll">Xóa</a>
+                </div>
+                <div class="clear"></div> -->
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" name="deleteAll"></th>
+                            <th>STT</th>
+                            <th>Tiêu đề</th>
+                            <th>Nội dung</th>
+                            <th>Người đăng</th>
+                            <th>Tùy chọn</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="checkbox" name="deleteAll"></td>
+                            <td>1 </td>
+                            <td>Lorem isum dolor set amit</td>
+
+                            <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.....</td>
+                            <td>Admin</td>
+                            <td>
+                                <ul class="tbl-actions">
+                                    <li><a href="#" id="btnEdit" class="btnedit"><i class="fa fa-edit"></i></a></li>
+                                    <li><a id="btnDelUser" class="btndelete"><i class="fa fa-trash-o"></i></a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" name="deleteAll"></td>
+                            <td>2 </td>
+                            <td>Lorem isum dolor set amit</td>
+
+                            <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.....</td>
+                            <td>Admin</td>
+                            <td>
+                                <ul class="tbl-actions">
+                                    <li><a href="#" id="btnEdit" class="btnedit"><i class="fa fa-edit"></i></a></li>
+                                    <li><a id="btnDelUser" class="btndelete"><i class="fa fa-trash-o"></i></a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="pagination">Hiển thị kết quả từ 1 đến 2<span class="divider-vertical">|</span><strong>Trang: </strong><span class="page-number current-page">1 của 2</span>
+                    <ul>
+                        <li><a href="javascript:void(0)" style="background: rgb(14, 88, 130); color: rgb(255, 255, 255);">1</a></li>
+                        <li><a href="#">2</a></li>
+                    </ul>
+                </div>
+            </div><!-- .db-main-table-results -->
+           
+        </div><!-- .db-main -->
+
+        <div class="db-foot">
+            <p>LA - Management 2017</p>
+        </div><!-- .db-foot -->
+
+    </div><!-- .search-container -->
+</div><!-- .wrapper -->
+
+</body>
+</html>

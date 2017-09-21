@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search User</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/datepicker.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/fn.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap-datepicker.js"></script>
+    <script src="../js/la-management.js"></script>
+</head>
+<body>
+<div class="wrapper">
+    <div class="db-container">
+        <div class="db-head">
+            <div class="g-row">
+                <div class="one-half">
+                    <h1 class="logo"><img src="../img/logo.png" alt=""/></h1>
+                </div>
+                <div class="one-half">
+                    <div class="db-head-control">
+                        <div class="db-head-mess">Xin chào, <span>administrator</span>. Bạn có <a href="#">... thông báo</a> chưa đọc.</div>
+                        <div class="db-head-nav">
+                            <a href="/login"><i class="fa fa-home"></i>Trang chủ</a>                                    <a href="#"><i class="fa fa-gears"></i> Cài đặt</a> |
+                            <a href="/users/logout"><i class="fa fa-sign-out"></i>Đăng xuất</a>                                </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- .db-head -->
+
+        <div class="db-breadcrums">
+            <ul>
+                <li><a href="/users/login">Dashboard </a></li>
+                <li><i class="fa fa-angle-double-right"> Tìm kiếm người dùng</i></li>
+            </ul>
+        </div><!-- .db-breadcrums -->
+
+        <div class="db-main">
+            <!--<button class="btn pull-right" id="export">Export</button>-->
+            <div class="db-main-search-form">
+                <form id="search-form" action="search" method="GET">
+                    <div class="g-row">
+                        <div class="one-half">
+                            <div class="input-component">
+                                <div class="one-quarter no-pad">
+                                    <label for="txtHoten">Họ tên SV: </label>
+                                </div>
+                                <div class="three-quarters no-pad">
+                                    <input type="text" name="txtHoten" id="txtHoten" value="">
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="input-component">
+                                <div class="one-quarter no-pad">
+                                    <label for="txtEmail">Email: </label>
+                                </div>
+                                <div class="three-quarters no-pad">
+                                    <input type="text" name="txtEmail" id="txtEmail" value="">
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="input-component">
+                                <div class="one-quarter no-pad">
+                                    <label for="txtKhoa">Khóa học: </label>
+                                </div>
+                                <div class="three-quarters no-pad">
+                                    <input type="text" name="txtKhoa" id="txtKhoa" class="width-half" value="">
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="input-component">
+                                <div class="one-quarter no-pad">
+                                    <label for="txtNgaydangky">Ngày đăng ký: </label>
+                                </div>
+                                <div class="three-quarters no-pad">
+                                    <input readonly type="text" name="txtNgaydangky" id="txtNgaydangky" class="width-half"
+                                           value="">
+                                    <button class="btn" title="Clean" id="btnClrNgaydangky" style="margin-right: 10px; padding: 4px 4px;"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+
+                        <div class="one-half">
+                            <div class="input-component">
+                                <div class="one-quarter no-pad">
+                                    <label for="txtTruonghoc">Trường học: </label>
+                                </div>
+                                <div class="three-quarters no-pad">
+                                    <input type="text" name="txtTruonghoc" id="txtTruonghoc" value="">
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="input-component">
+                                <div class="one-quarter no-pad">
+                                    <label for="txtNamtotnghiep">Năm tốt nghiệp: </label>
+                                </div>
+                                <div class="three-quarters no-pad">
+                                    <input type="text" name="txtNamtotnghiep" id="txtNamtotnghiep"
+                                           value="">
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="input-component">
+                                <div class="one-quarter no-pad">
+                                    <label for="txtChuyennganh">Chuyên ngành: </label>
+                                </div>
+                                <div class="three-quarters no-pad">
+                                    <input type="text" name="txtChuyennganh" id="txtChuyennganh"
+                                           value="">
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="input-component">
+                                <div class="one-half no-pad" style="width: 48%;">
+                                    <button class="btnSubmit btn" type="submit"><span>Tìm kiếm</span></button>
+                                </div>
+                                <div class="inline" style="float: right;">
+                                    <button type="button" class="btn pull-right" id="exportCSV">Export to .CSV</button>
+                                    <button type="button" class="btn pull-right" id="exportXLSX" style="margin-right: 1px;">Export to .XLSX</button>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </form>
+            </div><!-- .db-main-search-form -->
+
+            <div class="db-main-table-results">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Họ và tên</th>
+                        <th>Ngày sinh</th>
+                        <th>Email</th>
+                        <th>Điện thoại</th>
+                        <th>Khóa học</th>
+                        <th>Trường học</th>
+                        <th>Năm tốt nghiệp</th>
+                        <th>Chuyên ngành</th>
+                        <!--                <th>Ngày tạo</th>-->
+                        <th>Tùy chọn</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1 </td>
+                        <td>d</td>
+
+                        <td>30/11/-0001</td>
+                        <td>l@l</td>
+                        <td>d</td>
+                        <td></td>
+                        <td></td>
+                        <td>0</td>
+                        <td></td>
+                        <!--                <td>--><!--</td>-->
+                        <td>
+                            <ul class="tbl-actions">
+                                <li><a href="/users/edit?userId=5876" id="btnEdit" class="btnedit"><i class="fa fa-edit"></i></a></li>
+                                <li><a id="btnDelUser" class="btndelete valid-window">
+                                    <i class="fa fa-trash-o"></i>
+                                    <input type="hidden" id="userId" value="5876">
+                                    <input type="hidden" id="fullName" value="d">
+                                </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="pagination">Hiển thị kết quả từ 1 đến 1<span class="divider-vertical">|</span><strong>Trang: </strong><span class="page-number current-page">1 của 38</span><li><a href="javascript:void(0)" style="background: rgb(14, 88, 130); color: rgb(255, 255, 255);">1</a></li><li><a href="/users/search?page=2">2</a></li><li><a href="/users/search?page=3">3</a></li><li><a href="/users/search?page=4">4</a></li><li><a href="/users/search?page=5">5</a></li><li><a href="/users/search?page=6">6</a></li><li><a href="/users/search?page=7">7</a></li><li><a href="/users/search?page=8">8</a></li><li><a href="/users/search?page=9">9</a></li><li><a href="/users/search?&page=2">></a></li><li><a href="/users/search?&page=38">>></a></li></div>
+                </div><!-- .db-main-table-results -->
+                
+
+                </div><!-- .db-main -->
+
+            <div class="db-foot">
+                <p>LA - Management 2017</p>
+            </div><!-- .db-foot -->
+
+        </div><!-- .search-container -->
+    </div><!-- .wrapper -->
+</body>
+</html>

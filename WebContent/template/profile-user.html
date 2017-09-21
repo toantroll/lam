@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile User</title>
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/fn.js"></script>
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="db-container">
+        <div class="db-head">
+            <div class="g-row">
+                <div class="one-half">
+                    <h1 class="logo"><img src="../img/logo.png" alt=""/></h1>
+                </div>
+                <div class="one-half">
+                    <div class="one-third">
+                        <div class="avatar"><a href="#"><img src="../img/profile-ava.png"></a></div>
+                    </div>
+                    <div class="two-thirds">
+                        <div class="db-head-control">
+                            <div class="db-head-mess">Xin chào, <span>administrator</span></div>
+                            <div class="db-head-nav">
+                                <a href="/login"><i class="fa fa-home"></i>Trang chủ</a>                                    
+                                <a href="#"><i class="fa fa-gears"></i> Cài đặt</a> |
+                                <a href="/users/logout"><i class="fa fa-sign-out"></i>Đăng xuất</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div><!-- .db-head -->
+
+        <div class="g-row">
+            <div class="full-width">
+                <div class="db-breadcrums">
+                    <ul>
+                        <li><a href="/users/login">Dashboard </a></li>
+                    </ul>
+                </div><!-- .db-breadcrums -->
+            </div>
+        </div>
+
+        <div class="db-main">
+            
+            <div class="g-row">
+                <div class="one-quarter">
+                    <div class="menu">
+                        <ul class="nav">
+                            <li><a href="#">Nội dung</a></li>
+                            <li>
+                                <a href="#">Tin tức <i class="fa fa-plus-square-o"></i></a>
+                                <ul class="sub-menu">
+                                    <li><a href="#">Thêm mới bài viết</a></li>
+                                    <li><a href="#">Tìm kiếm bài viết</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Thời khóa biểu</a></li>
+                            <li><a href="#">Cài đặt hệ thống</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="three-quarters">
+                    <div class="main-content">
+                        <div class="content-bl subject">
+                            <div class="one-third">
+                                <div class="avatar">
+                                    <a href="#"><img src="../img/profile-ava.png"></a>
+                                    <button class="btn">Thay ảnh đại diện</button>
+                                </div>                                
+                            </div>
+                            <div class="two-thirds">
+                                <form>
+                                    <input type="password" name="oldpass" placeholder="Mật khẩu cũ">
+                                    <input type="password" name="oldpass" placeholder="Mật khẩu mới">
+                                    <input type="password" name="oldpass" placeholder="Nhập lại mật khẩu mới">
+                                    <input type="submit" value="Lưu" class="btn">
+                                </form>
+                            </div>
+                            <div class="clear"></div>
+                        </div><!-- .content-bl -->
+                        <div class="content-bl subject">
+                            <h3>Thông tin cá nhân</h3>
+                            
+                            <form>
+                                <div class="one-half">
+                                    <input type="text" name="" placeholder="Họ tên">
+                                    <input type="text" name="" placeholder="Điện thoại">
+                                    <input type="text" name="" placeholder="Địa chỉ">
+                                </div>
+                                <div class="one-half">
+                                    <input type="text" name="" placeholder="Email">
+                                    <div class="one-half no-pl"><input type="text" name="" placeholder="Ngày sinh"></div>
+                                    <div class="one-half no-pr">
+                                        <label class="lbl-slb">
+                                            <select name="gender" required="required">
+                                                <option value="" selected="selected">Giới tính (*)</option>
+                                                <option value="0">Nữ</option>
+                                                <option value="1">Nam</option>
+                                                <option value="2">Không xác định</option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                    <div class="clear"></div>
+                                    <input type="text" name="" placeholder="Quên quán">
+                                </div>
+                                <div class="clear"></div>
+                                <div class="full-width">
+                                    <textarea placeholder="Ghi chú"></textarea>
+                                </div>
+                                <div class="clear"></div>
+                                <input type="submit" value="Lưu" class="btn">
+                            </form>
+
+                        </div><!-- .content-bl -->
+                    </div><!-- .main-content -->
+                </div>
+            </div>
+           
+        </div><!-- .db-main -->
+
+        <div class="db-foot">
+            <p>LA - Management 2017</p>
+        </div><!-- .db-foot -->
+
+    </div><!-- .search-container -->
+</div><!-- .wrapper -->
+
+</body>
+</html>

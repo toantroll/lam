@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm mới môn học</title>
+    <link rel="icon" type="favicon" href="../img/logo-icon.png"/>
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="wrapper">
+    <div class="db-container">
+        <div class="db-head">
+            <div class="g-row">
+                <div class="one-half">
+                    <h1 class="logo"><img src="../img/logo.png" alt=""/></h1>
+                </div>
+                <div class="one-half">
+                    <div class="db-head-control">
+                        <div class="db-head-mess">Xin chào, <span>administrator</span>. Bạn có <a href="#">... thông báo</a> chưa đọc.</div>
+                        <div class="db-head-nav">
+                            <a href="/login"><i class="fa fa-home"></i>Trang chủ</a>                                    <a href="#"><i class="fa fa-gears"></i> Cài đặt</a> |
+                            <a href="/users/logout"><i class="fa fa-sign-out"></i>Đăng xuất</a>                                </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- .db-head -->
+
+        <div class="db-breadcrums">
+            <ul>
+                <li><a href="/users/login">Dashboard </a></li>
+                <li><i class="fa fa-angle-double-right"> Thêm mới môn học</i></li>
+            </ul>
+        </div><!-- .db-breadcrums -->
+
+        <div class="db-main">
+            <div class="wrapper">
+                <div class="reg-container">
+                    <div class="reg-content">
+                        <div class="reg-inner">
+                            <form id="reg-form" action="add" method="post" onsubmit="return validAddForm();">
+                                <ul>
+                                    <li>
+                                        <div class="input text"><input type="text" name="txtMamonhoc" id="txtMamonhoc" placeholder="Mã môn học (*)" autofocus="autofocus" required="required" value=""/></div>
+                                    </li>
+                                    <li>
+                                        <div class="input text"><input type="text" name="txtTenmonhoc" id="txtTenmonhoc" placeholder="Tên môn học (*)" required="required" value=""/></div>
+                                    </li>
+                                    <li>
+                                        <label class="lbl-slb">
+                                            <select name="slbGiaovien" id="slbGiaovien">
+                                                <option value="" selected="selected">Giáo viên dạy</option>
+                                            </select>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <div class="input text"><input type="text" name="txtSotiet" id="txtSotiet" placeholder="Số tiết học (*)" required="required" value=""/></div>
+                                    </li>
+                                    <li>
+                                        <div class="input email">
+                                            <textarea placeholder="Nội dung"></textarea>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="input text">
+                                            <textarea placeholder="Chú ý"></textarea>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <button class="btnSubmit btn" type="submit"><span>Thêm mới</span></button>
+                                    </li>
+                                </ul>
+                            </form><!-- .reg-form -->
+                        </div><!-- .reg-inner -->
+                    </div><!-- .reg-content -->
+                </div><!-- .reg-container -->
+            </div><!-- .wrapper -->
+           
+           </div><!-- .db-main -->
+
+        <div class="db-foot">
+            <p>LA - Management 2017</p>
+        </div><!-- .db-foot -->
+
+    </div><!-- .search-container -->
+</div><!-- .wrapper -->
+</body>
+</html>
