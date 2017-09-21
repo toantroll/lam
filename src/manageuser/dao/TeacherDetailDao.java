@@ -4,6 +4,8 @@
  */
 package manageuser.dao;
 
+import java.sql.SQLException;
+
 import manageuser.entities.Teacher;
 
 /**
@@ -15,6 +17,7 @@ public interface TeacherDetailDao extends BaseDao {
 	 * Thêm dữ liệu Teacher vào DB
 	 * @param teacher đối tượng thông tin teacher
 	 * @return true: insert thành công , false: insert không thành công.
+	 * @throws SQLException 
 	 */
-	public boolean insertTeacher(Teacher teacher);
+	public void insertTeacher(Teacher teacher) throws SQLException;
 }
