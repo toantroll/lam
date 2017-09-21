@@ -21,7 +21,7 @@ public class BaseDaoImpl implements BaseDao{
 	private String dirver;
 	private String user;
 	private String pass;
-	Connection conn = null;
+	private Connection conn = null;
 	protected static Connection connTransaction = null; 
 	
 	/**
