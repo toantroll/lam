@@ -17,10 +17,6 @@ import manageuser.utils.DatabaseProperties;
  *
  */
 public class BaseDaoImpl implements BaseDao{
-	private String url;
-	private String dirver;
-	private String user;
-	private String pass;
 	Connection conn = null;
 	protected static Connection connTransaction = null; 
 	
@@ -28,10 +24,7 @@ public class BaseDaoImpl implements BaseDao{
 	 *  Khởi tạo contructor
 	 */
 	public BaseDaoImpl() {
-		dirver = DatabaseProperties.getDatabase("DATABASE_DRIVER");
-		url = DatabaseProperties.getDatabase("DATABASE_URL");
-		user = DatabaseProperties.getDatabase("DATABASE_USER");
-		pass = DatabaseProperties.getDatabase("DATABASE_PASS");
+		
 	}
 
 
@@ -41,6 +34,10 @@ public class BaseDaoImpl implements BaseDao{
 	@Override
 	public Connection getConnection() {
 		try {		
+			String dirver = DatabaseProperties.getDatabase("DATABASE_DRIVER");
+			String url = DatabaseProperties.getDatabase("DATABASE_URL");
+			String user = DatabaseProperties.getDatabase("DATABASE_USER");
+			String pass = DatabaseProperties.getDatabase("DATABASE_PASS");
 			Class.forName(dirver);
 			conn = DriverManager.getConnection(url, user, pass);
 			
