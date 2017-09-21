@@ -8,13 +8,10 @@ import manageuser.entities.StudentDetail;
 
 public class StudentDetailDaoImpl extends BaseDaoImpl implements StudentDetailDao {
 
-
-	/* (non-Javadoc)
-	 * @see manageuser.dao.StudentDetailDao#createStudentInfor(manageuser.entities.StudentDetail)
-	 */
+	@Override
 	public boolean createStudentInfor(StudentDetail studentInfor) {
-		String sql = "INSERT INTO `student_detail` (`student_id`, `course_id`, `name`, `email`, `tel`, `id_card`, `address`, `school`, `major`, `graduated_year`, `gender`, `birthday`, `IQ`, `note`, `japan_level`, `interview`, `status`, `created_at`, `updated_at`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
-		PreparedStatement pre;
-
+		// TODO Auto-generated method stub
+		return false;
 	}
+
 }

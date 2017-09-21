@@ -3,12 +3,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Signup</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/datepicker.css">
     <link rel="stylesheet" href="../css/style.css">
-    <script type="text/javascript" src="../js/jquery.min.js"></script>
-    <script type="text/javascript" src="../js/fn.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/fn.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap-datepicker.js"></script>
+    <script src="../js/la-management.js"></script>
 </head>
 <body class="login">
 
@@ -84,52 +89,16 @@
                                 <input id="txtHoTen" name="full_name" type="text" placeholder="Họ và tên" autofocus>
                             </li>
                             <li>
-                                <input id="txtUsername" name="username" type="text" placeholder="Tên đăng nhập">
-                            </li>
-                            <li>
-                                <input id="txtPassword" name="password" type="password" placeholder="Mật khẩu">
-                            </li>
-                            <li>
                                 <input id="txtMobile" name="phone" type="text" placeholder="Điện thoại">
                             </li>
                             <li>
                                 <input id="txtEmail" name="email" type="text" placeholder="Email">
                             </li>
                             <li>
-                                <div class="g-row">
-                                    <div class="two-thirds no-pad">
-                                        <div class="one-third no-pl">
-                                            <label class="lbl-slb">
-                                                <select>
-                                                    <option selected>Ngày sinh</option>
-                                                    <option>01</option>
-                                                    <option>02</option>
-                                                    <option>03</option>
-                                                </select>
-                                            </label>    
-                                        </div>
-                                        <div class="one-third no-pl">
-                                            <label class="lbl-slb">
-                                                <select>
-                                                    <option selected>Tháng sinh</option>
-                                                    <option>01</option>
-                                                    <option>02</option>
-                                                    <option>03</option>
-                                                </select>
-                                            </label>    
-                                        </div>
-                                        <div class="one-third no-pad">
-                                            <label class="lbl-slb">
-                                                <select>
-                                                    <option selected>Năm sinh</option>
-                                                    <option>01</option>
-                                                    <option>02</option>
-                                                    <option>03</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="one-third no-pr">
+                            <input readonly type="text" name="txtNgaydangky" id="txtNgaydangky" class="width-half" placeholder = "Ngày sinh"
+                                           value="">
+                               <button class="btn" title="Clean" id="btnClrNgaydangky" style="margin-right: 10px; padding: 4px 4px;"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+                               <div class="one-third no-pr">
                                         <label class="lbl-slb">
                                             <select>
                                                 <option selected> Giới tính </option>
@@ -139,8 +108,6 @@
                                             </select>
                                         </label>
                                     </div>
-                                    <div class="clear"></div>
-                                </div>
                             </li>
                             <li>
                                 <label class="lbl-slb">
