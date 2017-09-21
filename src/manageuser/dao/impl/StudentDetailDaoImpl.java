@@ -12,7 +12,7 @@ public class StudentDetailDaoImpl extends BaseDaoImpl implements StudentDetailDa
 
 	@Override
 	public void insertStudentInfor(StudentDetail studentInfor) throws SQLException{
-			String sql = "INSERT INTO `student_detail` (`student_id`, `course_id`, `name`, `email`, `tel`, `id_card`, `address`, `school`, `major`, `graduated_year`, `gender`, `birthday`, `IQ`, `note`, `japan_level`, `interview`, `status`, `created_at`, `updated_at`) VALUES (LAST_INSERT_ID(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+			String sql = "INSERT INTO `student_detail` (`student_id`, `course_id`, `name`, `email`, `tel`, `id_card`, `address`, `school`, `major`, `graduated_year`, `gender`, `birthday`, `IQ`, `note`, `japan_level`, `interview`, `status`, `created_at`) VALUES (LAST_INSERT_ID(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now()) ";
 			PreparedStatement pre;
 			Connection con = this.getConnectionTransaction();
 			int i = 1;
@@ -33,15 +33,13 @@ public class StudentDetailDaoImpl extends BaseDaoImpl implements StudentDetailDa
 			pre.setString(i++, studentInfor.getJapanLevel());
 			pre.setInt(i++, studentInfor.getScoreInterview());
 			pre.setString(i++, studentInfor.getStatus());
-			pre.setDate(i++, studentInfor.getCreatedDate());
-			pre.setDate(i++, studentInfor.getUpdatedDate());
 			pre.executeUpdate();
 		}
 	@Override
 	public void editStudentInfor(StudentDetail studentInfor) throws SQLException {
-		String sql = "UPDATE `student_detail` SET `course_id`=?, `name`=?, `email`=?, `tel`=?, `id_card`=?, `address`=?, `school`=?, `gender`=?, `birthday`=?, `major`=?, `graduated_year`=?, `IQ`=?, `note`=?, `japan_level`=?, `interview`=?, `status`=?, `created_at`=?, `updated_at`=? WHERE `student_id`=?";
+		String sql = "UPDATE `student_detail` SET `course_id`=?, `name`=?, `email`=?, `tel`=?, `id_card`=?, `address`=?, `school`=?, `gender`=?, `birthday`=?, `major`=?, `graduated_year`=?, `IQ`=?, `note`=?, `japan_level`=?, `interview`=?, `status`=?, `created_at`=?, `updated_at`= now() WHERE `student_id`=?";
 		PreparedStatement pre;
-		Connection con = this.getConnectionTransaction();
+		Connection con = this.getConnection();
 		int i = 1;
 		pre = con.prepareStatement(sql);
 		pre.setInt(i++, studentInfor.getCourseId());
@@ -60,8 +58,7 @@ public class StudentDetailDaoImpl extends BaseDaoImpl implements StudentDetailDa
 		pre.setString(i++, studentInfor.getJapanLevel());
 		pre.setInt(i++, studentInfor.getScoreInterview());
 		pre.setString(i++, studentInfor.getStatus());
-		pre.setDate(i++, studentInfor.getCreatedDate());
-		pre.setDate(i++, studentInfor.getUpdatedDate());
+		this.closeConnection();
 	}
 	@Override
 	public void deleteStudentInfor(int userId) throws SQLException {

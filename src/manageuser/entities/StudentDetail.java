@@ -29,8 +29,6 @@ public class  StudentDetail extends Users {
 	private String email;
 	private Date birthday;
 	private String gender;
-	private Date createdDate;
-	private Date updatedDate;
 	/**
 	 * @return the studentId
 	 */
@@ -235,31 +233,4 @@ public class  StudentDetail extends Users {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	/**
-	 * @return the createdDate
-	 */
-	public Date getCreatedDate() {
-		return createdDate;
-	}
-	/**
-	 * @param createdDate the createdDate to set
-	 */
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
-	}
-	/**
-	 * @return the updatedDate
-	 */
-	public Date getUpdatedDate() {
-		return updatedDate;
-	}
-	/**
-	 * @param updatedDate the updatedDate to set
-	 */
-	public void setUpdatedDate(Date updatedDate) {
-		this.updatedDate = updatedDate;
-	}
-	
-	
-	
 }
