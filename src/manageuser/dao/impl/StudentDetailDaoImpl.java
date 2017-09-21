@@ -6,11 +6,12 @@ import java.sql.SQLException;
 
 import manageuser.dao.StudentDetailDao;
 import manageuser.entities.StudentDetail;
+import manageuser.utils.Constant;
 
 public class StudentDetailDaoImpl extends BaseDaoImpl implements StudentDetailDao {
 
 	@Override
-	public void createStudentInfor(StudentDetail studentInfor) throws SQLException{
+	public void insertStudentInfor(StudentDetail studentInfor) throws SQLException{
 			String sql = "INSERT INTO `student_detail` (`student_id`, `course_id`, `name`, `email`, `tel`, `id_card`, `address`, `school`, `major`, `graduated_year`, `gender`, `birthday`, `IQ`, `note`, `japan_level`, `interview`, `status`, `created_at`, `updated_at`) VALUES (LAST_INSERT_ID(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
 			PreparedStatement pre;
 			Connection con = this.getConnectionTransaction();
@@ -37,7 +38,7 @@ public class StudentDetailDaoImpl extends BaseDaoImpl implements StudentDetailDa
 			pre.executeUpdate();
 		}
 	@Override
-	public void updateStudentInfor(StudentDetail studentInfor) throws SQLException {
+	public void editStudentInfor(StudentDetail studentInfor) throws SQLException {
 		String sql = "UPDATE `student_detail` SET `course_id`=?, `name`=?, `email`=?, `tel`=?, `id_card`=?, `address`=?, `school`=?, `gender`=?, `birthday`=?, `major`=?, `graduated_year`=?, `IQ`=?, `note`=?, `japan_level`=?, `interview`=?, `status`=?, `created_at`=?, `updated_at`=? WHERE `student_id`=?";
 		PreparedStatement pre;
 		Connection con = this.getConnectionTransaction();
@@ -62,5 +63,15 @@ public class StudentDetailDaoImpl extends BaseDaoImpl implements StudentDetailDa
 		pre.setDate(i++, studentInfor.getCreatedDate());
 		pre.setDate(i++, studentInfor.getUpdatedDate());
 	}
-	
+	@Override
+	public void deleteStudentInfor(int userId) throws SQLException {
+		String sql = "UPDATE `student_detail` SET `status`=? WHERE `student_id`= ?";
+		PreparedStatement pre;
+		Connection con = this.getConnectionTransaction();
+		int i = 1;
+		pre = con.prepareStatement(sql);
+		pre.setInt(i++, Constant.STATUS_DELETE);
+		pre.setInt(i++, userId);
+		pre.executeUpdate();
+	}
 }

@@ -9,11 +9,18 @@ public interface StudentDetailDao {
 	 * @param studentInfor đối tượng lưu thông tin
 	 * @throws SQLException
 	 */
-	public void createStudentInfor(StudentDetail studentInfor) throws SQLException;
+	public void insertStudentInfor(StudentDetail studentInfor) throws SQLException;
 	/**
 	 * Update dữ liệu thông tin StudentInfor vào Db
 	 * @param studentDetail
 	 * @throws SQLException
 	 */
-	public void updateStudentInfor(StudentDetail studentDetail) throws SQLException ;
+	public void editStudentInfor(StudentDetail studentDetail) throws SQLException ;
+	
+	/**
+	 * Ẩn thông tin sinh viên
+	 * @param userId
+	 * @throws SQLException
+	 */
+	public void deleteStudentInfor(int userId) throws SQLException;
 }
