@@ -32,4 +32,5 @@ public interface UserDao {
 	 * @throws SQLException ném ngoại lệ nếu update không thành công 
 	 */
 	public void deleteUser(int studentId) throws SQLException;
+	
 }

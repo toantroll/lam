@@ -38,6 +38,8 @@ public interface BaseDao {
 	 * lưu dữ liệu Transaction vào dataBase
 	 * @throws SQLException ném ngoại lệ nếu commit lỗi 
 	 */
-	public void Commit() throws SQLException;
+	public void commit() throws SQLException;
+	
+	public void closeConnectionTransaction();
 	
 }

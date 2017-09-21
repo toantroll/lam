@@ -99,7 +99,20 @@ public class BaseDaoImpl implements BaseDao{
 	 * @see manageuser.dao.BaseDao#Commit()
 	 */
 	@Override
-	public void Commit() throws SQLException {
+	public void commit() throws SQLException {
 		connTransaction.commit();
+	}
+	/* (non-Javadoc)
+	 * @see manageuser.dao.BaseDao#closeConnectionTransaction()
+	 */
+	@Override
+	public void closeConnectionTransaction() {
+		if(connTransaction != null) {	
+			try {
+				connTransaction.close();
+			} catch (SQLException e) {
+				System.out.println("Loi sql closeConnectionTrasaction" + e.getMessage());
+			}
+		}
 	}
 }
