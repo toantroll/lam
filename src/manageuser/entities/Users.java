@@ -12,7 +12,7 @@ package manageuser.entities;
 public class Users {
 	private String userName;
 	private String password;
-	private String userID;
+	private int userID;
 	private int roleId;
 	/**
 	 * @return the userName
@@ -38,16 +38,11 @@ public class Users {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	/**
-	 * @return the userID
-	 */
-	public String getUserID() {
+	
+	public int getUserID() {
 		return userID;
 	}
-	/**
-	 * @param userID the userID to set
-	 */
-	public void setUserID(String userID) {
+	public void setUserID(int userID) {
 		this.userID = userID;
 	}
 	/**
