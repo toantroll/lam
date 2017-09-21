@@ -27,5 +27,11 @@ public interface BaseDao {
 	 * Thực hiện rollback connection
 	 * @param conn conn tham số kiểu Connection
 	 */
-	public void rollbackTrasaction(Connection conn);
+	public void rollbackTrasaction();
+	/**
+	 * lấy kết nối sử dụng Transaction
+	 * @return kết nối 
+	 */
+	public Connection getConnectionTransaction();
+	
 }

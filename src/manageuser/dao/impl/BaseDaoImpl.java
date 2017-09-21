@@ -17,12 +17,11 @@ import manageuser.utils.DatabaseProperties;
  *
  */
 public class BaseDaoImpl implements BaseDao{
-	Connection conn = null;
 	private String url;
 	private String dirver;
 	private String user;
 	private String pass;
-	
+	protected static Connection connTransaction = null; 
 	
 	/**
 	 *  Khởi tạo contructor
@@ -40,7 +39,8 @@ public class BaseDaoImpl implements BaseDao{
 	 */
 	@Override
 	public Connection getConnection() {
-		try {
+		Connection conn = null;
+		try {		
 			Class.forName(dirver);
 			conn = DriverManager.getConnection(url, user, pass);
 			if(conn != null){
@@ -76,13 +76,32 @@ public class BaseDaoImpl implements BaseDao{
 	 * @see manageuser.dao.BaseDao#rollbackTrasaction(java.sql.Connection)
 	 */
 	@Override
-	public void rollbackTrasaction(Connection conn) {
-		if(conn != null){
+	public void rollbackTrasaction() {
+		if(connTransaction != null){
 			try {
-				conn.rollback();
+				connTransaction.rollback();
 			} catch (SQLException e) {
 				System.out.println("Loi sql rollbackTrasaction" + e.getMessage());
 			}
 		}
+	}
+
+
+	/* (non-Javadoc)
+	 * @see manageuser.dao.BaseDao#getConnectionTransection()
+	 */
+	@Override
+	public Connection getConnectionTransaction() {
+		try {		
+			if(connTransaction != null){
+				Class.forName(dirver);
+				connTransaction = DriverManager.getConnection(url, user, pass);
+			}
+		} catch (ClassNotFoundException e) {
+			System.out.println("Có lỗi xảy ra ClassNotFoundException");
+		} catch (SQLException e) {
+			System.out.println("Có lỗi xảy ra SQLException");
+		}
+		return connTransaction;
 	}
 }
