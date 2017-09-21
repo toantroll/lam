@@ -8,7 +8,7 @@ import java.sql.Connection;
 
 /**
  * Chứa phương thức kết nối với csdl
- * @author DinhHop
+ * @author LA
  *
  */
 public interface BaseDao {
