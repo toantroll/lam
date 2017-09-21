@@ -9,20 +9,20 @@ package manageuser.entities;
  *
  */
 public class Teacher {
-	private String teacherId;
+	private int teacherId;
 	private String fullName;
 	private String email;
 	private String tel;
 	/**
 	 * @return the teacherId
 	 */
-	public String getTeacherId() {
+	public int getTeacherId() {
 		return teacherId;
 	}
 	/**
 	 * @param teacherId the teacherId to set
 	 */
-	public void setTeacherId(String teacherId) {
+	public void setTeacherId(int teacherId) {
 		this.teacherId = teacherId;
 	}
 	/**
@@ -61,5 +61,6 @@ public class Teacher {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
+	
 	
 }

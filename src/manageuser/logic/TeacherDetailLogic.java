@@ -5,7 +5,9 @@
 package manageuser.logic;
 
 import java.sql.SQLException;
+import java.util.List;
 
+import manageuser.entities.Teacher;
 import manageuser.entities.TeacherDetail;
 
 /**
@@ -20,4 +22,15 @@ public interface TeacherDetailLogic {
 	 * @throws SQLException 
 	 */
 	public boolean createTeacherDetail(TeacherDetail teacherDetail) throws SQLException;
+	/**
+	 * Sửa thông tin giáo viên
+	 * @param teacherId mã giáo viên
+	 * @return true: sửa thành công , false: sửa thất bại
+	 */
+	public boolean updateTeacherDetail(Teacher teacher);
+	/**
+	 * Lấy danh sách thông tin giáo viên.
+	 * @return danh sách thông tin giáo viên
+	 */
+	public List<TeacherDetail> getAllTeacherDetail();
 }
