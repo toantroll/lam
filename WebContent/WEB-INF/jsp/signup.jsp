@@ -5,15 +5,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Signup</title>
-     <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/datepicker.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/fn.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/bootstrap-datepicker.js"></script>
-    <script src="../js/la-management.js"></script>
+     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/datepicker.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/fn.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/la-management.js"></script>
 </head>
 <body class="login">
 
