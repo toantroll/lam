@@ -62,4 +62,5 @@ public class StudentDetailDaoImpl extends BaseDaoImpl implements StudentDetailDa
 		pre.setDate(i++, studentInfor.getCreatedDate());
 		pre.setDate(i++, studentInfor.getUpdatedDate());
 	}
+	
 }
