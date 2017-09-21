@@ -4,6 +4,9 @@
 package manageuser.utils;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +22,9 @@ public class ErrorMessageProperties {
     static {
         Properties prop = new Properties();
         try {
-        	prop.load(ErrorMessageProperties.class.getResourceAsStream(Constant.ERR_MESS_PROPERTIES));
+        	InputStream input = ErrorMessageProperties.class.getResourceAsStream(Constant.ERR_MESS_PROPERTIES);
+        	InputStreamReader is = new InputStreamReader(input, "UTF-8");
+        	prop.load(is);
         } catch (IOException e) {
             
         }
