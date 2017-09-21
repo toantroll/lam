@@ -37,5 +37,19 @@
 				$(this).parent().toggleClass('closed-box');
 			}
 		);
+		
+		//tabs
+		$('#box-content-tabs a').click(function(){
+			var tab_id = $(this).attr('data-tab');
+			var myVar = $("#"+tab_id).hasClass('current');	
+			if(myVar){
+				$("#"+tab_id).removeClass('current');			
+			}else{
+				$('.tab-content').removeClass('current');
+				$("#"+tab_id).addClass('current');		
+			}
+			
+		})
+
 	});
 })(jQuery);
