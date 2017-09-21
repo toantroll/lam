@@ -26,7 +26,7 @@ public class StudentDetailDaoImpl extends BaseDaoImpl implements StudentDetailDa
 			pre.setString(i++, studentInfor.getSchool());
 			pre.setString(i++, studentInfor.getMajor());
 			pre.setString(i++, studentInfor.getGraduatedYear());
-			pre.setString(i++, studentInfor.getGender());
+			pre.setInt(i++, studentInfor.getGender());
 			pre.setDate(i++, studentInfor.getBirthday());
 			pre.setInt(i++, studentInfor.getScoreIQ());
 			pre.setString(i++, studentInfor.getNote());
@@ -37,7 +37,7 @@ public class StudentDetailDaoImpl extends BaseDaoImpl implements StudentDetailDa
 		}
 	@Override
 	public void editStudentInfor(StudentDetail studentInfor) throws SQLException {
-		String sql = "UPDATE `student_detail` SET `course_id`=?, `name`=?, `email`=?, `tel`=?, `id_card`=?, `address`=?, `school`=?, `gender`=?, `birthday`=?, `major`=?, `graduated_year`=?, `IQ`=?, `note`=?, `japan_level`=?, `interview`=?, `status`=?, `created_at`=?, `updated_at`= now() WHERE `student_id`=?";
+		String sql = "UPDATE `student_detail` SET `course_id`=?, `name`=?, `email`=?, `tel`=?, `id_card`=?, `address`=?, `school`=?, `gender`=?, `birthday`=?, `major`=?, `graduated_year`=?, `IQ`=?, `note`=?, `japan_level`=?, `interview`=?, `status`=?, `updated_at`= now() WHERE `student_id`=?";
 		PreparedStatement pre;
 		Connection con = this.getConnection();
 		int i = 1;
@@ -51,7 +51,7 @@ public class StudentDetailDaoImpl extends BaseDaoImpl implements StudentDetailDa
 		pre.setString(i++, studentInfor.getSchool());
 		pre.setString(i++, studentInfor.getMajor());
 		pre.setString(i++, studentInfor.getGraduatedYear());
-		pre.setString(i++, studentInfor.getGender());
+		pre.setInt(i++, studentInfor.getGender());
 		pre.setDate(i++, studentInfor.getBirthday());
 		pre.setInt(i++, studentInfor.getScoreIQ());
 		pre.setString(i++, studentInfor.getNote());

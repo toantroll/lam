@@ -28,7 +28,7 @@ public class  StudentDetail extends Users {
 	private String status;
 	private String email;
 	private Date birthday;
-	private String gender;
+	private int gender;
 	/**
 	 * @return the studentId
 	 */
@@ -224,13 +224,13 @@ public class  StudentDetail extends Users {
 	/**
 	 * @return the gender
 	 */
-	public String getGender() {
+	public int getGender() {
 		return gender;
 	}
 	/**
 	 * @param gender the gender to set
 	 */
-	public void setGender(String gender) {
+	public void setGender(int gender) {
 		this.gender = gender;
 	}
 }
