@@ -29,9 +29,12 @@ public class RegisterDaoImpl extends BaseDaoImpl implements RegisterDao{
 			ps.setString(i++, register.getFullName());
 			ps.setString(i++, register.getEmail());
 			ps.setString(i++, register.getTel());
+			ps.setInt(i++, register.getGraduatedYear());
 			ps.setString(i++, register.getSchool());
 			ps.setString(i++, register.getMajor());
 			ps.setDate(i++, register.getBirthday());
+			ps.setInt(i++, register.getStatus());
+			ps.setDate(i++, register.getCreatedDate());
 			ps.execute();
 			ps.close();
 			return true;

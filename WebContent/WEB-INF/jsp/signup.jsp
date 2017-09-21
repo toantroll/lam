@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+ <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -79,7 +80,7 @@
             <div class="reg-content register">
                 <img src="../img/little-dude.png" class="little-dude" alt=""/>
                 <div class="reg-heading">
-                    <h2>Đăng ký sinh viên</h2>
+                    <h2>Đăng ký nhận thông tin</h2>
                 </div><!-- .reg-heading -->
 
                 <div class="reg-inner">
@@ -87,7 +88,13 @@
                         <ul>
                             <li>
                                 <input id="txtHoTen" name="full_name" type="text" placeholder="Họ và tên" autofocus>
+                                <div>
+                                	<c:forEach var = "error" items = "${listError}">
+                                		${error.value }
+                                	</c:forEach>
+                                </div>
                             </li>
+                            
                             <li>
                                 <input id="txtMobile" name="phone" type="text" placeholder="Điện thoại">
                             </li>
