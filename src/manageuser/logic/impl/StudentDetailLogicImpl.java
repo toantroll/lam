@@ -78,10 +78,10 @@ public class StudentDetailLogicImpl implements StudentDetailLogic{
 	@Override
 	public boolean deleteUser(int studentID) {
 		UserDaoImpl userDaoImpl = new UserDaoImpl();
-		StudentDetailLogicImpl studentDetailLogicImpl = new StudentDetailLogicImpl();
+		StudentDetailDaoImpl studentDetailDaoImpl = new StudentDetailDaoImpl();
 		try {
+			studentDetailDaoImpl.deleteStudentInfor(studentID);
 			userDaoImpl.deleteUser(studentID);
-			studentDetailLogicImpl.deleteUser(studentID);
 			userDaoImpl.commit();
 			return true;
 		} catch (SQLException e) {
@@ -93,7 +93,10 @@ public class StudentDetailLogicImpl implements StudentDetailLogic{
 		}
 		
 	}
-	
+    public static void main(String[] args) {
+		StudentDetailLogicImpl a = new StudentDetailLogicImpl();
+		a.deleteUser(8);
+	}
 	
 
 }

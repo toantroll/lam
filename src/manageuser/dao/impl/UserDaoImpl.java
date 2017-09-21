@@ -28,7 +28,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 		PreparedStatement preparedStatement = getConnectionTransaction().prepareStatement(sql);
 		preparedStatement.setString(count++,user.getUserName());
 		preparedStatement.setInt(count++, user.getRoleId());
-		preparedStatement.executeUpdate(sql);
+		preparedStatement.executeUpdate();
 	}
 
 	/* (non-Javadoc)
@@ -42,7 +42,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 		preparedStatement.setString(count++ , user.getPassword());
 		preparedStatement.setInt(count++ , user.getRoleId());
 		preparedStatement.setInt(count++ , user.getUserID());
-		preparedStatement.executeUpdate(sql);
+		preparedStatement.executeUpdate();
 	}
 
 	/* (non-Javadoc)
@@ -55,8 +55,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 		int count = 1;
 		preparedStatement.setInt(count++, Constant.ROLE_UNACTIVE);
 		preparedStatement.setInt(count++, studentId);
-		preparedStatement.executeUpdate(sql);
-		
+		preparedStatement.executeUpdate();
 	}
 
 }
