@@ -61,4 +61,21 @@ public class Common {
 		}
 		return flag;
 	}
+	
+	/**
+	 * check date in range
+	 * @param currentDate currentDate
+	 * @param startDate startDate
+	 * @param endDate endDate
+	 * @return true if date in range
+	 */
+	public static boolean isInRangeDate(Date currentDate, Date startDate, Date endDate){
+		boolean flag = true;
+		if(!isNull(currentDate) && !isNull(startDate) && !isNull(endDate)){
+			flag = startDate.getTime() <= currentDate.getTime() && currentDate.getTime() <= endDate.getTime()?true: false;
+		} else {
+			flag = false;
+		}
+		return flag;
+	}
 }
