@@ -11,7 +11,7 @@ public class StudentDetailDaoImpl extends BaseDaoImpl implements StudentDetailDa
 	@Override
 	public boolean createStudentInfor(StudentDetail studentInfor) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 }
