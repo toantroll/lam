@@ -5,6 +5,7 @@
 package manageuser.logic.impl;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import manageuser.dao.impl.TeacherDetailDaoImpl;
 import manageuser.dao.impl.UserDaoImpl;
@@ -43,6 +44,28 @@ public class TeacherDetailLogicImpl implements TeacherDetailLogic {
 			userDaoImpl.closeConnectionTransaction();
 		}		
 		return ketQua;
+	}
+	/* (non-Javadoc)
+	 * @see manageuser.logic.TeacherDetailLogic#updateTeacherDetail(int)
+	 */
+	@Override
+	public boolean updateTeacherDetail(Teacher teacher) {
+		boolean ketQua= true;
+		try {
+			teacherDetailDaoImpl.updateTeacher(teacher);
+		} catch (SQLException e) {
+			ketQua=false;
+			e.printStackTrace();
+		}
+		return ketQua;
+	}
+	/* (non-Javadoc)
+	 * @see manageuser.logic.TeacherDetailLogic#getAllTeacherDetail()
+	 */
+	@Override
+	public List<TeacherDetail> getAllTeacherDetail() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
