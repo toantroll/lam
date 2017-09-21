@@ -56,7 +56,7 @@ public class BaseDaoImpl implements BaseDao{
 	 * @see manageuser.dao.BaseDao#closeConnectionTrasaction(java.sql.Connection)
 	 */
 	@Override
-	public void closeConnection(Connection conn) {
+	public void closeConnection() {
 		if(conn != null){
 			try {
 				conn.close();
