@@ -1,5 +1,5 @@
-/**
- * 
+/**Copyright(C) 2017 Luvina
+ * ErrorMessageProperties.java, Sep 21, 2017
  */
 package manageuser.utils;
 
@@ -19,7 +19,7 @@ public class ErrorMessageProperties {
     static {
         Properties prop = new Properties();
         try {
-        	prop.load(DatabaseProperties.class.getResourceAsStream(Constant.ERR_MESS_PROPERTIES));
+        	prop.load(ErrorMessageProperties.class.getResourceAsStream(Constant.ERR_MESS_PROPERTIES));
         } catch (IOException e) {
             
         }
@@ -46,4 +46,8 @@ public class ErrorMessageProperties {
         }
         return string;
     }
+
+    public static void main(String[] args) {
+		System.out.println("asdasd");
+	}
 }
