@@ -71,6 +71,28 @@ public class StudentDetailLogicImpl implements StudentDetailLogic{
 			return false;
 		}
 	}
+
+	/* (non-Javadoc)
+	 * @see manageuser.logic.StudentDetailLogic#deleteUser(int)
+	 */
+	@Override
+	public boolean deleteUser(int studentID) {
+		UserDaoImpl userDaoImpl = new UserDaoImpl();
+		StudentDetailLogicImpl studentDetailLogicImpl = new StudentDetailLogicImpl();
+		try {
+			userDaoImpl.deleteUser(studentID);
+			studentDetailLogicImpl.deleteUser(studentID);
+			userDaoImpl.commit();
+			return true;
+		} catch (SQLException e) {
+			userDaoImpl.rollbackTrasaction();
+			System.out.println("lỗi xóa sinh viên "+ e);
+			return false;
+		} finally {
+			userDaoImpl.closeConnectionTransaction();
+		}
+		
+	}
 	
 	
 

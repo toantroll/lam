@@ -30,4 +30,10 @@ public boolean updatePass(Users user);
  * @return true cập nhật thành công, false cập nhật không thành công
  */
 public boolean updateUserInfor( StudentDetail studentDetail );
+/**
+ * xóa thông tin User
+ * @param studentID mã sinh viên cần xóa 
+ * @return true nếu xóa thành công, false xóa không thành công
+ */
+public boolean deleteUser(int studentID);
 }
