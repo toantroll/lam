@@ -38,9 +38,10 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 	public void editUser(Users user) throws SQLException {
 		String sql = "Update Users Set password = ?, role_id = ? where id = ? ";
 		PreparedStatement preparedStatement = getConnectionTransaction().prepareStatement(sql);
-		preparedStatement.setString(1, user.getPassword());
-		preparedStatement.setInt(2, user.getRoleId());
-		preparedStatement.setInt(3, user.getUserID());
+		int count = 1;
+		preparedStatement.setString(count++ , user.getPassword());
+		preparedStatement.setInt(count++ , user.getRoleId());
+		preparedStatement.setInt(count++ , user.getUserID());
 		preparedStatement.executeUpdate(sql);
 	}
 
@@ -51,8 +52,9 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 	public void deleteUser(int studentId) throws SQLException {
 		String sql = "Update Users set role_id = ? where id = ?";
 		PreparedStatement preparedStatement = getConnectionTransaction().prepareStatement(sql);
-		preparedStatement.setInt(1, Constant.ROLE_UNACTIVE);
-		preparedStatement.setInt(2, studentId);
+		int count = 1;
+		preparedStatement.setInt(count++, Constant.ROLE_UNACTIVE);
+		preparedStatement.setInt(count++, studentId);
 		preparedStatement.executeUpdate(sql);
 		
 	}
