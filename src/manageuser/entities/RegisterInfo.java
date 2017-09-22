@@ -3,8 +3,6 @@
  */
 package manageuser.entities;
 
-import java.sql.Date;
-
 /**
  * @author LA-PM
  *
