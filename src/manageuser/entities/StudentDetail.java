@@ -4,7 +4,6 @@
  *  Infor.java,Sep 20, 2017 HoangThai
  */
 package manageuser.entities;
-
 import java.sql.Date;
 
 /**
