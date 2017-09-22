@@ -127,4 +127,18 @@ public class Common {
 		}
 		return flag;
 	}
+	
+	/**
+	 * kiểm tra là số 
+	 * @param num số cần kiểm tra số 
+	 * @return true 
+	 */
+	public static boolean isNumBer(String num) {
+		try{
+			Integer.parseInt(num);
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		return true;
+	}
 }
