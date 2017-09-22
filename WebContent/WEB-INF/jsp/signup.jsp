@@ -151,7 +151,7 @@
 								<li><label class="lbl-slb"> <select name = "selectStatus">
 											<option value = "0">--Trạng thái tốt nghiệp--</option>
 											<c:forEach var="status" items="${listStatus}">
-												<option value="${status.id}">${status.nameStatus}</option>
+												<option value="${status.id}"<c:if test="${status.id == registerInfo.status}">selected</c:if> >${status.nameStatus}</option>
 											</c:forEach>
 
 									</select>

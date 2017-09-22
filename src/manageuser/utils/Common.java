@@ -6,7 +6,7 @@ package manageuser.utils;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Base64;
-import java.util.Date;
+import java.sql.Date;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -16,6 +16,7 @@ import java.security.NoSuchAlgorithmException;
  *
  */
 public class Common {
+	
 	
 	/**
 	 * Mã hóa chuỗi theo sha1+base64
@@ -140,5 +141,25 @@ public class Common {
 			return false;
 		}
 		return true;
+	}
+	
+	/**
+	 * Thực hiện convert date string sang date sql
+	 * @param date Ngày theo kiểu chuỗi
+	 * @return trả về ngày dạng Date sql
+	 */
+	public static Date convertStringToDate(String date){
+		java.sql.Date sql = null; 
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		java.util.Date parsed;
+			try {
+				parsed = format.parse(date);
+				sql = new java.sql.Date(parsed.getTime());
+			} catch (ParseException e) {
+				System.out.println("Lỗi convert to Date");
+			}
+	        
+		return sql;
+		
 	}
 }

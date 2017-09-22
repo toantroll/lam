@@ -26,7 +26,7 @@ public interface TeacherDetailDao extends BaseDao {
 	 * @param teacher đối tượng thông tin giáo viên
 	 * @throws SQLException 
 	 */
-	public void insertTeacher(Teacher teacher) throws SQLException;
+	public void insertTeacher(TeacherDetail teacherDetail) throws SQLException;
 	/**
 	 * Sửa thông tin giáo viên
 	 * @param teacher đối tượng lưu thông tin giáo viên
