@@ -5,7 +5,6 @@
 package manageuser.dao.impl;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,7 +31,7 @@ public class TimeTableInfoDaoIml extends BaseDaoImpl implements TimeTableInfoDao
 	@Override
 	public void insertTimeTableInfo(TimeTableInfo e) throws SQLException {
 		StringBuilder sql = new StringBuilder();
-		sql.append("INSERT INTO `dashboard-la-management`.`timetables_info`")
+		sql.append("INSERT INTO `timetables_info`")
 				.append("(`id`, `course_id`, `start_date`, `end_date`, `content`, `note`, `created_at`,")
 				.append("`place`, `status`)").append("VALUES(?,?,?,?,?,?,now(),?,?)");
 
@@ -41,8 +40,8 @@ public class TimeTableInfoDaoIml extends BaseDaoImpl implements TimeTableInfoDao
 		int i = 1;
 		ps.setInt(i++, e.getId());
 		ps.setInt(i++, e.getCourseId());
-		ps.setDate(i++, new Date(e.getStartDate().getTime()));
-		ps.setDate(i++, new Date(e.getEndDate().getTime()));
+		ps.setDate(i++, e.getStartDate());
+		ps.setDate(i++, e.getEndDate());
 		ps.setString(i++, e.getContent());
 		ps.setString(i++, e.getNote());
 		ps.setString(i++, e.getPlace());
@@ -60,14 +59,14 @@ public class TimeTableInfoDaoIml extends BaseDaoImpl implements TimeTableInfoDao
 	@Override
 	public void updateTimeTableInfo(TimeTableInfo e) throws SQLException {
 		StringBuilder sql = new StringBuilder();
-		sql.append("UPDATE `dashboard-la-management`.`timetables_info`")
+		sql.append("UPDATE `timetables_info`")
 				.append("SET `start_date` = ?,`end_date` = ?, `course_id` = ?,`content` = ?,")
 				.append("`note` =?,	`updated_at` = now(),	`place` = ?").append("WHERE `id` = ?");
 
 		PreparedStatement ps = getConnection().prepareStatement(sql.toString());
 		int i = 1;
-		ps.setDate(i++, new Date(e.getStartDate().getTime()));
-		ps.setDate(i++, new Date(e.getEndDate().getTime()));
+		ps.setDate(i++, e.getStartDate());
+		ps.setDate(i++, e.getEndDate());
 		ps.setInt(i++, e.getCourseId());
 		ps.setString(i++, e.getContent());
 		ps.setString(i++, e.getNote());
@@ -86,7 +85,7 @@ public class TimeTableInfoDaoIml extends BaseDaoImpl implements TimeTableInfoDao
 	@Override
 	public void deleteTimeTableInfo(int id) throws SQLException {
 		StringBuilder sql = new StringBuilder();
-		sql.append("UPDATE `dashboard-la-management`.`timetables_info`")
+		sql.append("UPDATE `timetables_info`")
 				.append("SET `status` = ?, `deleted_at` = now()")
 				.append("WHERE `id` = ?");
 		
@@ -119,7 +118,7 @@ public class TimeTableInfoDaoIml extends BaseDaoImpl implements TimeTableInfoDao
 		.append("`timetables_info`.`deleted_at`,")
 		.append("`timetables_info`.`status`,")
 		.append("`timetables_info`.`place`")
-		.append("FROM `dashboard-la-management`.`timetables_info`")
+		.append("FROM `timetables_info`")
 		.append("WHERE `timetables_info`.`status` = 1");
 
 		PreparedStatement ps = getConnection().prepareStatement(sql.toString());
@@ -168,7 +167,7 @@ public class TimeTableInfoDaoIml extends BaseDaoImpl implements TimeTableInfoDao
 		.append("`timetables_info`.`deleted_at`,")
 		.append("`timetables_info`.`status`,")
 		.append("`timetables_info`.`place`")
-		.append("FROM `dashboard-la-management`.`timetables_info`")
+		.append("FROM `timetables_info`")
 		.append("WHERE `timetables_info`.`status` = 1 AND `timetables_info`.`id` = ?");
 
 		PreparedStatement ps = getConnection().prepareStatement(sql.toString());
