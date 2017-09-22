@@ -16,6 +16,7 @@ import manageuser.dao.TimeTableDetailDao;
 import manageuser.entities.TimeTableDetail;
 
 /**
+ * time table detail dao 
  * @author LA-PM
  *
  */
@@ -179,7 +180,6 @@ public class TimeTableDetailDaoImpl extends BaseDaoImpl implements TimeTableDeta
 		d.setStartDate(new Date(System.currentTimeMillis()));
 		
 		try {
-			//t.insertTimeTableDetail(d);
 			t.deleteTimeTableDetail(3);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
