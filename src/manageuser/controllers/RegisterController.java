@@ -24,29 +24,31 @@ import manageuser.validates.Validate;
 @WebServlet("/RegisterController")
 public class RegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public RegisterController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-    
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public RegisterController() {
+		super();
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		setDataLogic(request, response);
 		RequestDispatcher dispatcher = request.getRequestDispatcher(Constant.SIGNUP);
 		dispatcher.forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		setDataLogic(request, response);
 		RegisterInfo registerInfo = new RegisterInfo();
 		RegisterLogicImpl registerLogicImpl = new RegisterLogicImpl();
@@ -59,7 +61,7 @@ public class RegisterController extends HttpServlet {
 		String school = request.getParameter("school");
 		String major = request.getParameter("major");
 		String graduatedYear = "";
-		if(request.getParameter("graduated_year") != null){
+		if (request.getParameter("graduated_year") != null) {
 			graduatedYear = request.getParameter("graduated_year");
 		}
 		registerInfo.setEmail(email);
@@ -71,12 +73,12 @@ public class RegisterController extends HttpServlet {
 		registerInfo.setStatus(status);
 		registerInfo.setGraduatedYear(graduatedYear);
 		HashMap<String, String> listError = Validate.validateRegister(registerInfo);
-		if(listError.size() != 0){
+		if (listError.size() != 0) {
 			request.setAttribute("listError", listError);
 			request.setAttribute("registerInfo", registerInfo);
 			RequestDispatcher dispatcher = request.getRequestDispatcher(Constant.SIGNUP);
 			dispatcher.forward(request, response);
-		}else{
+		} else {
 			register.setBirthday(Common.convertStringToDate(date));
 			register.setEmail(email);
 			register.setFullName(fullName);
@@ -92,9 +94,10 @@ public class RegisterController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/SuccessRegisterController");
 		}
 	}
-	private void setDataLogic(HttpServletRequest request, HttpServletResponse response){
-    	StatusStudentLogicImpl statusStudentLogicImpl = new StatusStudentLogicImpl();
-    	request.setAttribute("listStatus", statusStudentLogicImpl.getStatus());
-    }
+
+	private void setDataLogic(HttpServletRequest request, HttpServletResponse response) {
+		StatusStudentLogicImpl statusStudentLogicImpl = new StatusStudentLogicImpl();
+		request.setAttribute("listStatus", statusStudentLogicImpl.getStatus());
+	}
 
 }

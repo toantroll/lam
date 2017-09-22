@@ -177,13 +177,13 @@
 									</div></li>
 
 								<li><input id="txtMobile" name="phone" type="text"
-									value="${registerInfo.email}" placeholder="Điện thoại">
+									value="${registerInfo.tel}" placeholder="Điện thoại">
 									<div class="err">
 										<c:if test="${listError.containsKey('tel')}">${listError.get('tel')}</c:if>
 
 									</div></li>
 								<li><input id="txtEmail" name="email" type="text"
-									value="${registerInfo.tel}" placeholder="Email">
+									value="${registerInfo.email}" placeholder="Email">
 									<div class="err">
 										<c:if test="${listError.containsKey('email')}">${listError.get('email')}</c:if>
 
