@@ -5,13 +5,62 @@ package manageuser.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Date;
-
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 /**
  * @author LA-PM
  *
  */
 public class Common {
+	
+	/**
+	 * Mã hóa chuỗi theo sha1+base64
+	 * @param text chuỗi muốn mã hóa
+	 * @return chuỗi đã mã hóa theo sha1 + base64 trả về null nếu lỗi
+	 */
+	public static String encodeText(String text) {
+	
+		String passEncrypted = null;
+		try {
+			passEncrypted = encodeBase64(encodeSHA1(text));
+		} catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
+			System.out.println("lỗi hàm mã hóa");
+		}	
+		return passEncrypted;
+	}
+	
+	/**
+	 * Mã hóa SHA1
+	 * @param text chuỗi cần  mã hóa
+	 * @return chuỗi đã mã hóa SHA1
+	 * @throws NoSuchAlgorithmException
+	 */
+	public static String encodeSHA1(String text) throws NoSuchAlgorithmException{
+		String passEncrypted = "";
+		MessageDigest md = MessageDigest.getInstance("SHA-1");
+		byte[] encryptText = md.digest(text.getBytes());
+		BigInteger bigInt = new BigInteger(1,encryptText);
+		passEncrypted = bigInt.toString(16);
+		return passEncrypted;
+	}
+	/**
+	 * Mã hóa Base64
+	 * @param text chuỗi cần  mã hóa
+	 * @return chuỗi đã mã hóa base64
+	 * @throws NoSuchAlgorithmException
+	 */
+	public static String encodeBase64(String text) throws UnsupportedEncodingException{
+		 byte[] bytes;
+		 String passEncrypted="" ;
+		 bytes = text.getBytes("UTF-8");
+		 passEncrypted = Base64.getEncoder().encodeToString(bytes);
+		 return passEncrypted;
+	}
+	
 	public static boolean checkEmpty(String value){
 		if("".equals(value)){
 			return true;

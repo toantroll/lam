@@ -93,6 +93,7 @@ public class StudentDetailLogicImpl implements StudentDetailLogic{
 		}
 		
 	}
+	// test
     public static void main(String[] args) {
 		StudentDetailLogicImpl a = new StudentDetailLogicImpl();
 		a.deleteUser(8);

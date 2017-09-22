@@ -12,7 +12,6 @@ import java.sql.Date;
  *
  */
 public class  StudentDetail extends Users {
-	private String studentId;
 	private int courseId;
 	private String name;
 	private String tel;
@@ -29,18 +28,6 @@ public class  StudentDetail extends Users {
 	private String email;
 	private Date birthday;
 	private int gender;
-	/**
-	 * @return the studentId
-	 */
-	public String getStudentId() {
-		return studentId;
-	}
-	/**
-	 * @param studentId the studentId to set
-	 */
-	public void setStudentId(String studentId) {
-		this.studentId = studentId;
-	}
 	/**
 	 * @return the courseId
 	 */
