@@ -6,6 +6,7 @@ package manageuser.validates;
 import java.util.HashMap;
 
 import manageuser.entities.Register;
+import manageuser.entities.RegisterInfo;
 import manageuser.utils.Common;
 import manageuser.utils.Constant;
 import manageuser.utils.ErrorMessageProperties;
@@ -15,7 +16,7 @@ import manageuser.utils.ErrorMessageProperties;
  *
  */
 public class Validate {
-	public static HashMap<String, String> validateRegister(Register register){
+	public static HashMap<String, String> validateRegister(RegisterInfo register){
 		String tel=register.getTel();
 		String email=register.getEmail();
 		String yearGraduate=register.getGraduatedYear()+"";
@@ -23,21 +24,20 @@ public class Validate {
 		if(Common.checkEmpty(register.getFullName())){
 			listError.put("full_name", ErrorMessageProperties.getErrorMessage("ERR01_FULLNAME"));
 		}
-
 		if(Common.checkEmpty(tel)){
 			listError.put("tel", ErrorMessageProperties.getErrorMessage("ERR01_TEL"));
-		}else if(checkFormat(tel,Constant.REGEX_TEL)){
+		}else if(!checkFormat(tel,Constant.REGEX_TEL)){
 			listError.put("tel", ErrorMessageProperties.getErrorMessage("ERR02_TEL"));
 		}
 		if(Common.checkEmpty(email)){
 			listError.put("email", ErrorMessageProperties.getErrorMessage("ERR01_EMAIL"));
-		}else if(checkFormat(email,Constant.REGEX_MAIL)){
+		}else if(!checkFormat(email,Constant.REGEX_MAIL)){
 			listError.put("email", ErrorMessageProperties.getErrorMessage("ERR02_EMAIL"));
 		}
 		if(Common.checkEmpty(register.getBirthday().toString())){
 			listError.put("birthday", ErrorMessageProperties.getErrorMessage("ERR01_BIRTH"));
 		}
-		if(Common.checkEmpty(register.getStatus()+"")){
+		if(register.getStatus() == 0){
 			listError.put("status", ErrorMessageProperties.getErrorMessage("ERR03_STATUS"));
 		}
 		if(Common.checkEmpty(register.getSchool())){
@@ -48,7 +48,7 @@ public class Validate {
 		}
 		if(Common.checkEmpty(yearGraduate)){
 			listError.put("year_graduate", ErrorMessageProperties.getErrorMessage("ERR01_YEAR"));
-		}else if(checkFormat(yearGraduate,Constant.REGEX_YEAR_GRADUATE)){
+		}else if(!checkFormat(yearGraduate,Constant.REGEX_YEAR_GRADUATE)){
 			listError.put("year_graduate", ErrorMessageProperties.getErrorMessage("ERR02_YEAR"));
 		}
 		return listError;
