@@ -10,6 +10,7 @@ import manageuser.dao.impl.UserDaoImpl;
 import manageuser.entities.StudentDetail;
 import manageuser.entities.Users;
 import manageuser.logic.StudentDetailLogic;
+import manageuser.utils.Common;
 public class StudentDetailLogicImpl implements StudentDetailLogic{
 
 	/* (non-Javadoc)
@@ -21,7 +22,7 @@ public class StudentDetailLogicImpl implements StudentDetailLogic{
 		StudentDetailDaoImpl studentDetailDaoImpl = new StudentDetailDaoImpl();
 		Users users = new Users();
 		users.setUserID(student.getUserID());
-		users.setPassword(student.getPassword());
+		users.setPassword(Common.encodeText(student.getPassword()));
 		users.setRoleId(student.getRoleId());
 		users.setUserName(student.getUserName());
 		try {
@@ -44,7 +45,7 @@ public class StudentDetailLogicImpl implements StudentDetailLogic{
 	@Override
 	public boolean updatePass(Users user) {
 		UserDaoImpl userDaoImpl = new UserDaoImpl();
-		// cần mã hóa pass rồi mới đưa vào đang chờ Hưng
+		user.setPassword(Common.encodeText(user.getPassword()));
 		try {
 			userDaoImpl.editUser(user);
 			userDaoImpl.commit();
