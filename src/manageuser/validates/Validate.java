@@ -1,12 +1,15 @@
 /**
- * 
+ * Copyright(C) 2017 luvina
+ *	Validate.java, 22/9/2017 longvc
  */
 package manageuser.validates;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-import manageuser.entities.Register;
 import manageuser.entities.RegisterInfo;
+import manageuser.logic.impl.UsersLogicImpl;
 import manageuser.utils.Common;
 import manageuser.utils.Constant;
 import manageuser.utils.ErrorMessageProperties;
@@ -16,6 +19,35 @@ import manageuser.utils.ErrorMessageProperties;
  *
  */
 public class Validate {
+	/**
+	 * kiểm tra thông tin nhập
+	 * 
+	 * @param loginId tên đăng nhập
+	 * @param password mật khẩu đăng nhập
+	 * @return Danh sách lỗi ,nếu không có lỗi trả về mảng rỗng
+	 */
+	public List<String> validateLogin(String userName, String password) {
+		List<String> messageError = new ArrayList<String>();
+		if (Common.checkEmpty(userName)) {
+			messageError.add(ErrorMessageProperties.getErrorMessage("ERR01_USERNAME"));
+		}
+		if (Common.checkEmpty(password)) {
+			messageError.add(ErrorMessageProperties.getErrorMessage("ERR01_PASS"));
+		}
+		if (!Common.checkEmpty(userName) && !Common.checkEmpty(password)) {
+			UsersLogicImpl usersLogicImpl = new UsersLogicImpl();
+			if (!usersLogicImpl.checkAccount(userName, password)) {
+				messageError.add(ErrorMessageProperties.getErrorMessage("ER16"));
+			}
+		}
+		return messageError;
+	}
+
+	/**
+	 * validate thông tin đăng kí
+	 * @param register đối tượng registẻ
+	 * @return cặp list lỗi
+	 */
 	public static HashMap<String, String> validateRegister(RegisterInfo register){
 		String tel=register.getTel();
 		String email=register.getEmail();
