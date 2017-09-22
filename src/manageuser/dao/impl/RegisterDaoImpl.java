@@ -29,28 +29,27 @@ public class RegisterDaoImpl extends BaseDaoImpl implements RegisterDao {
 	 * manageuser.dao.RegisterDao#insertRegister(manageuser.entities.Register)
 	 */
 	@Override
-	public boolean addUserRegist(Register regiter) {
+	public boolean addUserRegist(Register register) {
 		Connection con = getConnection();
 		if (con != null) {
 			StringBuffer sql = new StringBuffer();
 			int i = 0;
 			sql.append(
-					"insert into register (full_name,email,birthday,tel,school,graduated_year,major,status,created_date,iq) ")
-					.append("values (?,?,?,?,?,?,?,?,?,?)");
+					"insert into register (full_name,email,birthday,tel,school,graduated_year,major,status,created_date) ")
+					.append("values (?,?,?,?,?,?,?,?,?)");
 			System.out.println(sql.toString());
 			try {
 				pst = con.prepareStatement(sql.toString());
 			
-				pst.setString(++i, regiter.getFullName());
-				pst.setString(++i, regiter.getEmail());
-				pst.setDate(++i, regiter.getBirthday());
-				pst.setString(++i, regiter.getTel());
-				pst.setString(++i, regiter.getSchool());
-				pst.setInt(++i, regiter.getGraduatedYear());
-				pst.setString(++i, regiter.getMajor());
-				pst.setInt(++i, regiter.getStatus());
-				pst.setDate(++i, regiter.getCreatedDate());
-				pst.setInt(++i, regiter.getIq());
+				pst.setString(++i, register.getFullName());
+				pst.setString(++i, register.getEmail());
+				pst.setDate(++i, register.getBirthday());
+				pst.setString(++i, register.getTel());
+				pst.setString(++i, register.getSchool());
+				pst.setInt(++i, register.getGraduatedYear());
+				pst.setString(++i, register.getMajor());
+				pst.setInt(++i, register.getStatus());
+				pst.setDate(++i, register.getCreatedDate());
 				return (pst.executeUpdate() == 1);
 			} catch (SQLException e) {
 				System.out.println(e);

@@ -17,4 +17,6 @@ public class Constant {
 	public static final String REGEX_TEL="[0-9]{10,11}";
 	public static final String REGEX_MAIL="^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 	public static final String REGEX_YEAR_GRADUATE="[0-9]{4}";
+	public static final String SIGNUP = "WEB-INF/jsp/signup.jsp";
+	public static final String SUCCESS = "WEB-INF/jsp/successRegister.jsp";
 }
