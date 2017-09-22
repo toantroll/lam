@@ -47,15 +47,15 @@ public class TeacherDetailDaoImpl extends BaseDaoImpl implements TeacherDetailDa
 	 * Teacher)
 	 */
 	@Override
-	public void insertTeacher(Teacher teacher) throws SQLException {
+	public void insertTeacher(TeacherDetail teacherDetail) throws SQLException {
 		String sql ="INSERT INTO teacher_detail (teacher_id,full_name,email,tel,delete_flag) values (LAST_INSERT_ID(),?,?,?,?)";
 		connTransaction = getConnectionTransaction();
 		PreparedStatement pstm = null;
 		pstm = connTransaction.prepareStatement(sql.toString());
 		int i = 0;
-		pstm.setString((++i), teacher.getFullName());
-		pstm.setString((++i), teacher.getEmail());
-		pstm.setString((++i), teacher.getTel());
+		pstm.setString((++i), teacherDetail.getFullName());
+		pstm.setString((++i), teacherDetail.getEmail());
+		pstm.setString((++i), teacherDetail.getTel());
 		pstm.executeUpdate();
 	}
 
@@ -81,7 +81,8 @@ public class TeacherDetailDaoImpl extends BaseDaoImpl implements TeacherDetailDa
 	@Override
 	public void deleteTeacher(int teacherId) throws SQLException {
 		String sql="UPDATE teacher_detail SET delete_flag= ? ";
-		PreparedStatement pstm= getConnection().prepareStatement(sql);
+		connTransaction=getConnectionTransaction();
+		PreparedStatement pstm= connTransaction.prepareStatement(sql);
 		pstm.setInt(1,0);
 		pstm.executeUpdate();
 	}
