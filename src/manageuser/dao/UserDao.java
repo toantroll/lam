@@ -15,6 +15,13 @@ import manageuser.entities.Users;
  */
 public interface UserDao {
 	/**
+	 * Kiểm tra tài khoản 
+	 * @param userName tên đăng nhập
+	 * @param password mật khẩu
+	 * @return true nếu thông tin đăng nhập hợp lệ
+	 */
+	public boolean checkAccount(String userName, String password);
+	/**
 	 * 
 	 * @param user đối tượng đăng nhập
 	 * @return true nếu thêm thành false nếu thêm không thành công
