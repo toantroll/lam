@@ -56,6 +56,7 @@ public class TeacherDetailDaoImpl extends BaseDaoImpl implements TeacherDetailDa
 		pstm.setString((++i), teacherDetail.getFullName());
 		pstm.setString((++i), teacherDetail.getEmail());
 		pstm.setString((++i), teacherDetail.getTel());
+		pstm.setInt(++i,teacherDetail.getDeleteFlag());
 		pstm.executeUpdate();
 	}
 
@@ -63,15 +64,15 @@ public class TeacherDetailDaoImpl extends BaseDaoImpl implements TeacherDetailDa
 	 * @see manageuser.dao.TeacherDetailDao#updateTeacher(manageuser.entities.Teacher)
 	 */
 	@Override
-	public void updateTeacher(Teacher teacher) throws SQLException {
+	public void updateTeacher(TeacherDetail teacherDetail) throws SQLException {
 		String sql="UPDATE teacher_detail SET full_name=?,email=?,tel=? WHERE teacher_id= ?";
 		connTransaction=getConnectionTransaction();
 		PreparedStatement pstm= connTransaction.prepareStatement(sql);
 		int i=0;
-		pstm.setString(++i, teacher.getFullName());
-		pstm.setString(++i, teacher.getEmail());
-		pstm.setString(++i, teacher.getTel());
-		pstm.setInt(++i,teacher.getTeacherId());
+		pstm.setString(++i, teacherDetail.getFullName());
+		pstm.setString(++i, teacherDetail.getEmail());
+		pstm.setString(++i, teacherDetail.getTel());
+		pstm.setInt(++i,teacherDetail.getTeacherId());
 		pstm.executeUpdate();
 	}
 
@@ -85,6 +86,25 @@ public class TeacherDetailDaoImpl extends BaseDaoImpl implements TeacherDetailDa
 		PreparedStatement pstm= connTransaction.prepareStatement(sql);
 		pstm.setInt(1,0);
 		pstm.executeUpdate();
+	}
+
+	/* (non-Javadoc)
+	 * @see manageuser.dao.TeacherDetailDao#getTeacherDetailById(int)
+	 */
+	@Override
+	public TeacherDetail getTeacherDetailById(int teacherId) throws SQLException {
+		TeacherDetail teacherDetail = new TeacherDetail();
+		String sql = "SELECT * FROM teacher_detail WHERE teacher_id=? AND delete_flag = 1";		
+		PreparedStatement pstm= getConnection().prepareStatement(sql);
+		ResultSet rs= pstm.executeQuery();
+		if(rs.next()){			
+			teacherDetail.setUserID(rs.getInt("id"));
+			teacherDetail.setUserName(rs.getString("username"));
+			teacherDetail.setFullName(rs.getString("full_name"));
+			teacherDetail.setEmail(rs.getString("email"));
+			teacherDetail.setTel(rs.getString("tel"));		
+		}		
+		return teacherDetail;
 	}
 
 }

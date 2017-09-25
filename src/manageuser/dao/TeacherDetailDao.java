@@ -32,11 +32,18 @@ public interface TeacherDetailDao extends BaseDao {
 	 * @param teacher đối tượng lưu thông tin giáo viên
 	 * @throws SQLException 
 	 */
-	public void updateTeacher(Teacher teacher) throws SQLException;
+	public void updateTeacher(TeacherDetail teacherDetail) throws SQLException;
 	/**
 	 * Xóa thông tin giáo viên
 	 * @param teacherId
 	 * @throws SQLException 
 	 */
 	public void deleteTeacher(int teacherId) throws SQLException;
+	/**
+	 * Lấy thông tin giáo viên theo id
+	 * @param teacherId
+	 * @return đối tượng giáo viên.
+	 * @throws SQLException 
+	 */
+	public TeacherDetail getTeacherDetailById(int teacherId) throws SQLException;
 }

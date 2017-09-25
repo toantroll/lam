@@ -7,7 +7,6 @@ package manageuser.logic;
 import java.sql.SQLException;
 import java.util.List;
 
-import manageuser.entities.Teacher;
 import manageuser.entities.TeacherDetail;
 
 /**
@@ -35,7 +34,7 @@ public interface TeacherDetailLogic {
 	 * @param teacherId  mã giáo viên
 	 * @return true: sửa thành công , false: sửa thất bại
 	 */
-	public boolean updateTeacherDetail(Teacher teacher);
+	public boolean updateTeacherDetail(TeacherDetail teacherDetail);
 
 	/**
 	 * Ẩn thông tin giáo viên và thay đổi  quyền truy cập
