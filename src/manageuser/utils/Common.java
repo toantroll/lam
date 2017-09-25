@@ -166,4 +166,152 @@ public class Common {
 		return dateSQl;
 		
 	}
+	/**
+	 * Phương thức kiểm tra một chuỗi đầu vào có null hoặc rỗng không.
+	 * 
+	 * @param input
+	 *            Chuỗi cần kiểm tra.
+	 * @return true nếu chuỗi đầu vào null hoặc rỗng.<br />
+	 *         false trong các trường hợp còn lại.
+	 */
+	public static boolean isNullOrEmpty(String input) {
+		return (input == null || input.isEmpty());
+	}
+
+	/**
+	 * Xử lí chuỗi ký tự nhập vào khi tìm kiếm để tránh lỗi SQL
+	 * 
+	 * @param input
+	 *            chuỗi có ký tự đặc biệt cần xử lý
+	 * @return input chuỗi được xử lý
+	 */
+	public static String escapeSQLSpecialChar(String input) {
+		if (input != null) {
+			input = input.replace("\\", "\\\\");
+			input = input.replace("%", "\\%");
+			input = input.replace("_", "\\_");
+		}
+		return input;
+	}
+
+	/**
+	 * Tính tổng số trang
+	 * 
+	 * @param totalSubject
+	 *            tổng số môn học
+	 * @param limit
+	 *            giới hạn số bản ghi trên 1 trang
+	 * @return tổng số trang
+	 */
+	public static int getTotalPageSubject(int totalSubject, int limit) {
+		if (totalSubject <= 0) {
+			return 0;
+		}
+		return ((totalSubject - 1) / limit + 1);
+	}
+
+	/**
+	 * Lấy offset
+	 * 
+	 * @param currentPage
+	 *            trang hiện tại
+	 * @param limit
+	 *            giới hạn số trang
+	 * @return offset của trang hiện tại
+	 */
+	public static int getOffsetSubject(int currentPage, int limit) {
+		return (currentPage - 1) * limit;
+	}
+
+	/**
+	 * Lấy mảng page
+	 * 
+	 * @param totalRecords
+	 *            tổng số bản ghi
+	 * @param limit
+	 *            giới hạn số bản ghi trên 1 trang
+	 * @param currentPage
+	 *            trang hiện tại
+	 * @return mảng các page
+	 */
+	public static List<Integer> getListPagingSubject(int totalRecords, int limit, int currentPage) {
+		List<Integer> listPaging = new ArrayList<>();
+		int totalPage = getTotalPageSubject(totalRecords, limit);
+		if (totalPage == 0 || totalPage == 1) {
+			return listPaging;
+		}
+		if (currentPage > totalPage || currentPage <= 0) {
+			currentPage = 1;
+		}
+		int pageLimit = 3;
+		int startPage = getStartPageSubject(currentPage, pageLimit);
+		int endPage = getEndPageSubject(startPage, pageLimit, totalPage);
+		for (int i = startPage; i <= endPage; i++) {
+			listPaging.add(i);
+		}
+		return listPaging;
+	}
+
+	/**
+	 * Lấy trang bắt đầu
+	 * 
+	 * @param currentPage
+	 *            trang hiện tại
+	 * @param pageLimit
+	 *            giới hạn số trang được hiển thị
+	 * @return trang bắt đầu
+	 */
+	public static int getStartPageSubject(int currentPage, int pageLimit) {
+		int currentSegment = getCurrentSegmentSubject(currentPage, pageLimit);
+		int startPage = (currentSegment - 1) * pageLimit + 1;
+		return startPage;
+	}
+
+	/**
+	 * Lấy trang kết thúc
+	 * 
+	 * @param startPage
+	 *            trang bắt đầu
+	 * @param pageLimit
+	 *            giới hạn số trang được hiển thị
+	 * @param totalPage
+	 *            tổng số trang
+	 * @return trang kết thúc
+	 */
+	public static int getEndPageSubject(int startPage, int pageLimit, int totalPage) {
+		int endPage = pageLimit;
+		if (startPage + pageLimit - 1 <= totalPage) {
+			endPage = startPage + pageLimit - 1;
+		} else {
+			endPage = totalPage;
+		}
+		return endPage;
+	}
+
+	/**
+	 * Lấy segment hiện tại
+	 * 
+	 * @param currentPage
+	 *            trang hiện tại
+	 * @param pageLimit
+	 *            giới hạn số trang được hiển thị
+	 * @return CurrentSegment
+	 */
+	public static int getCurrentSegmentSubject(int currentPage, int pageLimit) {
+		return (currentPage - 1) / pageLimit + 1;
+	}
+
+	/**
+	 * Kiểm tra điều kiện login
+	 * 
+	 * @param session
+	 *            phiên làm việc
+	 * @return success nếu login thành công, failure nếu login thất bại
+	 */
+	public static String checkLogin(HttpSession session) {
+		if (session == null || session.getAttribute("loginName") == null) {
+			return "failure";
+		}
+		return "success";
+	}
 }
