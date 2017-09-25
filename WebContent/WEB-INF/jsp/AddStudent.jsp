@@ -103,17 +103,29 @@
                                     </li>
                                     <li class="student-only">
                                         <label class="lbl-slb">
-                                            <select name="course" id="slCourse"><option value="" selected="selected">Khóa học</option><option value="None">Chưa học</option><option value="LA17_AM">LA17_AM</option><option value="LA17_PM">LA17_PM</option><option value="LA18_AM">LA18_AM</option><option value="LA18_PM">LA18_PM</option><option value="LA19_AM">LA19_AM</option><option value="LA19_PM">LA19_PM</option></select>                </label>
+                                            <select name="course" id="slCourse"><option value="" selected="selected">Khóa học</option>
+                                            <option value="None">Chưa học</option>
+                                            <option value="17">LA17</option>
+                                            <option value="16">LA16</option>
+                                            <option value="18">LA18</option>
+                                            <option value="LA18_PM">LA18_PM</option>
+                                            <option value="LA19_AM">LA19_AM</option>
+                                            <option value="LA19_PM">LA19_PM</option></select>            
+                                         </label>
                                     </li>
-                                    <li class="student-only">
-                                        <div class="input text"><input type="text" name="student_id" id="txtStudent_ID" required="required" placeholder="Student_ID (*)"/></div>            </li>
                                     <li class="student-only">
                                         <label class="lbl-slb">
                                             <select name="japanese_level" id="slJapanese"><option value="" selected="selected">Trình độ tiếng Nhật</option><option value="none">Chưa học</option><option value="N1">JLPT N1</option><option value="N2">JLPT N2</option><option value="N3">JLPT N3</option><option value="N4">JLPT N4</option><option value="N5">JLPT N5</option></select>                </label>
                                     </li>
                                     <li class="student-only">
                                         <label class="lbl-slb">
-                                            <select name="status"><option value="">Trạng thái người dùng</option><option value="0">Mới đăng kí người dùng</option><option value="1">Đang đăng kí học LA (chờ phê duyệt)</option><option value="2">Đã từng đăng kí khóa LA</option><option value="3">Đang học LA</option><option value="4">Đã học xong LA</option><option value="5">Bảo lưu kết quả</option></select>                </label>
+                                            <select name="status"><option value="">Trạng thái người dùng</option>
+                                            <option value="0">Mới đăng kí người dùng</option>
+                                            <option value="1">Đang đăng kí học LA (chờ phê duyệt)</option>
+                                            <option value="2">Đã từng đăng kí khóa LA</option><option value="3">Đang học LA</option>
+                                            <option value="4">Đã học xong LA</option>
+                                            <option value="5">Bảo lưu kết quả</option></select>
+                                        </label>
                                     </li>
                                     <li class="student-teacher">
                                         <div class="input text"><input type="text" name="school" id="txtTruong" placeholder="Trường" value=""/></div>            </li>
