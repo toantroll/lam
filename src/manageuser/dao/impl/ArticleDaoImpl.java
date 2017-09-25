@@ -22,15 +22,18 @@ public class ArticleDaoImpl extends BaseDaoImpl implements ArticleDao {
 	 * @see manageuser.dao.ArticleDao#getAllTitle()
 	 */
 	@Override
-	public List<String> getAllTitle() throws SQLException {
-		List<String> listTitle = new ArrayList<>();
-		String sql = "SELECT title FROM article ORDER BY created_at DESC";
+	public List<Article> getAllTitle() throws SQLException {		
+		List<Article> articleLst= new ArrayList<>();		
+		String sql = "SELECT id,title FROM article ORDER BY created_at DESC";
 		PreparedStatement pstm = getConnection().prepareStatement(sql);
 		ResultSet rs = pstm.executeQuery();
 		while (rs.next()) {
-			listTitle.add(rs.getString(1));
+			Article article= new Article();
+			article.setId(rs.getInt(1));
+			article.setTitle(rs.getString(2));
+			articleLst.add(article);
 		}
-		return listTitle;
+		return articleLst;
 	}
 
 	public static void main(String[] args) {

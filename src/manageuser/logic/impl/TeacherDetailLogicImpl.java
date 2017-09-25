@@ -9,7 +9,6 @@ import java.util.List;
 
 import manageuser.dao.impl.TeacherDetailDaoImpl;
 import manageuser.dao.impl.UserDaoImpl;
-import manageuser.entities.Teacher;
 import manageuser.entities.TeacherDetail;
 import manageuser.entities.Users;
 import manageuser.logic.TeacherDetailLogic;
@@ -38,7 +37,7 @@ public class TeacherDetailLogicImpl implements TeacherDetailLogic {
 			userDaoImpl.insertUser(users);
 			teacherDetailDaoImpl.insertTeacher(teacherDetail);
 			userDaoImpl.commit();
-		} catch (SQLException e) {
+		} catch (SQLException e) {			
 			e.printStackTrace();
 			userDaoImpl.rollbackTrasaction();
 			ketQua= false;			
@@ -51,10 +50,10 @@ public class TeacherDetailLogicImpl implements TeacherDetailLogic {
 	 * @see manageuser.logic.TeacherDetailLogic#updateTeacherDetail(int)
 	 */
 	@Override
-	public boolean updateTeacherDetail(Teacher teacher) {
+	public boolean updateTeacherDetail(TeacherDetail teacherDetail) {
 		boolean ketQua= true;
 		try {
-			teacherDetailDaoImpl.updateTeacher(teacher);
+			teacherDetailDaoImpl.updateTeacher(teacherDetail);
 		} catch (SQLException e) {
 			ketQua=false;
 			e.printStackTrace();

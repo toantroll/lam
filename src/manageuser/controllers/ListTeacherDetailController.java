@@ -40,10 +40,10 @@ public class ListTeacherDetailController extends HttpServlet {
 			TeacherDetailLogicImpl teacherDetailLogicImpl = new TeacherDetailLogicImpl();
 			TeacherDetail teacherDetail= new TeacherDetail();
 			teacherDetail.setFullName("Hồng");
-			teacherDetail.setUserName("hongtt");
+			teacherDetail.setUserName("ewrwerwer");
 			teacherDetail.setPassword("123425434");
-			teacherDetail.setRoleId(0);
-			teacherDetail.setDeleteFlag(Constant.ROLE_UNACTIVE);
+			teacherDetail.setRoleId(4);
+			teacherDetail.setDeleteFlag(1);
 			teacherDetail.setEmail("hong@gmail.com");
 			teacherDetail.setTel("398475893354");
 			//Thêm mới giáo viên:
