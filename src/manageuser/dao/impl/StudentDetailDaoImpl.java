@@ -33,7 +33,8 @@ public class StudentDetailDaoImpl extends BaseDaoImpl implements StudentDetailDa
 			pre.setString(i++, studentInfor.getNote());
 			pre.setString(i++, studentInfor.getJapanLevel());
 			pre.setInt(i++, studentInfor.getScoreInterview());
-			pre.setString(i++, studentInfor.getStatus());
+			pre.setInt(i++, studentInfor.getStatus());
+			System.out.println(pre);
 			pre.executeUpdate();
 		}
 	@Override
@@ -58,7 +59,7 @@ public class StudentDetailDaoImpl extends BaseDaoImpl implements StudentDetailDa
 		pre.setString(i++, studentInfor.getNote());
 		pre.setString(i++, studentInfor.getJapanLevel());
 		pre.setInt(i++, studentInfor.getScoreInterview());
-		pre.setString(i++, studentInfor.getStatus());
+		pre.setInt(i++, studentInfor.getStatus());
 		pre.setInt(i++, studentInfor.getUserID());
 		System.out.println(pre.toString());
 		pre.executeUpdate();

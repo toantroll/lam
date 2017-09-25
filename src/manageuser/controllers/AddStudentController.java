@@ -1,6 +1,8 @@
 package manageuser.controllers;
 
 import java.io.IOException;
+import java.sql.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import manageuser.entities.StudentDetail;
+import manageuser.logic.impl.StudentDetailLogicImpl;
 import manageuser.utils.Common;
 
 /**
@@ -33,14 +36,17 @@ public class AddStudentController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		StudentDetail studentDetail = new StudentDetail();
+		StudentDetailLogicImpl studentDetailLogicImpl = new StudentDetailLogicImpl();
 		String IQScore = request.getParameter("iq");
 		String status = request.getParameter("status");
 		String scoreInterview = request.getParameter("interview");
 		String gender = request.getParameter("gender");
+		String courseId = request.getParameter("course");
 		studentDetail.setUserName(request.getParameter("username"));
 		studentDetail.setName(request.getParameter("full_name"));
 		studentDetail.setPassword(request.getParameter("password"));
 		studentDetail.setTel(request.getParameter("phone"));
+		
 		studentDetail.setIdCard(request.getParameter("idCard"));
 		studentDetail.setAdress(request.getParameter("address"));
 		studentDetail.setSchool(request.getParameter("school"));
@@ -61,7 +67,11 @@ public class AddStudentController extends HttpServlet {
 		if(Common.isNumBer(gender)) {
 			studentDetail.setGender(Integer.parseInt(gender));
 		}
-		System.out.println(request.getParameter("birthday"));
+		if(Common.isNumBer(courseId)) {
+			studentDetail.setCourseId(Integer.parseInt(courseId));
+		}
+		studentDetail.setBirthday(Common.convertStringToDate(request.getParameter("birthday")));
+		studentDetailLogicImpl.createStudent(studentDetail);
 		
 		
 		
