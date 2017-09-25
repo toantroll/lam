@@ -1,4 +1,4 @@
-package manageuser.logics;
+package manageuser.logic;
 
 import manageuser.entities.Subject;
 import java.util.List;

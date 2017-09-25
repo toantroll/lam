@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import manageuser.entities.Subject;
-import manageuser.logics.impl.SubjectLogicImpl;
+import manageuser.logic.impl.SubjectLogicImpl;
 
 /**
  * Controller xử lý xóa môn học

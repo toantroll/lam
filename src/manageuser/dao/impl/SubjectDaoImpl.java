@@ -21,7 +21,7 @@ public class SubjectDaoImpl extends BaseDaoImpl implements SubjectDao {
 		String sql = "SELECT id, name, content, deleted_flag FROM subjects where id = ?";
 		Subject subject = new Subject();
 		try {
-			PreparedStatement pst = conn.prepareStatement(sql);
+			PreparedStatement pst = connection.prepareStatement(sql);
 			pst.setString(1, id);
 			ResultSet rs = pst.executeQuery();
 			if (rs.next()) {
@@ -35,7 +35,7 @@ public class SubjectDaoImpl extends BaseDaoImpl implements SubjectDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			closeConnection(connection);
+			closeConnection();
 		}
 		return subject;
 	}
@@ -63,7 +63,7 @@ public class SubjectDaoImpl extends BaseDaoImpl implements SubjectDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			closeConnection(connection);
+			closeConnection();
 		}
 		if (rowChange > 0) {
 			result = true;
@@ -90,7 +90,7 @@ public class SubjectDaoImpl extends BaseDaoImpl implements SubjectDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			closeConnection(connection);
+			closeConnection();
 		}
 		if (rowChange > 0) {
 			result = true;
@@ -119,7 +119,7 @@ public class SubjectDaoImpl extends BaseDaoImpl implements SubjectDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			closeConnection(connection);
+			closeConnection();
 		}
 		if (rowChange > 0) {
 			result = true;
@@ -146,7 +146,7 @@ public class SubjectDaoImpl extends BaseDaoImpl implements SubjectDao {
 			sql = sql.concat("AND name LIKE ? ");
 		}
 		try {
-			PreparedStatement preparedStatement = conn.prepareStatement(sql);
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			if (!id.isEmpty()) {
 				preparedStatement.setString(++i, "%" + id + "%");
 			}
@@ -160,7 +160,7 @@ public class SubjectDaoImpl extends BaseDaoImpl implements SubjectDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			closeConnection(connection);
+			closeConnection();
 		}
 		return total;
 	}
@@ -187,7 +187,7 @@ public class SubjectDaoImpl extends BaseDaoImpl implements SubjectDao {
 		sql = sql.concat("LIMIT ? ");
 		sql = sql.concat("OFFSET ? ");
 		try {
-			PreparedStatement preparedStatement = conn.prepareStatement(sql);
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			if (!id.isEmpty()) {
 				preparedStatement.setString(++i, "%" + id + "%");
 			}
@@ -207,7 +207,7 @@ public class SubjectDaoImpl extends BaseDaoImpl implements SubjectDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			closeConnection(connection);
+			closeConnection();
 		}
 		return listSubject;
 	}

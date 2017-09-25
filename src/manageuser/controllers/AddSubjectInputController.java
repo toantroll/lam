@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import manageuser.entities.Subject;
-import manageuser.logics.impl.SubjectLogicImpl;
+import manageuser.logic.impl.SubjectLogicImpl;
 import manageuser.validates.ValidateSubject;
 
 /**

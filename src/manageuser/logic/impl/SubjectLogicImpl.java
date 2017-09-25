@@ -1,10 +1,10 @@
-package manageuser.logics.impl;
+package manageuser.logic.impl;
 
 import java.util.List;
 
 import manageuser.dao.impl.SubjectDaoImpl;
 import manageuser.entities.Subject;
-import manageuser.logics.SubjectLogic;
+import manageuser.logic.SubjectLogic;
 import manageuser.utils.Common;
 
 public class SubjectLogicImpl implements SubjectLogic {
