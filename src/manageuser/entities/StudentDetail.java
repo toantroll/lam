@@ -23,7 +23,7 @@ public class  StudentDetail extends Users {
 	private String note;
 	private String japanLevel;
 	private int scoreInterview;
-	private String status;
+	private int status;
 	private String email;
 	private Date birthday;
 	private int gender;
@@ -174,13 +174,13 @@ public class  StudentDetail extends Users {
 	/**
 	 * @return the status
 	 */
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
 	/**
 	 * @param status the status to set
 	 */
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 	/**

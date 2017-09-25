@@ -135,11 +135,14 @@ public class Common {
 	 * @return true 
 	 */
 	public static boolean isNumBer(String num) {
+		if(isNull(num)) {
+			return false;
+		}
 		try{
 			Integer.parseInt(num);
 		} catch (NumberFormatException e) {
 			return false;
-		}
+		} 
 		return true;
 	}
 	
@@ -149,17 +152,18 @@ public class Common {
 	 * @return trả về ngày dạng Date sql
 	 */
 	public static Date convertStringToDate(String date){
-		java.sql.Date sql = null; 
+		java.sql.Date dateSQl = null; 
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 		java.util.Date parsed;
 			try {
 				parsed = format.parse(date);
-				sql = new java.sql.Date(parsed.getTime());
+				dateSQl = new java.sql.Date(parsed.getTime());
 			} catch (ParseException e) {
 				System.out.println("Lỗi convert to Date");
+				return null;
 			}
 	        
-		return sql;
+		return dateSQl;
 		
 	}
 }
