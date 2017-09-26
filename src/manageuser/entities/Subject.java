@@ -4,6 +4,8 @@ public class Subject {
 	private String id;
 	private String name;
 	private String content;
+	private int giaoVienId;
+	private String giaoVienName;
 	private String createTime;
 	private String deleteTime;
 	private String updateTime;
@@ -113,4 +115,35 @@ public class Subject {
 	public void setFlag(int flag) {
 		this.flag = flag;
 	}
+
+	/**
+	 * @return the giaoVienId
+	 */
+	public int getGiaoVienId() {
+		return giaoVienId;
+	}
+
+	/**
+	 * @param giaoVienId
+	 *            the giaoVienId to set
+	 */
+	public void setGiaoVienId(int giaoVienId) {
+		this.giaoVienId = giaoVienId;
+	}
+
+	/**
+	 * @return the giaoVienName
+	 */
+	public String getGiaoVienName() {
+		return giaoVienName;
+	}
+
+	/**
+	 * @param giaoVienName
+	 *            the giaoVienName to set
+	 */
+	public void setGiaoVienName(String giaoVienName) {
+		this.giaoVienName = giaoVienName;
+	}
+
 }

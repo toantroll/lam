@@ -18,7 +18,7 @@ public class SubjectDaoImpl extends BaseDaoImpl implements SubjectDao {
 	@Override
 	public Subject getSubjectById(String id) {
 		Connection connection = getConnection();
-		String sql = "SELECT id, name, content, deleted_flag FROM subjects where id = ?";
+		String sql = "SELECT s.id, s.teacher_id, s.name, s.content, s.deleted_flag, t.full_name FROM subjects s INNER JOIN teacher_detail t ON s.teacher_id = t.teacher_id where s.id = ?";
 		Subject subject = new Subject();
 		try {
 			PreparedStatement pst = connection.prepareStatement(sql);
@@ -26,9 +26,11 @@ public class SubjectDaoImpl extends BaseDaoImpl implements SubjectDao {
 			ResultSet rs = pst.executeQuery();
 			if (rs.next()) {
 				subject.setId(rs.getString("id"));
+				subject.setGiaoVienId(rs.getInt("teacher_id"));
 				subject.setName(rs.getString("name"));
 				subject.setContent(rs.getString("content"));
 				subject.setFlag(rs.getInt("deleted_flag"));
+				subject.setGiaoVienName(rs.getString("full_name"));
 			} else {
 				subject = null;
 			}
@@ -50,12 +52,13 @@ public class SubjectDaoImpl extends BaseDaoImpl implements SubjectDao {
 		Connection connection = getConnection();
 		String sql = "INSERT INTO subjects ";
 		boolean result = false;
-		sql = sql.concat("(id, name, content, created_at, deleted_flag) VALUES ");
-		sql = sql.concat("(?,?,?,now(),?)");
+		sql = sql.concat("(id, teacher_id, name, content, created_at, deleted_flag) VALUES ");
+		sql = sql.concat("(?,?,?,?,now(),?)");
 		int rowChange = -1, i = 0;
 		try {
 			PreparedStatement ptmt = connection.prepareStatement(sql);
 			ptmt.setString(++i, subject.getId());
+			ptmt.setInt(++i, subject.getGiaoVienId());
 			ptmt.setString(++i, subject.getName());
 			ptmt.setString(++i, subject.getContent());
 			ptmt.setInt(++i, subject.getFlag());
@@ -107,11 +110,12 @@ public class SubjectDaoImpl extends BaseDaoImpl implements SubjectDao {
 	@Override
 	public boolean editSubject(Subject subject) {
 		Connection connection = getConnection();
-		String sql = "UPDATE subjects SET name = ?, content = ?, updated_at = now() WHERE id = ?";
+		String sql = "UPDATE subjects SET teacher_id = ?, name = ?, content = ?, updated_at = now() WHERE id = ?";
 		boolean result = false;
 		int rowChange = -1, i = 0;
 		try {
 			PreparedStatement ptmt = connection.prepareStatement(sql);
+			ptmt.setInt(++i, subject.getGiaoVienId());
 			ptmt.setString(++i, subject.getName());
 			ptmt.setString(++i, subject.getContent());
 			ptmt.setString(++i, subject.getId());
@@ -176,13 +180,13 @@ public class SubjectDaoImpl extends BaseDaoImpl implements SubjectDao {
 		Connection connection = getConnection();
 		List<Subject> listSubject = new ArrayList<Subject>();
 		int i = 0;
-		String sql = "SELECT id, name, content FROM subjects ";
-		sql = sql.concat("WHERE deleted_flag = 1 ");
+		String sql = "SELECT s.id, s.name, s.content, t.full_name FROM subjects s INNER JOIN teacher_detail t ON s.teacher_id = t.teacher_id ";
+		sql = sql.concat("WHERE s.deleted_flag = 1 ");
 		if (!id.isEmpty()) {
-			sql = sql.concat("AND id LIKE ? ");
+			sql = sql.concat("AND s.id LIKE ? ");
 		}
 		if (!name.isEmpty()) {
-			sql = sql.concat("AND name LIKE ? ");
+			sql = sql.concat("AND s.name LIKE ? ");
 		}
 		sql = sql.concat("LIMIT ? ");
 		sql = sql.concat("OFFSET ? ");
@@ -202,6 +206,7 @@ public class SubjectDaoImpl extends BaseDaoImpl implements SubjectDao {
 				subject.setId(resultSet.getString("id"));
 				subject.setName(resultSet.getString("name"));
 				subject.setContent(resultSet.getString("content"));
+				subject.setGiaoVienName(resultSet.getString("full_name"));
 				listSubject.add(subject);
 			}
 		} catch (SQLException e) {

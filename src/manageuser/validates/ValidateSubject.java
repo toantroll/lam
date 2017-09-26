@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import manageuser.dao.impl.SubjectDaoImpl;
 import manageuser.entities.Subject;
+import manageuser.logic.impl.TeacherDetailLogicImpl;
 import manageuser.utils.Common;
 
 /**
@@ -34,6 +35,10 @@ public class ValidateSubject {
 		if (error != null) {
 			listError.add(error);
 		}
+		error = checkTeacher(subject.getGiaoVienId());
+		if (error != null) {
+			listError.add(error);
+		}
 		error = checkSubjectContent(subject.getContent());
 		if (error != null) {
 			listError.add(error);
@@ -52,6 +57,8 @@ public class ValidateSubject {
 		String error = null;
 		if (Common.isNullOrEmpty(name)) {
 			error = "Hãy nhập tên môn học!";
+		} else if (name.length() > 255) {
+			error = "Tên môn học không vượt quá 255 kí tự!";
 		}
 		return error;
 	}
@@ -68,6 +75,8 @@ public class ValidateSubject {
 		String error = null;
 		if (Common.isNullOrEmpty(id)) {
 			error = "Hãy nhập mã môn học!";
+		} else if (id.length() > 20) {
+			error = "Mã môn học không vượt quá 20 kí tự!";
 		} else if (subjectDaoImpl.getSubjectById(id) != null) {
 			error = "Mã môn học đã tồn tại!";
 		}
@@ -85,6 +94,24 @@ public class ValidateSubject {
 		String error = null;
 		if (Common.isNullOrEmpty(content)) {
 			error = "Hãy nhập nội dung môn học!";
+		}
+		return error;
+	}
+
+	/**
+	 * Kiểm tra giáo viên tồn tại
+	 * 
+	 * @param teacherId
+	 *            mã giáo viên
+	 * @return lỗi đầu tiên gặp phải
+	 */
+	private static String checkTeacher(int teacherId) {
+		String error = null;
+		TeacherDetailLogicImpl teacherDetailLogicImpl = new TeacherDetailLogicImpl();
+		if (teacherId == 0) {
+			error = "Hãy chọn giảng viên!";
+		} else if (teacherDetailLogicImpl.getTeacherDetailById(teacherId) == null) {
+			error = "Giảng viên không tồn tại!";
 		}
 		return error;
 	}
