@@ -1,5 +1,7 @@
+<%@page import="manageuser.utils.Constant"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,29 +71,60 @@
                                     <!--            <li class="hidden">-->
                                     <!--                --><!--            </li>-->
                                     <li>
-                                        <div class="input text"><input type="text" name="full_name" id="txtHoTen" placeholder="Họ và tên (*)" autofocus="autofocus" required="required" value=""/></div>            </li>
-                                    <li>
-                                        <div class="input text"><input type="text" name="username" id="txtUsername" placeholder="Tên đăng nhập (*)" required="required" value=""/></div>
+                                        <div class="input text"><input type="text" name="full_name" id="txtHoTen" placeholder="Họ và tên (*)" autofocus="autofocus" value=""/></div>
+                                        </li>
+									<li>
+										<div class="err text-danger text-left">
+											<c:if test="${listErr.containsKey(Constant.FULLNAME)}">${listErr.get(Constant.FULLNAME)}</c:if>
+										</div>
+									</li>                                   
+                                   <li>
+                                        <div class="input text"><input type="text" name="username" id="txtUsername" placeholder="Tên đăng nhập (*)" value=""/></div>
                                     </li>
                                     <li>
-                                        <input id="txtPassword" name="password" type="password" placeholder="Mật khẩu (*)" required>
+										<div class="err text-danger text-left">
+											<c:if test="${listErr.containsKey(Constant.USERNAME)}">${listErr.get(Constant.USERNAME)}</c:if>
+										</div>
+									</li>      
+                                    <li>
+                                        <input id="txtPassword" name="password" type="password" placeholder="Mật khẩu (*)" >
                                     </li>
+                                     <li>
+										<div class="err text-danger text-left">
+											<c:if test="${listErr.containsKey(Constant.PASSWORD)}">${listErr.get(Constant.PASSWORD)}</c:if>
+										</div>
+									</li>   
                                     <li>
-                                        <div class="input text"><input type="text" name="phone" id="txtMobile" placeholder="Điện thoại (*)" required="required" value=""/></div>            </li>
+                                        <div class="input text"><input type="text" name="phone" id="txtMobile" placeholder="Điện thoại (*)"  value=""/></div>            </li>
+                                  	<li>
+										<div class="err text-danger text-left">
+											<c:if test="${listErr.containsKey(Constant.TEL)}">${listErr.get(Constant.TEL)}</c:if>
+										</div>
+									</li>      
                                     <li>
-                                        <div class="input text"><input type="text" name="idCard" id="txtIdCard" placeholder="Số chứng minh nhân dân (*)" required="required" value=""/></div>            </li>    
+                                        <div class="input text"><input type="text" name="idCard" id="txtIdCard" placeholder="Số chứng minh nhân dân (*)"  value=""/></div>            </li>    
+                                   	<li>
+										<div class="err text-danger text-left">
+											<c:if test="${listErr.containsKey(Constant.IDCARD)}">${listErr.get(Constant.IDCARD)}</c:if>
+										</div>
+									</li>      
                                     <li>
-                                        <div class="input email"><input type="email" name="email" id="txtEmail" placeholder="Email (*)" required="required" value=""/></div>            </li>
+                                        <div class="input email"><input type="email" name="email" id="txtEmail" placeholder="Email (*)"  value=""/></div>            </li>
+                                 	<li>
+										<div class="err text-danger text-left">
+											<c:if test="${listErr.containsKey(Constant.EMAIL)}">${listErr.get(Constant.EMAIL)}</c:if>
+										</div>
+									</li>      
                                     <li>
                                         <div class="g-row">
                                             <div class="one-half no-pad">
-                                                <input type="text" id="txtBirthDay" name="birthday" placeholder="Ngày sinh (*)" style="height: 36px;" required>
+                                                <input type="text" id="txtBirthDay" name="birthday" placeholder="Ngày sinh (*)" style="height: 36px;" >
                                             </div>
+                                            
                                             <div class="one-half no-pr">
                                                 <label class="lbl-slb">
-                                                    <select name="gender" required="required">
-                                                    <option value="" selected="selected">Giới tính (*)</option>
-                                                    <option value="0">Nữ</option>
+                                                    <select name="gender">
+                                                    <option value="0" selected="selected">Nữ</option>
                                                     <option value="1">Nam</option>
                                                     </select>     
                                                     </label>
@@ -99,12 +132,14 @@
                                             <div class="clear"></div>
                                         </div>
                                     </li>
+                                    <li>
+										<div class="err text-danger text-left">
+											<c:if test="${listErr.containsKey(Constant.BIRTHDAY)}">${listErr.get(Constant.BIRTHDAY)}</c:if>
+										</div>
+									</li>      
 
                                     <li>
                                         <input id="txtAddress" name="address" type="text" placeholder="Địa chỉ">
-                                    </li>
-                                    <li>
-                                        <input id="txtHometown" name="hometown" type="text" placeholder="Quê quán">
                                     </li>
                                     <li class="student-only">
                                         <label class="lbl-slb">

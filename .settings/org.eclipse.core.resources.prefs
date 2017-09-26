@@ -1,2 +1,5 @@
 eclipse.preferences.version=1
+encoding//src/manageuser/utils/ErrorMessageProperties.java=ISO-8859-1
+encoding//src/manageuser/utils/error_message.properties=UTF-8
+encoding//src/manageuser/utils/error_properties.properties=ISO-8859-1
 encoding/<project>=UTF-8

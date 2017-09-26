@@ -1,6 +1,9 @@
 package manageuser.controllers;
 
 import java.io.IOException;
+import java.util.HashMap;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +16,8 @@ import manageuser.logic.impl.JapanDetailLogicImpl;
 import manageuser.logic.impl.StatusStudentLogicImpl;
 import manageuser.logic.impl.StudentDetailLogicImpl;
 import manageuser.utils.Common;
+import manageuser.utils.Constant;
+import manageuser.validates.Validate;
 
 /**
  * Servlet implementation class AddStudentController
@@ -37,8 +42,38 @@ public class AddStudentController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		StudentDetail studentDetail = new StudentDetail();
+		StudentDetail studentDetail = setDefaultValue(request, response);
+		HashMap<String, String> listErr = Validate.validateStudent(studentDetail);
+		if(listErr.size() != 0){
+			setDataLogic(request, response);
+			request.setAttribute("listErr", listErr);
+			System.out.println(listErr.get(Constant.FULLNAME));
+			request.setAttribute("studentDetail", studentDetail);
+			RequestDispatcher dispatcher = request.getRequestDispatcher(Constant.ADDSTUDENT);
+			dispatcher.forward(request, response);
+		} else {
 		StudentDetailLogicImpl studentDetailLogicImpl = new StudentDetailLogicImpl();
+			if(studentDetailLogicImpl.createStudent(studentDetail)) {
+				response.sendRedirect(request.getContextPath() + "/ErrorController");
+			}
+		}
+	}
+	
+	/**
+	 * lấy và đẩy dữ liệu cho combobox
+	 * @param request
+	 * @param response
+	 */
+	private void setDataLogic(HttpServletRequest request, HttpServletResponse response) {
+		CourseLogicImpl courseLogicImpl = new CourseLogicImpl();
+		StatusStudentLogicImpl statusStudentLogicImpl = new StatusStudentLogicImpl();
+		JapanDetailLogicImpl japanDetailLogicImpl = new JapanDetailLogicImpl();
+		request.setAttribute("listJapan", japanDetailLogicImpl.getListJapanDetail());
+		request.setAttribute("listCourse", courseLogicImpl.getListCourse());
+		request.setAttribute("listStatus", statusStudentLogicImpl.getStatus());
+	}
+	private StudentDetail setDefaultValue(HttpServletRequest request, HttpServletResponse response) {
+		StudentDetail studentDetail = new StudentDetail();
 		String IQScore = request.getParameter("iq");
 		String status = request.getParameter("status");
 		String scoreInterview = request.getParameter("interview");
@@ -48,7 +83,6 @@ public class AddStudentController extends HttpServlet {
 		studentDetail.setName(request.getParameter("full_name"));
 		studentDetail.setPassword(request.getParameter("password"));
 		studentDetail.setTel(request.getParameter("phone"));
-		
 		studentDetail.setIdCard(request.getParameter("idCard"));
 		studentDetail.setAdress(request.getParameter("address"));
 		studentDetail.setSchool(request.getParameter("school"));
@@ -73,21 +107,7 @@ public class AddStudentController extends HttpServlet {
 			studentDetail.setCourseId(Integer.parseInt(courseId));
 		}
 		studentDetail.setBirthday(Common.convertStringToDate(request.getParameter("birthday")));
-		studentDetailLogicImpl.createStudent(studentDetail);
-	}
-	
-	/**
-	 * lấy và đẩy dữ liệu cho combobox
-	 * @param request
-	 * @param response
-	 */
-	private void setDataLogic(HttpServletRequest request, HttpServletResponse response) {
-		CourseLogicImpl courseLogicImpl = new CourseLogicImpl();
-		StatusStudentLogicImpl statusStudentLogicImpl = new StatusStudentLogicImpl();
-		JapanDetailLogicImpl japanDetailLogicImpl = new JapanDetailLogicImpl();
-		request.setAttribute("listJapan", japanDetailLogicImpl.getListJapanDetail());
-		request.setAttribute("listCourse", courseLogicImpl.getListCourse());
-		request.setAttribute("listStatus", statusStudentLogicImpl.getStatus());
+		return studentDetail;
 	}
 
 }

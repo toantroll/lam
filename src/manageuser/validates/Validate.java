@@ -73,16 +73,16 @@ public class Validate {
 		if(Common.isEmpty(register.getBirthday().toString())){
 			listError.put("birthday", ErrorMessageProperties.getErrorMessage("ERR01_BIRTH"));
 		}
-		if(register.getStatus() == 0){
+		if(register.getStatus() == 0) {
 			listError.put("status", ErrorMessageProperties.getErrorMessage("ERR03_STATUS"));
 		}
-		if(Common.isEmpty(register.getSchool())){
+		if(Common.isEmpty(register.getSchool())) {
 			listError.put("school", ErrorMessageProperties.getErrorMessage("ERR01_SCHOOL"));
 		}
-		if(Common.isEmpty(register.getMajor())){
+		if(Common.isEmpty(register.getMajor())) {
 			listError.put("major", ErrorMessageProperties.getErrorMessage("ERR01_MAJOR"));
 		}
-		if(Common.isEmpty(yearGraduate)){
+		if(Common.isEmpty(yearGraduate)) {
 			listError.put("year_graduate", ErrorMessageProperties.getErrorMessage("ERR01_YEAR"));
 		}else if(!checkFormat(yearGraduate,Constant.REGEX_YEAR_GRADUATE)){
 			listError.put("year_graduate", ErrorMessageProperties.getErrorMessage("ERR02_YEAR"));
@@ -137,6 +137,10 @@ public class Validate {
 		String errIdCard = validateIdCard(student.getIdCard());
 		if(errIdCard != null) {
 			listErr.put(Constant.IDCARD, errIdCard);
+		}
+		// kiểm tra mật khẩu 
+		if(Common.isEmpty(student.getPassword())) {
+			listErr.put(Constant.PASSWORD, ErrorMessageProperties.getErrorMessage("ERR01_PASS"));
 		}
 		return listErr;
 	}

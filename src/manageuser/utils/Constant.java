@@ -25,4 +25,6 @@ public class Constant {
 	public static final String BIRTHDAY = "birthday";
 	public static final String IDCARD = "idcard";
 	public static final String FULLNAME = "fullName";
+	public static final String ADDSTUDENT = "WEB-INF/jsp/AddStudent.jsp";
+	public static final String PASSWORD = "password";
 }
