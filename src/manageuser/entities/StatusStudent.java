@@ -49,6 +49,5 @@ public class StatusStudent {
 	public void setNameStatus(String nameStatus) {
 		this.nameStatus = nameStatus;
 	}
-	
-	
+
 }

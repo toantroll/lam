@@ -1,9 +1,6 @@
 package manageuser.controllers;
 
 import java.io.IOException;
-
-
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import manageuser.entities.StudentDetail;
+import manageuser.logic.impl.CourseLogicImpl;
+import manageuser.logic.impl.JapanDetailLogicImpl;
+import manageuser.logic.impl.StatusStudentLogicImpl;
 import manageuser.logic.impl.StudentDetailLogicImpl;
 import manageuser.utils.Common;
 
@@ -19,15 +19,16 @@ import manageuser.utils.Common;
  */
 @WebServlet("/AddStudentController")
 public class AddStudentController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
+
+	private static final long serialVersionUID = -525206711271750237L;
+	/**
      * @see HttpServlet#HttpServlet()
      */
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		setDataLogic(request, response);
 		request.getRequestDispatcher("WEB-INF/jsp/AddStudent.jsp").forward(request, response);
 		
 	}
@@ -73,8 +74,21 @@ public class AddStudentController extends HttpServlet {
 		}
 		studentDetail.setBirthday(Common.convertStringToDate(request.getParameter("birthday")));
 		studentDetailLogicImpl.createStudent(studentDetail);
-		
-		
+	}
+	
+	/**
+	 * lấy và đẩy dữ liệu cho combobox
+	 * @param request
+	 * @param response
+	 */
+	private void setDataLogic(HttpServletRequest request, HttpServletResponse response) {
+		CourseLogicImpl courseLogicImpl = new CourseLogicImpl();
+		StatusStudentLogicImpl statusStudentLogicImpl = new StatusStudentLogicImpl();
+		JapanDetailLogicImpl japanDetailLogicImpl = new JapanDetailLogicImpl();
+		request.setAttribute("listJapan", japanDetailLogicImpl.getListJapanDetail());
+		request.setAttribute("listCourse", courseLogicImpl.getListCourse());
+		request.setAttribute("listStatus", statusStudentLogicImpl.getStatus());
+	
 		
 	}
 

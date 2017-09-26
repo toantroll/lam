@@ -1,12 +1,10 @@
 package manageuser.dao.impl;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import manageuser.dao.StudentDetailDao;
 import manageuser.entities.StudentDetail;
-import manageuser.logic.impl.StudentDetailLogicImpl;
 import manageuser.utils.Constant;
 
 public class StudentDetailDaoImpl extends BaseDaoImpl implements StudentDetailDao {
@@ -34,7 +32,6 @@ public class StudentDetailDaoImpl extends BaseDaoImpl implements StudentDetailDa
 			pre.setString(i++, studentInfor.getJapanLevel());
 			pre.setInt(i++, studentInfor.getScoreInterview());
 			pre.setInt(i++, studentInfor.getStatus());
-			System.out.println(pre);
 			pre.executeUpdate();
 		}
 	@Override
@@ -61,7 +58,6 @@ public class StudentDetailDaoImpl extends BaseDaoImpl implements StudentDetailDa
 		pre.setInt(i++, studentInfor.getScoreInterview());
 		pre.setInt(i++, studentInfor.getStatus());
 		pre.setInt(i++, studentInfor.getUserID());
-		System.out.println(pre.toString());
 		pre.executeUpdate();
 		this.closeConnection();
 	}
