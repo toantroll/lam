@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpSession;
 
@@ -338,5 +339,23 @@ public class Common {
 		}
 		return flag;
 	}
+	
+	/**
+	 * check time
+	 * @param time
+	 * @return true if is time
+	 */
+	public static boolean isTime(String time){
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+		sdf.setLenient(false);
+		try {
+			sdf.parse(time);
+		} catch (ParseException e) {
+			return false;
+		}
+		
+		return true;
+	}
+	
 	
 }
