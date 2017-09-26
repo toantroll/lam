@@ -134,7 +134,7 @@
 									<th><input type="checkbox" name="deleteAll"></th>
 									<th>Mã môn học</th>
 									<th>Tên môn học</th>
-									<th>Nội dung môn học</th>
+									<th>Giáo viên giảng dạy</th>
 									<th>Tùy chọn</th>
 								</tr>
 							</thead>
@@ -144,7 +144,7 @@
 										<td><input type="checkbox" name="deleteAll"></td>
 										<td>${subject.id}</td>
 										<td>${subject.name}</td>
-										<td>${subject.content}</td>
+										<td>${subject.giaoVienName}</td>
 										<td>
 											<ul class="tbl-actions">
 												<li><a

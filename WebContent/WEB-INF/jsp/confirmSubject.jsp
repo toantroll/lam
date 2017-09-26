@@ -9,6 +9,11 @@
 <link rel="icon" type="favicon" href="img/logo-icon.png" />
 <link rel="stylesheet" href="css/font-awesome.min.css">
 <link rel="stylesheet" href="css/style.css">
+<style type="text/css">
+#reg-form label {
+	font-style: bold;
+}
+</style>
 </head>
 <body>
 	<div class="wrapper">
@@ -17,7 +22,7 @@
 				<div class="g-row">
 					<div class="one-half">
 						<h1 class="logo">
-							<img src="../img/logo.png" alt="" />
+							<img src="img/logo.png" alt="" />
 						</h1>
 					</div>
 					<div class="one-half">
@@ -53,7 +58,8 @@
 					<c:set var="back" value="editSubject.do?ssid=${ssid}&type=back" />
 				</c:when>
 				<c:otherwise>
-					<c:set var="action" value="addSubjectConfirm.do?ssid=${ssid}&type=add" />
+					<c:set var="action"
+						value="addSubjectConfirm.do?ssid=${ssid}&type=add" />
 					<c:set var="back" value="addSubject.do?ssid=${ssid}&type=back" />
 				</c:otherwise>
 			</c:choose>
@@ -63,68 +69,48 @@
 						<div class="reg-content">
 							<div class="reg-inner">
 								<form id="reg-form" action="${action}" method="post">
-									<ul>
-										<li>
-											<div align="left">
-												<label>Mã môn học:</label>
-											</div>
-										</li>
-										<li>
-											<div class="input text">
-												<c:out value="${subject.id }"></c:out>
-											</div>
-										</li>
-										<li>
-											<div align="left">
-												<label>Tên môn học:</label>
-											</div>
-										</li>
-										<li>
-											<div class="input text">
-												<c:out value="${subject.name }"></c:out>
-											</div>
-										</li>
-										<!--	<li><label class="lbl-slb"> <select
-												name="slbGiaovien" id="slbGiaovien">
-													<option value="" selected="selected">GiÃ¡o viÃªn dáº¡y</option>
-											</select>
-										</label></li>
-										<li>
-											<div class="input text">
-												<input type="text" name="txtSotiet" id="txtSotiet"
-													placeholder="Sá» tiáº¿t há»c (*)" required="required"
-													value="" />
-											</div>
-											<li>
-											<div class="input text">
-												<textarea placeholder="ChÃº Ã½"></textarea>
-											</div>
-										</li>
-										</li>-->
-										<li><div class="input text"></div></li>
-										<li>
-											<div align="left">
-												<label>Nội dung:</label>
-											</div>
-										</li>
-										<li>
-											<div class="input email">
-												<c:out value="${subject.content }"></c:out>
-											</div>
-										</li>
-										<li>
-
-											<button class="btnSubmit btn" type="submit">
-												<span>Xác nhận</span>
-											</button>
-										</li>
-										<li>
-											<button class="btnSubmit btn" type="button"
-												onclick="window.location.href='${back}'">
-												<span>BACK</span>
-											</button>
-										</li>
-									</ul>
+									<div>
+										<table>
+											<tr>
+												<th style="background-color: #CC3333"><label>Mã
+														môn học:</label></th>
+											</tr>
+											<tr>
+												<td><c:out value="${subject.id }"></c:out></td>
+											</tr>
+											<tr>
+												<th style="background-color: #CC3333"><label>Tên
+														môn học:</label></th>
+											</tr>
+											<tr>
+												<td><c:out value="${subject.name }"></c:out></td>
+											</tr>
+											<tr>
+												<th style="background-color: #CC3333"><label>Giáo
+														viên giảng dạy:</label></th>
+											</tr>
+											<tr>
+												<td><c:out value="${subject.giaoVienName }"></c:out></td>
+											</tr>
+											<tr>
+												<th style="background-color: #CC3333"><label>Nội
+														dung:</label></th>
+											</tr>
+											<tr>
+												<td><c:out value="${subject.content }"></c:out></td>
+											</tr>
+										</table>
+									</div>
+									<div>
+										<button class="btnSubmit btn" style="margin: 20px"
+											type="submit">
+											<span>Xác nhận</span>
+										</button>
+										<button class="btnSubmit btn" type="button"
+											onclick="window.location.href='${back}'">
+											<span>BACK</span>
+										</button>
+									</div>
 								</form>
 								<!-- .reg-form -->
 							</div>

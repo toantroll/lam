@@ -17,7 +17,7 @@
 				<div class="g-row">
 					<div class="one-half">
 						<h1 class="logo">
-							<img src="../img/logo.png" alt="" />
+							<img src="img/logo.png" alt="" />
 						</h1>
 					</div>
 					<div class="one-half">
@@ -64,14 +64,17 @@
 									<ul>
 										<c:forEach items="${listError}" var="error">
 											<li>
-												<div align="left">
+												<div align="left" style="color: red">
 													<label><c:out value="${ error}"></c:out></label>
 												</div>
 											</li>
 										</c:forEach>
 										<li>
 											<div align="left">
-												<label>Mã môn học:</label>
+												<label>Mã môn học<c:if test="${subject.flag != 1}">
+														(<font color="red">*</font>)
+													</c:if>:
+												</label>
 											</div>
 										</li>
 										<li>
@@ -84,7 +87,8 @@
 										</li>
 										<li>
 											<div align="left">
-												<label>Tên môn học:</label>
+												<label>Tên môn học(<font color="red">*</font>):
+												</label>
 											</div>
 										</li>
 										<li>
@@ -94,6 +98,20 @@
 													value='<c:out value="${subject.name }"></c:out>' />
 											</div>
 										</li>
+										<li>
+											<div align="left">
+												<label>Giáo viên giảng dạy(<font color="red">*</font>):
+												</label>
+											</div>
+										</li>
+										<li><label class="lbl-slb"> <select
+												name="listTeacher" id="slbGiaovien" style="color: black">
+													<c:forEach items="${listTeacher}" var="teacher">
+														<option value="${teacher.teacherId}"
+															${teacher.teacherId==teacherSelect?'selected':''}>${teacher.fullName}</option>
+													</c:forEach>
+											</select>
+										</label></li>
 										<!--	<li><label class="lbl-slb"> <select
 												name="slbGiaovien" id="slbGiaovien">
 													<option value="" selected="selected">GiÃ¡o viÃªn dáº¡y</option>
@@ -114,7 +132,8 @@
 										<li><div class="input text"></div></li>
 										<li>
 											<div align="left">
-												<label>Nội dung:</label>
+												<label>Nội dung(<font color="red">*</font>):
+												</label>
 											</div>
 										</li>
 										<li>
@@ -126,7 +145,8 @@
 										<li>
 
 											<button class="btnSubmit btn" type="submit">
-												<span>Thêm mới</span>
+												<span><c:out
+														value="${subject.flag == 1?'CHỈNH SỬA':'THÊM MỚI'}"></c:out></span>
 											</button>
 										</li>
 										<li>
