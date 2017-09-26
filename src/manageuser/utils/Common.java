@@ -12,86 +12,104 @@ import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpSession;
 
+import jdk.nashorn.internal.runtime.regexp.joni.Regex;
+
 import java.sql.Date;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
 /**
  * @author LA-PM
  *
  */
 public class Common {
-	
-	
+
 	/**
 	 * Mã hóa chuỗi theo sha1+base64
-	 * @param text chuỗi muốn mã hóa
+	 * 
+	 * @param text
+	 *            chuỗi muốn mã hóa
 	 * @return chuỗi đã mã hóa theo sha1 + base64 trả về null nếu lỗi
 	 */
 	public static String encodeText(String text) {
-	
+
 		String passEncrypted = null;
 		try {
 			passEncrypted = encodeBase64(encodeSHA1(text));
 		} catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
 			System.out.println("lỗi hàm mã hóa");
-		}	
+		}
 		return passEncrypted;
 	}
-	
+
 	/**
 	 * Mã hóa SHA1
-	 * @param text chuỗi cần  mã hóa
+	 * 
+	 * @param text
+	 *            chuỗi cần mã hóa
 	 * @return chuỗi đã mã hóa SHA1
 	 * @throws NoSuchAlgorithmException
 	 */
-	public static String encodeSHA1(String text) throws NoSuchAlgorithmException{
+	public static String encodeSHA1(String text) throws NoSuchAlgorithmException {
 		String passEncrypted = "";
 		MessageDigest md = MessageDigest.getInstance("SHA-1");
 		byte[] encryptText = md.digest(text.getBytes());
-		BigInteger bigInt = new BigInteger(1,encryptText);
+		BigInteger bigInt = new BigInteger(1, encryptText);
 		passEncrypted = bigInt.toString(16);
 		return passEncrypted;
 	}
+
 	/**
 	 * Mã hóa Base64
-	 * @param text chuỗi cần  mã hóa
+	 * 
+	 * @param text
+	 *            chuỗi cần mã hóa
 	 * @return chuỗi đã mã hóa base64
 	 * @throws NoSuchAlgorithmException
 	 */
-	public static String encodeBase64(String text) throws UnsupportedEncodingException{
-		 byte[] bytes;
-		 String passEncrypted="" ;
-		 bytes = text.getBytes("UTF-8");
-		 passEncrypted = Base64.getEncoder().encodeToString(bytes);
-		 return passEncrypted;
+	public static String encodeBase64(String text) throws UnsupportedEncodingException {
+		byte[] bytes;
+		String passEncrypted = "";
+		bytes = text.getBytes("UTF-8");
+		passEncrypted = Base64.getEncoder().encodeToString(bytes);
+		return passEncrypted;
 	}
-	
-	public static boolean checkEmpty(String value){
-		if("".equals(value)){
+
+	public static boolean checkEmpty(String value) {
+		if ("".equals(value)) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	/**
 	 * check null
-	 * @param o object
+	 * 
+	 * @param o
+	 *            object
 	 * @return true if not null
 	 */
-	public static boolean isNull(Object o){
-		return o==null?true:false;
+	public static boolean isNull(Object o) {
+		return o == null ? true : false;
 	}
-	
+
 	/**
 	 * check date
-	 * @param year year
-	 * @param month month
-	 * @param day day
+	 * 
+	 * @param year
+	 *            year
+	 * @param month
+	 *            month
+	 * @param day
+	 *            day
 	 * @return true if is date
 	 */
-	public static boolean isDate(int year, int month, int day){
+	public static boolean isDate(int year, int month, int day) {
+		if (isNull(year) || isNull(month) || isNull(day)) {
+			return false;
+		}
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		sdf.setLenient(false);
 		try {
@@ -101,77 +119,91 @@ public class Common {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * compare 2 date
-	 * @param startDate startDate
-	 * @param endDate endDate
-	 * @return true if start date < end date, false if date null or start date >= end date
+	 * 
+	 * @param startDate
+	 *            startDate
+	 * @param endDate
+	 *            endDate
+	 * @return true if start date < end date, false if date null or start date
+	 *         >= end date
 	 */
-	public static boolean compareTwoDate(Date startDate, Date endDate){
+	public static boolean compareTwoDate(Date startDate, Date endDate) {
 		boolean flag = true;
-		if(!isNull(startDate) && !isNull(endDate)){
-			flag = startDate.compareTo(endDate) < 0? true: false;
+		if (!isNull(startDate) && !isNull(endDate)) {
+			flag = startDate.compareTo(endDate) < 0 ? true : false;
 		} else {
 			flag = false;
 		}
 		return flag;
 	}
-	
+
 	/**
 	 * check date in range
-	 * @param currentDate currentDate
-	 * @param startDate startDate
-	 * @param endDate endDate
+	 * 
+	 * @param currentDate
+	 *            currentDate
+	 * @param startDate
+	 *            startDate
+	 * @param endDate
+	 *            endDate
 	 * @return true if date in range
 	 */
-	public static boolean isInRangeDate(Date currentDate, Date startDate, Date endDate){
+	public static boolean isInRangeDate(Date currentDate, Date startDate, Date endDate) {
 		boolean flag = true;
-		if(!isNull(currentDate) && !isNull(startDate) && !isNull(endDate)){
-			flag = startDate.getTime() <= currentDate.getTime() && currentDate.getTime() <= endDate.getTime()?true: false;
+		if (!isNull(currentDate) && !isNull(startDate) && !isNull(endDate)) {
+			flag = startDate.getTime() <= currentDate.getTime() && currentDate.getTime() <= endDate.getTime() ? true
+					: false;
 		} else {
 			flag = false;
 		}
 		return flag;
 	}
-	
+
 	/**
-	 * kiểm tra là số 
-	 * @param num số cần kiểm tra số 
-	 * @return true 
+	 * kiểm tra là số
+	 * 
+	 * @param num
+	 *            số cần kiểm tra số
+	 * @return true
 	 */
 	public static boolean isNumBer(String num) {
-		if(isNull(num)) {
+		if (isNull(num)) {
 			return false;
 		}
-		try{
+		try {
 			Integer.parseInt(num);
 		} catch (NumberFormatException e) {
 			return false;
-		} 
+		}
 		return true;
 	}
-	
+
 	/**
 	 * Thực hiện convert date string sang date sql
-	 * @param date Ngày theo kiểu chuỗi
+	 * 
+	 * @param date
+	 *            Ngày theo kiểu chuỗi
 	 * @return trả về ngày dạng Date sql
 	 */
-	public static Date convertStringToDate(String date){
-		java.sql.Date dateSQl = null; 
+	public static Date convertStringToDate(String date) {
+		java.sql.Date dateSQl = null;
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 		java.util.Date parsed;
-			try {
-				parsed = format.parse(date);
-				dateSQl = new java.sql.Date(parsed.getTime());
-			} catch (ParseException e) {
-				System.out.println("Lỗi convert to Date");
-				return null;
-			}
-	        
+		try {
+			parsed = format.parse(date);
+			dateSQl = new java.sql.Date(parsed.getTime());
+		} catch (ParseException e) {
+			System.out.println("Lỗi convert to Date");
+			return null;
+		}
+
 		return dateSQl;
-		
+
 	}
+
 	/**
 	 * Phương thức kiểm tra một chuỗi đầu vào có null hoặc rỗng không.
 	 * 
@@ -320,32 +352,33 @@ public class Common {
 		}
 		return "success";
 	}
-	
+
 	/**
 	 * 
 	 * @param date1
 	 * @param date2
 	 * @return
 	 */
-	public static boolean equalss(Date date1, Date date2){
+	public static boolean equalss(Date date1, Date date2) {
 		boolean flag = true;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String dateString1 = sdf.format(date1);
 		String dateString2 = sdf.format(date2);
-		if(dateString1.equals(dateString2)){
+		if (dateString1.equals(dateString2)) {
 			flag = true;
 		} else {
 			flag = false;
 		}
 		return flag;
 	}
-	
+
 	/**
 	 * check time
+	 * 
 	 * @param time
 	 * @return true if is time
 	 */
-	public static boolean isTime(String time){
+	public static boolean isTime(String time) {
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
 		sdf.setLenient(false);
 		try {
@@ -353,17 +386,23 @@ public class Common {
 		} catch (ParseException e) {
 			return false;
 		}
-		
+
 		return true;
 	}
-	
+
 	/**
-	 * check date 
-	 * @param date date
-	 * @param regex format
+	 * check date
+	 * 
+	 * @param date
+	 *            date
+	 * @param regex
+	 *            format
 	 * @return
 	 */
-	public static boolean isDate(String date, String regex){
+	public static boolean isDate(String date, String regex) {
+		if (isEmpty(date) || isEmpty(regex)) {
+			return false;
+		}
 		SimpleDateFormat sdf = new SimpleDateFormat(regex);
 		sdf.setLenient(false);
 		try {
@@ -372,21 +411,44 @@ public class Common {
 			return false;
 		}
 		return true;
-	}	
-	
+	}
+
 	/**
-	 * check empty
+	 * 
 	 * @param text
 	 * @return
 	 */
-	public static boolean isEmpty(String text){
-		if(isNull(text)){
+	public static boolean isEmpty(String text) {
+		if (isNull(text)) {
 			return false;
 		}
-		if("".equals(text)){
+		if ("".equals(text)) {
 			return false;
 		}
 		return true;
 	}
-	
+
+	/**
+	 * conver date from String
+	 * 
+	 * @param date
+	 *            date String
+	 * @param regex
+	 *            format
+	 * @return date
+	 */
+	public static Date convertStringToDate(String date, String regex) {
+		if (isEmpty(date) || isEmpty(regex)) {
+			return null;
+		}
+		Date d = null;
+		SimpleDateFormat sdf = new SimpleDateFormat(regex);
+		try {
+			d = (Date)sdf.parse(date);
+		} catch (ParseException e) {
+			d = null;
+		}
+		return d;
+	}
+
 }
