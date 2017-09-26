@@ -9,9 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import manageuser.dao.TeacherDetailDao;
-import manageuser.entities.Teacher;
 import manageuser.entities.TeacherDetail;
 
 /**
@@ -93,11 +91,13 @@ public class TeacherDetailDaoImpl extends BaseDaoImpl implements TeacherDetailDa
 	 */
 	@Override
 	public TeacherDetail getTeacherDetailById(int teacherId) throws SQLException {
-		TeacherDetail teacherDetail = new TeacherDetail();
+		TeacherDetail teacherDetail =null;
 		String sql = "SELECT * FROM teacher_detail WHERE teacher_id=? AND delete_flag = 1";		
 		PreparedStatement pstm= getConnection().prepareStatement(sql);
+		pstm.setInt(1, teacherId);
 		ResultSet rs= pstm.executeQuery();
-		if(rs.next()){			
+		if(rs.next()){		
+			teacherDetail= new TeacherDetail();
 			teacherDetail.setUserID(rs.getInt("id"));
 			teacherDetail.setUserName(rs.getString("username"));
 			teacherDetail.setFullName(rs.getString("full_name"));

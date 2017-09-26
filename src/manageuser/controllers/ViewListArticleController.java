@@ -31,7 +31,7 @@ public class ViewListArticleController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ArticleLogicImpl articleLogicImpl= new ArticleLogicImpl();
 		try {
-			req.setAttribute("listArticle", articleLogicImpl.getAllTitle());
+			req.setAttribute("listArticle", articleLogicImpl.getAllArticle());
 		} catch (SQLException e) {
 			//Trang lỗi.
 		}

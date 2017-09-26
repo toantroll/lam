@@ -42,5 +42,11 @@ public interface TeacherDetailLogic {
 	 * @return true : delete thành công , false: không thành c
 	 */
 	public boolean deleteTeacherDetail(int teacherId);
+	/**
+	 * Kiểm tra giáo viên có tồn tại trong DB không .
+	 * @param teacherId mã giáo viên	
+	 * @return true : có trong DB , false: không có trong DB
+	 */
+	public boolean checkExistedTeacherDetailById(int teacherId);
 
 }

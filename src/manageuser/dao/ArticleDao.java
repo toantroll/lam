@@ -20,7 +20,7 @@ public interface ArticleDao {
 	 * @return danh sách tiêu đề bài viết .
 	 * @throws SQLException
 	 */
-	public List<Article> getAllTitle() throws SQLException;
+	public List<Article> getAllActicle() throws SQLException;
 
 	/**
 	 * Lấy thông tin bài viết theo id

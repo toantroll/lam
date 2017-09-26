@@ -6,8 +6,6 @@ package manageuser.dao;
 
 import java.sql.SQLException;
 import java.util.List;
-
-import manageuser.entities.Teacher;
 import manageuser.entities.TeacherDetail;
 
 /**
