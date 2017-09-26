@@ -12,18 +12,77 @@ import java.sql.Date;
  */
 public class TimeTableDetail {
 	private int id;
+	private int timeTableInfoId;
+	private int subjectId;
+	private String subjectName;
+	private int teacherId;
+	private String teacherName;
+	private String subjectContent;
+	private Date startDate;
+	private int hoursPerDay;
+	private int status;
+	private String startDateString;
+	private String startHours;
+	
+	
+
+	/**
+	 * @return the startDateString
+	 */
+	public String getStartDateString() {
+		return startDateString;
+	}
+
+	/**
+	 * @param startDateString the startDateString to set
+	 */
+	public void setStartDateString(String startDateString) {
+		this.startDateString = startDateString;
+	}
+
+	/**
+	 * @return the startHours
+	 */
+	public String getStartHours() {
+		return startHours;
+	}
+
+	/**
+	 * @param startHours the startHours to set
+	 */
+	public void setStartHours(String startHours) {
+		this.startHours = startHours;
+	}
+
+	public String getSubjectName() {
+		return subjectName;
+	}
+
+	public void setSubjectName(String subjectName) {
+		this.subjectName = subjectName;
+	}
+
+	public String getTeacherName() {
+		return teacherName;
+	}
+
+	public void setTeacherName(String teacherName) {
+		this.teacherName = teacherName;
+	}
+
+	public String getSubjectContent() {
+		return subjectContent;
+	}
+
+	public void setSubjectContent(String subjectContent) {
+		this.subjectContent = subjectContent;
+	}
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	private int timeTableInfoId;
-	private int subjectId;
-	private int teacherId;
-	private Date startDate;
-	private int hoursPerDay;
-	private int status;
 	
 	public int getTimeTableInfoId() {
 		return timeTableInfoId;

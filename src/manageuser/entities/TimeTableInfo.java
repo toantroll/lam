@@ -19,6 +19,15 @@ public class TimeTableInfo {
 	private Date createAt;
 	private Date updatedAt;
 	private Date deletedAt;
+	private String courseName;
+	
+	public String getCourseName() {
+		return courseName;
+	}
+
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
+	}
 	public int getId() {
 		return id;
 	}

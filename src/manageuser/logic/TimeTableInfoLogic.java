@@ -1,21 +1,18 @@
-/**
- * Copyright(C) 2017 Luvina Software Company
- *	TimeTableInfoDao.java 2017-09-21, toanvv
- */
-package manageuser.dao;
+package manageuser.logic;
 
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
+import manageuser.entities.ResponseData;
 import manageuser.entities.TimeTableInfo;
 
 /**
- * interface time table info
+ * interface time table info logic
  * @author LA-PM
  *
  */
-public interface TimeTableInfoDao {
+public interface TimeTableInfoLogic {
 	/**
 	 * insert time table
 	 * @param e TimeTableInfo
@@ -55,4 +52,11 @@ public interface TimeTableInfoDao {
 	 * @throws SQLException SQLException
 	 */
 	public Date[] getStartDateAndEndDateTimeTableInfoById(int id) throws SQLException;
+	
+	/**
+	 * get all data detail of time table
+	 * @return ResponseData
+	 * @throws SQLException SQLException
+	 */
+	public ResponseData getTimeTableById(int id) throws SQLException;
 }
