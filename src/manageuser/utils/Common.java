@@ -107,7 +107,7 @@ public class Common {
 	 * @param endDate endDate
 	 * @return true if start date < end date, false if date null or start date >= end date
 	 */
-	public static boolean conpareTwoDate(Date startDate, Date endDate){
+	public static boolean compareTwoDate(Date startDate, Date endDate){
 		boolean flag = true;
 		if(!isNull(startDate) && !isNull(endDate)){
 			flag = startDate.compareTo(endDate) < 0? true: false;
@@ -319,4 +319,24 @@ public class Common {
 		}
 		return "success";
 	}
+	
+	/**
+	 * 
+	 * @param date1
+	 * @param date2
+	 * @return
+	 */
+	public static boolean equalss(Date date1, Date date2){
+		boolean flag = true;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String dateString1 = sdf.format(date1);
+		String dateString2 = sdf.format(date2);
+		if(dateString1.equals(dateString2)){
+			flag = true;
+		} else {
+			flag = false;
+		}
+		return flag;
+	}
+	
 }
