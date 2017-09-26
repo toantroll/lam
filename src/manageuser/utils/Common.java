@@ -444,7 +444,7 @@ public class Common {
 		Date d = null;
 		SimpleDateFormat sdf = new SimpleDateFormat(regex);
 		try {
-			d = (Date)sdf.parse(date);
+			d = new Date(sdf.parse(date).getTime());
 		} catch (ParseException e) {
 			d = null;
 		}

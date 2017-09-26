@@ -4,6 +4,7 @@
  */
 package manageuser.dao;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -54,4 +55,30 @@ public interface TimeTableDetailDao {
 	 * @throws SQLException SQLException
 	 */
 	public List<TimeTableDetail> getAllDetailByTimeTableInfoId(int id) throws SQLException;
+	
+	/**
+	 * check exist by detail id
+	 * @param id detail id
+	 * @return true if exist
+	 * @throws SQLException SQLException
+	 */
+	public boolean isExistDetail(int id) throws SQLException;
+	
+	/**
+	 *  check exist by id detail and id time table info
+	 * @param id id detail
+	 * @param idTimeTableInfo id time table info
+	 * @return true if exist
+	 * @throws SQLException SQLException
+	 */
+	public boolean isExistDetail(int id, int idTimeTableInfo) throws SQLException;
+
+	/**
+	 * check exist
+	 * @param id time table Id
+	 * @param startDate start date
+	 * @return
+	 * @throws SQLException
+	 */
+	public boolean isExistDetail(int id, Date startDate) throws SQLException;
 }

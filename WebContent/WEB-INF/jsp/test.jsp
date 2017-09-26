@@ -85,52 +85,83 @@
 		role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="titleTableDetail">Modal title</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form>
-					<div class="row">
-						<div class='col-sm-3'>
-							 <label for="timeTimeTable">Giờ bắt đầu</label>
+				<form id="timeTableDetailForm" method="POST">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h2 class="modal-title" id="titleTableDetail">Modal title</h2>
+					</div>
+					<div class="modal-body">
+						<div class="row message">
+						
 						</div>
-						<div class='col-sm-6'>
-							<input type='text' class="form-control" id='timeTimeTable' name="time" />
-						</div>
-						<script type="text/javascript">
-							$(function() {
-								$('#timeTimeTable').datetimepicker({
-									format : 'HH:mm'
+						<div class="row">
+							<div class='col-sm-3'>
+								<label for="timeTimeTable">Giờ bắt đầu</label>
+							</div>
+							<div class='col-sm-6'>
+								<input type="hidden" name="date" id="date" /> <input
+									type="hidden" name="idDetail" id="idDetail" /> <input
+									type="hidden" name="idTimeTable" id="idTimeTable" /> <input
+									type='text' class="form-control" id='timeTimeTable' name="time" />
+							</div>
+							<script type="text/javascript">
+								$(function() {
+									$('#timeTimeTable').datetimepicker({
+										format : 'HH:mm'
+									});
 								});
-							});
-						</script>
-					</div>
-					<div class="row">
-						<div class='col-sm-3'>
-							 <label for="timeTimeTable">Môn học:</label>
+							</script>
 						</div>
-						<div class='col-sm-6'>
-							<select name="subject" class="form-control">
-								<option selected="selected" value="0">--Chọn Môn học--</option>
-							</select>
+						<div class="row">
+							<div class='col-sm-3'>
+								<label for="timeTimeTable">Môn học:</label>
+							</div>
+							<div class='col-sm-6'>
+								<select name="subject" class="form-control" id="cbxSubject">
+									<option selected="selected" value="0">--Chọn Môn học--</option>
+									<option value="9">Project</option>
+								</select>
+							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div class='col-sm-3'>
-							 <label for="timeTimeTable">Môn học:</label>
+						<div class="row">
+							<div class='col-sm-3'>
+								<label for="timeTimeTable">Tiêu đề:</label>
+							</div>
+							<div class='col-sm-6'>
+								<input type='text' class="form-control" name="titleSubject"
+									id="titleSubject" />
+							</div>
 						</div>
+						<div class="row">
+							<div class='col-sm-3'>
+								<label for="timeTimeTable">Số giờ:</label>
+							</div>
+							<div class='col-sm-6'>
+								<input type='text' class="form-control" name="hoursPerDay"
+									id="hoursPerDay" />
+							</div>
+						</div>
+						<div class="row">
+							<div class='col-sm-3'>
+								<label for="timeTimeTable">Có bài kiểm tra:</label>
+							</div>
+							<div class='col-sm-6'>
+								<input type="checkbox" class="form-control" name="isTest"
+									id="isTest" />
+							</div>
+						</div>
+
 					</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Save changes</button>
-				</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Hủy</button>
+						<button type="button" class="btn btn-danger">Xóa</button>
+						<button type="submit" class="btn btn-primary">Lưu</button>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>

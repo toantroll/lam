@@ -55,7 +55,7 @@ public class TimeTableInfoLogicImpl implements TimeTableInfoLogic {
 		TimeTableInfoDaoImpl infoDao = new TimeTableInfoDaoImpl();
 		ResponseData responseData = new ResponseData();
 		responseData.setData(createListDetail(infoDao.getStartDateAndEndDateTimeTableInfoById(id),
-				detailDao.getAllDetailByTimeTableInfoId(id)));
+				detailDao.getAllDetailByTimeTableInfoId(id), id));
 		return responseData;
 	}
 
@@ -65,7 +65,7 @@ public class TimeTableInfoLogicImpl implements TimeTableInfoLogic {
 	 * @param listDetail dánh sách chi tiết thời khóa biểu theo ngày được lấy ra từ db
 	 * @return danh sách chi khóa biểutiết thời
 	 */
-	private List<TimeTableDetail> createListDetail(Date[] dateArray, List<TimeTableDetail> listDetail) {
+	private List<TimeTableDetail> createListDetail(Date[] dateArray, List<TimeTableDetail> listDetail, int id) {
 		List<TimeTableDetail> l = new ArrayList<TimeTableDetail>();
 		// lấy ngày bắt đầu và ngày kết thúc
 		LocalDate startDate = LocalDate.parse(dateArray[0].toString());
@@ -97,6 +97,7 @@ public class TimeTableInfoLogicImpl implements TimeTableInfoLogic {
 			} else {
 				t = new TimeTableDetail();
 				t.setStartDate(Date.valueOf(startDate));
+				t.setTimeTableInfoId(id);
 				l.add(updateDetail(t));
 			}
 			
