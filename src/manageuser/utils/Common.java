@@ -420,12 +420,12 @@ public class Common {
 	 */
 	public static boolean isEmpty(String text) {
 		if (isNull(text)) {
-			return false;
+			return true;
 		}
 		if ("".equals(text)) {
-			return false;
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	/**
