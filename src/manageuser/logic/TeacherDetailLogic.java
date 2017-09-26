@@ -48,5 +48,6 @@ public interface TeacherDetailLogic {
 	 * @return true : có trong DB , false: không có trong DB
 	 */
 	public boolean checkExistedTeacherDetailById(int teacherId);
+	public TeacherDetail getTeacherDetailById(int teacherId);
 
 }

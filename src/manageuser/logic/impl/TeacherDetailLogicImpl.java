@@ -97,9 +97,23 @@ public class TeacherDetailLogicImpl implements TeacherDetailLogic {
 		return ketQua;
 	}
 
+	/* (non-Javadoc)
+	 * @see manageuser.logic.TeacherDetailLogic#getTeacherDetailById(int)
+	 */
+	@Override
+	public TeacherDetail getTeacherDetailById(int teacherId) {
+		// TODO Auto-generated method stub
+		try {
+			return teacherDetailDaoImpl.getTeacherDetailById(teacherId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * manageuser.logic.TeacherDetailLogic#checkExistedTeacherDetailById(int)
 	 */
