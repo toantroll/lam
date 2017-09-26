@@ -24,4 +24,5 @@ public class Constant {
 	public static final String TEL = "tel";
 	public static final String BIRTHDAY = "birthday";
 	public static final String IDCARD = "idcard";
+	public static final String FULLNAME = "fullName";
 }
