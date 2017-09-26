@@ -357,5 +357,36 @@ public class Common {
 		return true;
 	}
 	
+	/**
+	 * check date 
+	 * @param date date
+	 * @param regex format
+	 * @return
+	 */
+	public static boolean isDate(String date, String regex){
+		SimpleDateFormat sdf = new SimpleDateFormat(regex);
+		sdf.setLenient(false);
+		try {
+			sdf.parse(date);
+		} catch (ParseException e) {
+			return false;
+		}
+		return true;
+	}	
+	
+	/**
+	 * check empty
+	 * @param text
+	 * @return
+	 */
+	public static boolean isEmpty(String text){
+		if(isNull(text)){
+			return false;
+		}
+		if("".equals(text)){
+			return false;
+		}
+		return true;
+	}
 	
 }
