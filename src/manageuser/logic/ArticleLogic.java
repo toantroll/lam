@@ -19,7 +19,7 @@ public interface ArticleLogic {
 	 * @return
 	 * @throws SQLException 
 	 */
-	public List<Article> getAllTitle() throws SQLException;
+	public List<Article> getAllArticle() throws SQLException;
 	/**
 	 * Lấy thông tin bài viết theo id
 	 * @param acticleId

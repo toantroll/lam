@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import manageuser.entities.TeacherDetail;
 import manageuser.logic.impl.TeacherDetailLogicImpl;
-import manageuser.utils.Constant;
 
 /**
  * @author HongTT

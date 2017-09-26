@@ -78,13 +78,23 @@
 						<div class="main-content">
 
 							<div class="content-bl subject">
-								<p>${detaiArticle.title }</p>
-								<p>${detaiArticle.author_id }</p>
-								<p>${detaiArticle.content }</p>
-								<p>${detaiArticle.img_link }</p>
-								<p>${detaiArticle.created_at }</p>
-								<p>${detaiArticle.deleted_at }</p>
-								<p>${detaiArticle.deleted_flag }</p>
+
+								<div class="article"
+									style="width: 100%; text-align: left; margin-bottom: 5px;">
+									<div class="title-article"
+										style="width: 100%; font-size: 26px; color: red; float: left;">
+										<b> ${detaiArticle.title } </b>
+									</div>
+									<div class="main-article">
+										<div style="width: 100%;">
+											Người viết : <b>${detaiArticle.nameAuthor } </b> Ngày viết
+											bài : <b>${detaiArticle.created_at}</b>
+										</div>
+										<div class="content-article"
+											style="width: 100%; margin-top: 10px;">${detaiArticle.content}
+										</div>
+									</div>
+								</div>
 							</div>
 							<!-- .content-bl -->
 

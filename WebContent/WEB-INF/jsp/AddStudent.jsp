@@ -89,7 +89,12 @@
                                             </div>
                                             <div class="one-half no-pr">
                                                 <label class="lbl-slb">
-                                                    <select name="gender" required="required"><option value="" selected="selected">Giới tính (*)</option><option value="0">Nữ</option><option value="1">Nam</option><option value="2">Không xác định</option></select>                        </label>
+                                                    <select name="gender" required="required">
+                                                    <option value="" selected="selected">Giới tính (*)</option>
+                                                    <option value="0">Nữ</option>
+                                                    <option value="1">Nam</option>
+                                                    </select>     
+                                                    </label>
                                             </div>
                                             <div class="clear"></div>
                                         </div>
@@ -103,28 +108,32 @@
                                     </li>
                                     <li class="student-only">
                                         <label class="lbl-slb">
-                                            <select name="course" id="slCourse"><option value="" selected="selected">Khóa học</option>
-                                            <option value="None">Chưa học</option>
-                                            <option value="17">LA17</option>
-                                            <option value="16">LA16</option>
-                                            <option value="18">LA18</option>
-                                            <option value="LA18_PM">LA18_PM</option>
-                                            <option value="LA19_AM">LA19_AM</option>
-                                            <option value="LA19_PM">LA19_PM</option></select>            
+                                            <select name="course" id="slCourse">
+                                            <option value="0" selected="selected">Khóa học</option>
+                                              <c:forEach items="${listCourse }" var = "course">
+                                        	    <option value='<c:out value="${course.id }"></c:out>'><c:out value="${course.courser_name }"></c:out></option>
+                                            </c:forEach>
+                                            </select>            
                                          </label>
                                     </li>
                                     <li class="student-only">
                                         <label class="lbl-slb">
-                                            <select name="japanese_level" id="slJapanese"><option value="" selected="selected">Trình độ tiếng Nhật</option><option value="none">Chưa học</option><option value="N1">JLPT N1</option><option value="N2">JLPT N2</option><option value="N3">JLPT N3</option><option value="N4">JLPT N4</option><option value="N5">JLPT N5</option></select>                </label>
+                                            <select name="japanese_level" id="slJapanese">
+                                            <option value="0" selected="selected">Trình độ tiếng Nhật</option>
+                                           <c:forEach items="${listJapan }" var = "japan">
+                                        	    <option value='<c:out value="${japan.codeLevel }"></c:out>'><c:out value="${japan.nameLevel }"></c:out></option>
+                                            </c:forEach>
+                                            </select>             
+                                               </label>
                                     </li>
                                     <li class="student-only">
                                         <label class="lbl-slb">
-                                            <select name="status"><option value="">Trạng thái người dùng</option>
-                                            <option value="0">Mới đăng kí người dùng</option>
-                                            <option value="1">Đang đăng kí học LA (chờ phê duyệt)</option>
-                                            <option value="2">Đã từng đăng kí khóa LA</option><option value="3">Đang học LA</option>
-                                            <option value="4">Đã học xong LA</option>
-                                            <option value="5">Bảo lưu kết quả</option></select>
+                                            <select name="status">
+                                            <option value="0" selected >Trạng thái người dùng</option>
+                                              <c:forEach items="${listStatus }" var = "status">
+                                        	    <option value='<c:out value="${status.id }"></c:out>'><c:out value="${status.nameStatus }"></c:out></option>
+                                            </c:forEach>
+                                            </select>
                                         </label>
                                     </li>
                                     <li class="student-teacher">

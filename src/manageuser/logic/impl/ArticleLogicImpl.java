@@ -21,8 +21,8 @@ public class ArticleLogicImpl implements ArticleLogic {
 	 * @see manageuser.logic.ArticleLogic#getAllTitle()
 	 */
 	@Override
-	public List<Article> getAllTitle() throws SQLException {		
-		return articleDaoImpl.getAllTitle();
+	public List<Article> getAllArticle() throws SQLException {		
+		return articleDaoImpl.getAllActicle();
 	}
 	/*
 	 * @see manageuser.logic.ArticleLogic#getActicleById(int)

@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpSession;
 
@@ -107,7 +108,7 @@ public class Common {
 	 * @param endDate endDate
 	 * @return true if start date < end date, false if date null or start date >= end date
 	 */
-	public static boolean conpareTwoDate(Date startDate, Date endDate){
+	public static boolean compareTwoDate(Date startDate, Date endDate){
 		boolean flag = true;
 		if(!isNull(startDate) && !isNull(endDate)){
 			flag = startDate.compareTo(endDate) < 0? true: false;
@@ -319,4 +320,42 @@ public class Common {
 		}
 		return "success";
 	}
+	
+	/**
+	 * 
+	 * @param date1
+	 * @param date2
+	 * @return
+	 */
+	public static boolean equalss(Date date1, Date date2){
+		boolean flag = true;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String dateString1 = sdf.format(date1);
+		String dateString2 = sdf.format(date2);
+		if(dateString1.equals(dateString2)){
+			flag = true;
+		} else {
+			flag = false;
+		}
+		return flag;
+	}
+	
+	/**
+	 * check time
+	 * @param time
+	 * @return true if is time
+	 */
+	public static boolean isTime(String time){
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+		sdf.setLenient(false);
+		try {
+			sdf.parse(time);
+		} catch (ParseException e) {
+			return false;
+		}
+		
+		return true;
+	}
+	
+	
 }
