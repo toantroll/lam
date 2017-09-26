@@ -19,4 +19,9 @@ public class Constant {
 	public static final String REGEX_YEAR_GRADUATE="[0-9]{4}";
 	public static final String SIGNUP = "WEB-INF/jsp/signup.jsp";
 	public static final String SUCCESS = "WEB-INF/jsp/successRegister.jsp";
+	public static final String USERNAME = "userName";
+	public static final String EMAIL = "email";
+	public static final String TEL = "tel";
+	public static final String BIRTHDAY = "birthday";
+	public static final String IDCARD = "idcard";
 }

@@ -88,8 +88,6 @@ public class AddStudentController extends HttpServlet {
 		request.setAttribute("listJapan", japanDetailLogicImpl.getListJapanDetail());
 		request.setAttribute("listCourse", courseLogicImpl.getListCourse());
 		request.setAttribute("listStatus", statusStudentLogicImpl.getStatus());
-	
-		
 	}
 
 }

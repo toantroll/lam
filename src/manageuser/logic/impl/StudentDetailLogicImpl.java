@@ -99,6 +99,15 @@ public class StudentDetailLogicImpl implements StudentDetailLogic{
 		StudentDetailLogicImpl a = new StudentDetailLogicImpl();
 		a.deleteUser(8);
 	}
+
+	/* (non-Javadoc)
+	 * @see manageuser.logic.StudentDetailLogic#existUser(java.lang.String)
+	 */
+	@Override
+	public String existUser(String userName) {
+		StudentDetailDaoImpl studentDetailDaoImpl = new StudentDetailDaoImpl();
+		return studentDetailDaoImpl.existUser(userName);
+	}
 	
 
 }

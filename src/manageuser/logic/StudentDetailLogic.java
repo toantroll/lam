@@ -36,4 +36,10 @@ public boolean updateUserInfor( StudentDetail studentDetail );
  * @return true nếu xóa thành công, false xóa không thành công
  */
 public boolean deleteUser(int studentID);
+/**
+ * hàm kiểm tra User đã tồn tại hay chưa 
+ * @param userName tên đăng nhập cần kiểm tra 
+ * @return chuỗi nếu user đã tồn tại, null nếu chưa tồn tại 
+ */
+public String existUser(String userName);
 }

@@ -2,6 +2,7 @@ package manageuser.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import manageuser.dao.StudentDetailDao;
 import manageuser.entities.StudentDetail;
@@ -72,33 +73,25 @@ public class StudentDetailDaoImpl extends BaseDaoImpl implements StudentDetailDa
 		pre.setInt(i++, userId);
 		pre.executeUpdate();
 	}
+	/* (non-Javadoc)
+	 * @see manageuser.dao.StudentDetailDao#existUser(java.lang.String)
+	 */
+	@Override
+	public String existUser(String userName) {
+		String sql = "Select username from users where username = ?";
+		try {
+			PreparedStatement preparedStatement = getConnection().prepareStatement(sql);
+			preparedStatement.setString(1, userName);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if(resultSet.next()) {
+				return resultSet.getString("username");
+			}
+		} catch (SQLException e) {
+			System.out.println("lỗi kiểm tra tồn tại user");
+		}
+		return null;
+	}
 	
-//	public static void main(String[] args) {
-//		Date date = new Date(2017, 2, 7);
-//		StudentDetail detail = new StudentDetail();
-//		detail.setUserID(14);
-//		detail.setCourseId(16);
-//		detail.setName("thai dui1");
-//		detail.setTel("123456");
-//		detail.setIdCard("12345678");
-//		detail.setAdress("12345678");
-//		detail.setSchool("12345678");
-//		detail.setMajor("12345678");
-//		detail.setGraduatedYear("1994");
-//		detail.setScoreIQ(12);
-//		detail.setNote("12345678");
-//		detail.setJapanLevel("N3");
-//		detail.setScoreInterview(12);
-//		detail.setStatus("3");
-//		detail.setEmail("12345678");
-//		detail.setBirthday(date);
-//		detail.setGender(0);
-//		detail.setUserName("hunghb9x1");
-//		detail.setPassword("111111");
-//		detail.setRoleId(4);
-//		StudentDetailLogicImpl studentDetailLogicImpl = new StudentDetailLogicImpl();
-//		System.out.println(studentDetailLogicImpl.updatePass(detail));
-//		System.out.println(studentDetailLogicImpl.deleteUser(14));
-//	}
+
 
 }

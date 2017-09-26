@@ -23,4 +23,10 @@ public interface StudentDetailDao {
 	 * @throws SQLException
 	 */
 	public void deleteStudentInfor(int userId) throws SQLException;
+	/**
+	 * kiểm tra tồn tại tên đăng nhập 
+	 * @param studentName tên đăng nhập cần kiểm tra 
+	 * @return
+	 */
+	public String existUser(String userName);
 }
