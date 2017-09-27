@@ -110,7 +110,7 @@
 										</div>
 									</li>      
                                     <li>
-                                        <div class="input email"><input type="email" name="email" id="txtEmail" placeholder="Email (*)"  value='<c:out value="${studentDetail.email }"></c:out>'/></div>            </li>
+                                        <div class="input email"><input type="text" name="email" id="txtEmail" placeholder="Email (*)"  value='<c:out value="${studentDetail.email }"></c:out>'/></div>            </li>
                                  	<li>
 										<div class="err text-danger text-left">
 											<c:if test="${listErr.containsKey(Constant.EMAIL)}">${listErr.get(Constant.EMAIL)}</c:if>

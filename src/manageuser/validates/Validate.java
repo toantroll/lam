@@ -216,6 +216,8 @@ public class Validate {
 	private static String validateFullName(String fullName) {
 		if(Common.isEmpty(fullName)){
 			return ErrorMessageProperties.getErrorMessage("ERR01_FULLNAME");
+		}else if(fullName.length() < 6) {
+			return  ErrorMessageProperties.getErrorMessage("ERR02_FULLNAME");
 		}
 		return null;
 	}
