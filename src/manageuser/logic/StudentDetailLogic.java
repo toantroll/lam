@@ -42,4 +42,10 @@ public boolean deleteUser(int studentID);
  * @return chuỗi nếu user đã tồn tại, null nếu chưa tồn tại 
  */
 public String existUser(String userName);
+/**
+ * kiểm tra email đã tồn tại hay chưa 
+ * @param email email cần kiểm tra 
+ * @return chuỗi email nếu đã tồn tại, null nếu chưa tồn tại 
+ */
+public String existEmail(String email);
 }

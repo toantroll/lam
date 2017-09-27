@@ -108,6 +108,15 @@ public class StudentDetailLogicImpl implements StudentDetailLogic{
 		StudentDetailDaoImpl studentDetailDaoImpl = new StudentDetailDaoImpl();
 		return studentDetailDaoImpl.existUser(userName);
 	}
+
+	/* (non-Javadoc)
+	 * @see manageuser.logic.StudentDetailLogic#existEmail(java.lang.String)
+	 */
+	@Override
+	public String existEmail(String email) {
+		StudentDetailDaoImpl studentDetailDaoImpl = new StudentDetailDaoImpl();
+		return studentDetailDaoImpl.existEmail(email);
+	}
 	
 
 }

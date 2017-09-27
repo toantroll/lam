@@ -2,7 +2,7 @@
  * Copyright(C) 2017 Jul 12, 2017 Luvina
  * CharacterEncodingFilter.java, Jul 12, 2017, CTA
  */
-package manageuser.filters;
+package manageuser.filter;
 
 import java.io.IOException;
 import javax.servlet.Filter;

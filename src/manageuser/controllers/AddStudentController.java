@@ -89,6 +89,7 @@ public class AddStudentController extends HttpServlet {
 		studentDetail.setSchool(request.getParameter("school"));
 		studentDetail.setMajor(request.getParameter("major"));
 		studentDetail.setGraduatedYear(request.getParameter("gra_year"));
+		studentDetail.setRoleId(3);
 		if(Common.isNumBer(IQScore)) {
 		studentDetail.setScoreIQ( Integer.parseInt(IQScore));
 		}
