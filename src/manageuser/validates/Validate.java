@@ -114,10 +114,10 @@ public class Validate {
 			listErr.put(Constant.USERNAME, errUserName);
 		}
 		//Kiểm tra fullName
-				String errFullName= validateFullName(student.getName());
-				if(errFullName!=null){
-					listErr.put(Constant.FULLNAME, errFullName);
-				}		
+		String errFullName= validateFullName(student.getName());
+			if(errFullName!=null){
+				listErr.put(Constant.FULLNAME, errFullName);
+		}		
 		// kiển tra số điện thoại 
 		String errTel = validateTel(student.getTel());
 		if(errTel != null) {
@@ -125,7 +125,7 @@ public class Validate {
 		}
 		// kiểm tra email
 		String errEmail = validateEmail(student.getEmail());
-		if(listErr != null) {
+		if(errEmail != null) {
 			listErr.put(Constant.EMAIL, errEmail);
 		}
 		// kiểm tra ngay sinh 
@@ -141,6 +141,16 @@ public class Validate {
 		// kiểm tra mật khẩu 
 		if(Common.isEmpty(student.getPassword())) {
 			listErr.put(Constant.PASSWORD, ErrorMessageProperties.getErrorMessage("ERR01_PASS"));
+		}
+		// kiểm tra khóa học đã được chọn hay chưa
+		String errcourseID = validateCourse(student.getCourseId());
+		if(errcourseID != null) {
+			listErr.put(Constant.COURSEID, errcourseID);
+		}
+		// kiểm tra khóa học đã được chọn hay chưa
+		String errStatus = validateStatus(student.getStatus());
+		if(errStatus != null) {
+			listErr.put(Constant.STATUS, errStatus);
 		}
 		return listErr;
 	}
@@ -165,7 +175,8 @@ public class Validate {
 		String errFullName= validateFullName(teacher.getFullName());
 		if(errFullName!=null){
 			listErr.put(Constant.FULLNAME, errFullName);
-		}		
+		}	
+		
 		return listErr;
 	}
 	/**
@@ -189,15 +200,15 @@ public class Validate {
 	private static String validateEmail(String email) {
 		if(Common.isEmpty(email)){
 			return ErrorMessageProperties.getErrorMessage("ERR01_EMAIL");
-		}else if(!checkFormat(email,Constant.REGEX_MAIL)){
+		} else if(!checkFormat(email,Constant.REGEX_MAIL)){
 			return ErrorMessageProperties.getErrorMessage("ERR02_EMAIL");
 		}
 		return null;
 	}
 	/**
 	 * validate fullName
-	 * @param fullName
-	 * @return
+	 * @param fullName họ tên cần kiểm tra 
+	 * @return chuỗi lỗi nếu có trả vê null nếu không có lỗi 
 	 */
 	private static String validateFullName(String fullName) {
 		if(Common.isEmpty(fullName)){
@@ -206,9 +217,9 @@ public class Validate {
 		return null;
 	}
 	/**
-	 * 
-	 * @param userName
-	 * @return
+	 * validate tên đăng nhập
+	 * @param userName tên đăng nhập cần kiểm tra 
+	 * @return chuỗi lỗi nếu có trả vê null nếu không có lỗi 
 	 */
 	private static String validateUserName(String userName){
 		StudentDetailLogicImpl studentDetailLogicImpl = new StudentDetailLogicImpl();
@@ -222,9 +233,9 @@ public class Validate {
 		return null;
 	}
 	/**
-	 * 
-	 * @param date
-	 * @return
+	 *  ngày cần kiểm tra 
+	 * @param date 
+	 * @return chuỗi lỗi nếu có trả vê null nếu không có lỗi 
 	 */
 	private static String validateDate(Date date) {
 		if(date == null) {
@@ -233,13 +244,35 @@ public class Validate {
 		return null;
 	}
 	/**
-	 * 
+	 * kiểm tra định dạng của chứng minh thư
 	 * @param idcard
-	 * @return
+	 * @return chuỗi lỗi nếu có trả vê null nếu không có lỗi 
 	 */
 	private static String validateIdCard(String idcard){
-		if( idcard != null && !checkFormat(idcard, Constant.REGEX_TEL)) {
+		if( idcard != null && !checkFormat(idcard, Constant.REGEX_IDCARD)) {
 			return ErrorMessageProperties.getErrorMessage("ERR02_IDCARD");
+		}
+		return null;
+	}
+	/**
+	 * validate khóa học
+	 * @param courserId mã khóa học 
+	 * @return 
+	 */
+	private static String validateCourse(int courserId) {
+		if(courserId == 0) {
+			return ErrorMessageProperties.getErrorMessage("ERR04_COURSEID");
+		}
+		return null;
+	}
+	/**
+	 * validate tình trạng sinh viên
+	 * @param status mã tình trạng khóa học 
+	 * @return chuỗi lỗi nếu có trả vê null nếu không có lỗi 
+	 */
+	private static String validateStatus(int status) {
+		if(status == 0) {
+			return ErrorMessageProperties.getErrorMessage("ERR04_STATUS");
 		}
 		return null;
 	}

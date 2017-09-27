@@ -151,10 +151,15 @@
                                             </select>            
                                          </label>
                                     </li>
+                                    <li>
+										<div class="err text-danger text-left">
+											<c:if test="${listErr.containsKey(Constant.COURSEID)}">${listErr.get(Constant.COURSEID)}</c:if>
+										</div>
+									</li>   
                                     <li class="student-only">
                                         <label class="lbl-slb">
                                             <select name="japanese_level" id="slJapanese">
-                                            <option value="0" selected="selected">Trình độ tiếng Nhật</option>
+                                            <option value="" selected="selected">Trình độ tiếng Nhật</option>
                                            <c:forEach items="${listJapan }" var = "japan">
                                         	    <option value='<c:out value="${japan.codeLevel }"></c:out>'><c:out value="${japan.nameLevel }"></c:out></option>
                                             </c:forEach>
@@ -171,6 +176,11 @@
                                             </select>
                                         </label>
                                     </li>
+                                    <li>
+										<div class="err text-danger text-left">
+											<c:if test="${listErr.containsKey(Constant.STATUS)}">${listErr.get(Constant.STATUS)}</c:if>
+										</div>
+									</li>   
                                     <li class="student-teacher">
                                         <div class="input text"><input type="text" name="school" id="txtTruong" placeholder="Trường" value=""/></div>            </li>
                                     <li class="student-teacher">

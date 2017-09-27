@@ -44,14 +44,15 @@ public class AddStudentController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		StudentDetail studentDetail = setDefaultValue(request, response);
 		HashMap<String, String> listErr = Validate.validateStudent(studentDetail);
+		System.out.println(listErr);
 		if(listErr.size() != 0){
 			setDataLogic(request, response);
 			request.setAttribute("listErr", listErr);
-			System.out.println(listErr.get(Constant.FULLNAME));
 			request.setAttribute("studentDetail", studentDetail);
 			RequestDispatcher dispatcher = request.getRequestDispatcher(Constant.ADDSTUDENT);
 			dispatcher.forward(request, response);
 		} else {
+			
 		StudentDetailLogicImpl studentDetailLogicImpl = new StudentDetailLogicImpl();
 			if(studentDetailLogicImpl.createStudent(studentDetail)) {
 				response.sendRedirect(request.getContextPath() + "/ErrorController");

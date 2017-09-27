@@ -27,4 +27,7 @@ public class Constant {
 	public static final String FULLNAME = "fullName";
 	public static final String ADDSTUDENT = "WEB-INF/jsp/AddStudent.jsp";
 	public static final String PASSWORD = "password";
+	public static final String COURSEID = "courseid";
+	public static final String STATUS = "status";
+	public static final String REGEX_IDCARD="[0-9]{9,15}";
 }
