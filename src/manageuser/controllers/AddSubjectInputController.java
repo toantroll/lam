@@ -96,7 +96,7 @@ public class AddSubjectInputController extends HttpServlet {
 		}
 		TeacherDetail teacherDetail = new TeacherDetail();
 		teacherDetail.setTeacherId(0);
-		teacherDetail.setFullName("LỰA CHỌN GIẢNG VIÊN:");
+		teacherDetail.setFullName("DANH SÁCH GIẢNG VIÊN:");
 		listTeacher.add(0, teacherDetail);
 		req.setAttribute("listTeacher", listTeacher);
 	}
