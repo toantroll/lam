@@ -43,8 +43,8 @@ public class AddStudentController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		StudentDetail studentDetail = setDefaultValue(request, response);
+		StudentDetailLogicImpl studentDetailLogicImpl = new StudentDetailLogicImpl();
 		HashMap<String, String> listErr = Validate.validateStudent(studentDetail);
-		System.out.println(listErr);
 		if(listErr.size() != 0){
 			setDataLogic(request, response);
 			request.setAttribute("listErr", listErr);
@@ -53,10 +53,10 @@ public class AddStudentController extends HttpServlet {
 			dispatcher.forward(request, response);
 		} else {
 			
-		StudentDetailLogicImpl studentDetailLogicImpl = new StudentDetailLogicImpl();
-			if(studentDetailLogicImpl.createStudent(studentDetail)) {
+			
+			/*if(studentDetailLogicImpl.createStudent(studentDetail)) {
 				response.sendRedirect(request.getContextPath() + "/ErrorController");
-			}
+			}*/
 		}
 	}
 	
@@ -89,12 +89,15 @@ public class AddStudentController extends HttpServlet {
 		studentDetail.setSchool(request.getParameter("school"));
 		studentDetail.setMajor(request.getParameter("major"));
 		studentDetail.setGraduatedYear(request.getParameter("gra_year"));
+		studentDetail.setNote(request.getParameter("note"));
 		studentDetail.setRoleId(3);
 		if(Common.isNumBer(IQScore)) {
 		studentDetail.setScoreIQ( Integer.parseInt(IQScore));
 		}
 		studentDetail.setNote(request.getParameter(request.getParameter("note")));
-		studentDetail.setJapanLevel(request.getParameter("japanese_level"));
+		String japanlevel = request.getParameter("japanese_level");
+		if(!"".equals(japanlevel))
+			studentDetail.setJapanLevel(japanlevel);
 		if(Common.isNumBer(scoreInterview)) {
 			studentDetail.setScoreInterview(Integer.parseInt(scoreInterview));
 		}

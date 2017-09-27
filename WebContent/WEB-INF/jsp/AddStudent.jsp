@@ -71,7 +71,7 @@
                                     <!--            <li class="hidden">-->
                                     <!--                --><!--            </li>-->
                                     <li>
-                                        <div class="input text"><input type="text" name="full_name" id="txtHoTen" placeholder="Họ và tên (*)" autofocus="autofocus" value=""/></div>
+                                        <div class="input text"><input type="text" name="full_name" id="txtHoTen" placeholder="Họ và tên (*)" autofocus="autofocus" value='<c:out value="${studentDetail.name }"></c:out>'/></div>
                                         </li>
 									<li>
 										<div class="err text-danger text-left">
@@ -79,7 +79,7 @@
 										</div>
 									</li>                                   
                                    <li>
-                                        <div class="input text"><input type="text" name="username" id="txtUsername" placeholder="Tên đăng nhập (*)" value=""/></div>
+                                        <div class="input text"><input type="text" name="username" id="txtUsername" placeholder="Tên đăng nhập (*)" value='<c:out value="${studentDetail.userName }"></c:out>'/></div>
                                     </li>
                                     <li>
 										<div class="err text-danger text-left">
@@ -95,21 +95,21 @@
 										</div>
 									</li>   
                                     <li>
-                                        <div class="input text"><input type="text" name="phone" id="txtMobile" placeholder="Điện thoại (*)"  value=""/></div>            </li>
+                                        <div class="input text"><input type="text" name="phone" id="txtMobile" placeholder="Điện thoại (*)"  value='<c:out value="${studentDetail.tel }"></c:out>'/></div>            </li>
                                   	<li>
 										<div class="err text-danger text-left">
 											<c:if test="${listErr.containsKey(Constant.TEL)}">${listErr.get(Constant.TEL)}</c:if>
 										</div>
 									</li>      
                                     <li>
-                                        <div class="input text"><input type="text" name="idCard" id="txtIdCard" placeholder="Số chứng minh nhân dân (*)"  value=""/></div>            </li>    
+                                        <div class="input text"><input type="text" name="idCard" id="txtIdCard" placeholder="Số chứng minh nhân dân (*)"  value='<c:out value="${studentDetail.idCard }"></c:out>'/></div>            </li>    
                                    	<li>
 										<div class="err text-danger text-left">
 											<c:if test="${listErr.containsKey(Constant.IDCARD)}">${listErr.get(Constant.IDCARD)}</c:if>
 										</div>
 									</li>      
                                     <li>
-                                        <div class="input email"><input type="email" name="email" id="txtEmail" placeholder="Email (*)"  value=""/></div>            </li>
+                                        <div class="input email"><input type="email" name="email" id="txtEmail" placeholder="Email (*)"  value='<c:out value="${studentDetail.email }"></c:out>'/></div>            </li>
                                  	<li>
 										<div class="err text-danger text-left">
 											<c:if test="${listErr.containsKey(Constant.EMAIL)}">${listErr.get(Constant.EMAIL)}</c:if>
@@ -118,14 +118,24 @@
                                     <li>
                                         <div class="g-row">
                                             <div class="one-half no-pad">
-                                                <input type="text" id="txtBirthDay" name="birthday" placeholder="Ngày sinh (*)" style="height: 36px;" >
+                                                <input type="text" id="txtBirthDay" name="birthday" placeholder="Ngày sinh (*)" style="height: 36px;" value = '<c:out value="${studentDetail.birthday }"></c:out>' >
                                             </div>
                                             
                                             <div class="one-half no-pr">
                                                 <label class="lbl-slb">
                                                     <select name="gender">
+                                                    <c:if test="${studentDetail.gender == 0 }">
                                                     <option value="0" selected="selected">Nữ</option>
+                                                    </c:if>
+                                                     <c:if test="${studentDetail.gender != 0 }">
+                                                    <option value="0">Nữ</option>
+                                                    </c:if>
+                                                    <c:if test="${studentDetail.gender == 1 }">
+                                                    <option value="1" selected="selected">Nam</option>
+                                                    </c:if>
+                                                     <c:if test="${studentDetail.gender != 1 }">
                                                     <option value="1">Nam</option>
+                                                    </c:if>
                                                     </select>     
                                                     </label>
                                             </div>
@@ -139,14 +149,19 @@
 									</li>      
 
                                     <li>
-                                        <input id="txtAddress" name="address" type="text" placeholder="Địa chỉ">
+                                        <input id="txtAddress" name="address" type="text" placeholder="Địa chỉ" value='<c:out value="${studentDetail.adress }"></c:out>'>
                                     </li>
                                     <li class="student-only">
                                         <label class="lbl-slb">
                                             <select name="course" id="slCourse">
                                             <option value="0" selected="selected">Khóa học</option>
                                               <c:forEach items="${listCourse }" var = "course">
-                                        	    <option value='<c:out value="${course.id }"></c:out>'><c:out value="${course.courser_name }"></c:out></option>
+                                              	<c:if test="${studentDetail.courseId == course.id  }">
+                                        	   		 <option value='<c:out value="${course.id }"></c:out>' selected="selected" ><c:out value="${course.courser_name }"></c:out></option>
+                                           		</c:if>
+                                           		<c:if test="${studentDetail.courseId != course.id  }">
+                                        	   		 <option value='<c:out value="${course.id }"></c:out>'><c:out value="${course.courser_name }"></c:out></option>
+                                           		</c:if>
                                             </c:forEach>
                                             </select>            
                                          </label>
@@ -161,7 +176,12 @@
                                             <select name="japanese_level" id="slJapanese">
                                             <option value="" selected="selected">Trình độ tiếng Nhật</option>
                                            <c:forEach items="${listJapan }" var = "japan">
+                                          	 <c:if test="${studentDetail.japanLevel == japan.codeLevel  }">
+                                        	    <option value='<c:out value="${japan.codeLevel }"></c:out>' selected="selected"><c:out value="${japan.nameLevel }"></c:out></option>
+                                           	</c:if>
+                                           	 <c:if test="${studentDetail.japanLevel != japan.codeLevel  }">
                                         	    <option value='<c:out value="${japan.codeLevel }"></c:out>'><c:out value="${japan.nameLevel }"></c:out></option>
+                                           	</c:if>
                                             </c:forEach>
                                             </select>             
                                                </label>
@@ -171,7 +191,12 @@
                                             <select name="status">
                                             <option value="0" selected >Trạng thái người dùng</option>
                                               <c:forEach items="${listStatus }" var = "status">
+                                               <c:if test="${studentDetail.status == status.id  }">
+                                        	    <option value='<c:out value="${status.id }"></c:out>' selected="selected"><c:out value="${status.nameStatus }"></c:out></option>
+                                           		</c:if>
+                                           		  <c:if test="${studentDetail.status != status.id  }">
                                         	    <option value='<c:out value="${status.id }"></c:out>'><c:out value="${status.nameStatus }"></c:out></option>
+                                           		</c:if>
                                             </c:forEach>
                                             </select>
                                         </label>
@@ -182,19 +207,37 @@
 										</div>
 									</li>   
                                     <li class="student-teacher">
-                                        <div class="input text"><input type="text" name="school" id="txtTruong" placeholder="Trường" value=""/></div>            </li>
+                                        <div class="input text"><input type="text" name="school" id="txtTruong" placeholder="Trường" value='<c:out value="${studentDetail.school }"></c:out>'/></div>            </li>
                                     <li class="student-teacher">
-                                        <div class="input text"><input type="text" name="major" id="txtMajor" placeholder="Chuyên ngành" value=""/></div>            </li>
+                                        <div class="input text"><input type="text" name="major" id="txtMajor" placeholder="Chuyên ngành" value='<c:out value="${studentDetail.major }"></c:out>'/></div>            </li>
                                     <li class="student-only">
-                                        <div class="input number"><input type="number" name="gra_year" id="txtGraduatedYear" placeholder="Năm tốt nghiệp" value=""/></div>            </li>
+                                        <div class="input number"><input type="number" name="gra_year" id="txtGraduatedYear" placeholder="Năm tốt nghiệp" value='<c:out value="${studentDetail.graduatedYear }"></c:out>'/></div>            </li>
                                     <li class="student-only">
-                                        <div class="input number"><input type="number" name="iq" id="txtIQ" placeholder="Kết quả test IQ" value=""/></div>            </li>
+                                        <div class="input number"><input type="number" name="iq" id="txtIQ" placeholder="Kết quả test IQ" value='<c:out value="${studentDetail.scoreIQ }"></c:out>'/></div>            </li>
                                     <li class="student-only">
                                         <label class="lbl-slb">
-                                            <select name="interview" id="slInterview"><option value="" selected="selected">Kết quả phỏng vấn</option><option value="0">Đỗ</option><option value="1">Trượt</option><option value="2">Xét</option></select>                </label>
+                                            <select name="interview" id="slInterview">
+                                            <option value="" selected="selected">Kết quả phỏng vấn</option>
+                                            <c:if test="${studentDetail.scoreInterview == 0 }">
+                                           		 <option value="0" selected="selected">Đỗ</option>
+                                            </c:if>
+                                            <c:if test="${studentDetail.scoreInterview != 0 }">
+                                           		 <option value="0">Đỗ</option>
+                                            </c:if>
+                                            <c:if test="${studentDetail.scoreInterview == 1 }">
+                                           		 <option value="1" selected="selected">Trượt</option>
+                                            </c:if>
+                                             <c:if test="${studentDetail.scoreInterview != 1 }">
+                                           		 <option value="1">Trượt</option>
+                                            </c:if>
+                                            </select>              
+                                            </label>
                                     </li>
                                     <li>
-                                        <div class="input text"><input type="text" name="note" placeholder="Ghi chú" id="txtNote" value=""/></div>            </li>
+                                        <div class="input text">
+                                        <input type="text" name="note" placeholder="Ghi chú" id="txtNote" value='<c:out value="${studentDetail.note }"></c:out>'/>
+                                        </div>            
+                                        </li>
                                     <li>
                                         <button class="btnSubmit btn" type="submit"><span>Thêm mới</span></button>
                                     </li>

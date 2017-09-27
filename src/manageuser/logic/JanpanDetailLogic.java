@@ -19,4 +19,10 @@ public interface JanpanDetailLogic {
 	 * @return danh sách tiếng nhật. Nếu không có trình độ tiếng Nhật trả về danh sách có size = 0
 	 */
 	public ArrayList<JapanDetail> getListJapanDetail();
+	/**
+	 * kiểm tra trình độ tiếng nhật có tồn tại hay không 
+	 * @param japanlevel mã trình độ tiếng nhật cần kiểm tra 
+	 * @return mã tiếng nhật nếu tồn tại và null nếu không tồn tại 
+	 */
+	public String existJapanLevel(String japanlevel);
 }

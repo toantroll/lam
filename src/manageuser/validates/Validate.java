@@ -204,7 +204,7 @@ public class Validate {
 		} else if(!checkFormat(email,Constant.REGEX_MAIL)){
 			return ErrorMessageProperties.getErrorMessage("ERR02_EMAIL");
 		} else if(studentDetailLogicImpl.existEmail(email) != null) {
-			ErrorMessageProperties.getErrorMessage("ERR03_EMAIL");
+			return ErrorMessageProperties.getErrorMessage("ERR03_EMAIL");
 		}
 		return null;
 	}

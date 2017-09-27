@@ -43,4 +43,26 @@ public class JapanDetailDaoImpl extends BaseDaoImpl implements JapanDetailDao{
 		return listJapan;
 	}
 
+	/* (non-Javadoc)
+	 * @see manageuser.dao.JapanDetailDao#existJapanLevel(java.lang.String)
+	 */
+	@Override
+	public String existJapanLevel(String japanlevel) {
+		String code_level= null;
+		String sql = "select code_level from japan_detail where code_level = ? ";
+		try {
+			PreparedStatement preparedStatement = getConnection().prepareStatement(sql);
+			preparedStatement.setString(1, japanlevel);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if(resultSet.next()) {
+				code_level = resultSet.getString("code_level");
+			}
+		} catch (SQLException e) {
+			System.out.println("Lỗi kiểm tra tồn tại trình độ tiếng nhật");
+		} finally {
+			closeConnection();
+		}
+		return code_level;
+	}
+
 }

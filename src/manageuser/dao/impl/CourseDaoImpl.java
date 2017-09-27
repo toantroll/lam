@@ -45,4 +45,25 @@ public class CourseDaoImpl extends BaseDaoImpl implements CourseDao {
 		return listCourse;
 	}
 
+	/* (non-Javadoc)
+	 * @see manageuser.dao.CourseDao#existCourse(int)
+	 */
+	@Override
+	public boolean existCourse(int courseID) {
+		String sql = "Select id from course where id = ?";
+		try {
+			PreparedStatement preparedStatement = getConnection().prepareStatement(sql);
+			preparedStatement.setInt(1, courseID);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if(resultSet.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			return false;
+		} finally {
+			closeConnection();
+		}
+		return false;
+	}
+
 }

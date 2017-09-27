@@ -25,5 +25,14 @@ public class JapanDetailLogicImpl implements JanpanDetailLogic {
 		JapanDetailDaoImpl japanDetailDaoImpl = new JapanDetailDaoImpl();
 		return japanDetailDaoImpl.getListJapanDetail();
 	}
+
+	/* (non-Javadoc)
+	 * @see manageuser.logic.JanpanDetailLogic#existJapanLevel(java.lang.String)
+	 */
+	@Override
+	public String existJapanLevel(String japanlevel) {
+		JapanDetailDaoImpl japanDetailDaoImpl = new JapanDetailDaoImpl();
+		return japanDetailDaoImpl.existJapanLevel(japanlevel);
+	}
 	
 }

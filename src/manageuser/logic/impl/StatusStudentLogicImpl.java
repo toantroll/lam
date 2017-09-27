@@ -23,5 +23,14 @@ public class StatusStudentLogicImpl implements StatusStudentLogic{
 		StatusStudentDaoImpl statusStudentLogicImpl = new StatusStudentDaoImpl();
 		return statusStudentLogicImpl.getStatus();
 	}
+
+	/* (non-Javadoc)
+	 * @see manageuser.logic.StatusStudentLogic#existStatus(int)
+	 */
+	@Override
+	public boolean existStatus(int statusID) {
+		StatusStudentDaoImpl statusStudentDaoImpl = new StatusStudentDaoImpl();
+		return statusStudentDaoImpl.existStatus(statusID);
+	}
 	
 }

@@ -26,5 +26,14 @@ public class CourseLogicImpl extends BaseDaoImpl implements CourseLogic {
 		CourseDaoImpl courseDaoImpl = new CourseDaoImpl();
 		return courseDaoImpl.getListCourse();
 	}
+
+	/* (non-Javadoc)
+	 * @see manageuser.logic.CourseLogic#existCourse(int)
+	 */
+	@Override
+	public boolean existCourse(int courseID) {
+		CourseDaoImpl courseDaoImpl = new CourseDaoImpl();
+		return courseDaoImpl.existCourse(courseID);
+	}
  
 }

@@ -45,4 +45,25 @@ public class StatusStudentDaoImpl extends BaseDaoImpl implements StatusStudentDa
 		return listStatus;
 	}
 
+	/* (non-Javadoc)
+	 * @see manageuser.dao.StatusStudentDao#existStatus(int)
+	 */
+	@Override
+	public boolean existStatus(int statusID) {
+		String sql = "select id from status_detail where id = ?";
+		try {
+			PreparedStatement preparedStatement = getConnection().prepareStatement(sql);
+			preparedStatement.setInt(1, statusID);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if(resultSet.next()){
+				return true;
+			}
+		} catch (SQLException e) {
+			System.out.println("lỗi kiểm tra tồn tại trạng thái ");
+		} finally {
+			closeConnection();
+		}
+		return false;
+	}
+
 }

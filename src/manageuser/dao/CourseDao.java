@@ -19,4 +19,10 @@ public interface CourseDao {
 	 * @return danh sách khoa học. không thể null; 
 	 */
 		public ArrayList<Course> getListCourse();
+		/**
+		 * kiểm tra khóa học có tồn tại hay không 
+		 * @param courseID mã khóa học cần kiểm tra 
+		 * @return true nếu tồn tại khóa học và false nếu không tồn tại   
+		 */
+		public boolean existCourse(int courseID);
 }

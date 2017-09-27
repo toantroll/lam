@@ -96,7 +96,7 @@ public class StudentDetailDaoImpl extends BaseDaoImpl implements StudentDetailDa
 	 */
 	@Override
 	public String existEmail(String email) {
-		String sql = "Select email from users where email = ?";
+		String sql = "Select email from student_detail where email = ? ";
 		try {
 			PreparedStatement preparedStatement = getConnection().prepareStatement(sql);
 			preparedStatement.setString(1, email);
