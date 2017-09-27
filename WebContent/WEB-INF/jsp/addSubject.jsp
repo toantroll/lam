@@ -14,29 +14,7 @@
 <body>
 	<div class="wrapper">
 		<div class="db-container">
-			<div class="db-head">
-				<div class="g-row">
-					<div class="one-half">
-						<h1 class="logo">
-							<img src="img/logo.png" alt="" />
-						</h1>
-					</div>
-					<div class="one-half">
-						<div class="db-head-control">
-							<div class="db-head-mess">
-								Xin chào, <span>administrator</span>. Bạn có <a href="#">...
-									thông báo</a> chưa đọc.
-							</div>
-							<div class="db-head-nav">
-								<a href="/login"><i class="fa fa-home"></i>Trang chủ</a> <a
-									href="#"><i class="fa fa-gears"></i> Cài đặt</a> | <a
-									href="/users/logout"><i class="fa fa-sign-out"></i>Đăng
-									xuất</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			<jsp:include page="header.jsp" />
 			<!-- .db-head -->
 
 			<div class="db-breadcrums">
