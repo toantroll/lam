@@ -5,7 +5,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Thêm mới môn học</title>
+<title><c:out
+		value="${subject.flag != 1?'Thêm mới môn học':'Chỉnh sửa môn học'}"></c:out></title>
 <link rel="icon" type="favicon" href="img/logo-icon.png" />
 <link rel="stylesheet" href="css/font-awesome.min.css">
 <link rel="stylesheet" href="css/style.css">
@@ -62,13 +63,13 @@
 							<div class="reg-inner">
 								<form id="reg-form" action="${action}" method="post">
 									<ul>
-										<c:forEach items="${listError}" var="error">
+										<%-- <c:forEach items="${listError}" var="error">
 											<li>
 												<div align="left" style="color: red">
 													<label><c:out value="${ error}"></c:out></label>
 												</div>
 											</li>
-										</c:forEach>
+										</c:forEach> --%>
 										<li>
 											<div align="left">
 												<label>Mã môn học<c:if test="${subject.flag != 1}">
@@ -76,11 +77,16 @@
 													</c:if>:
 												</label>
 											</div>
+											<div style="color: red" align="left">
+												<c:if test="${listError.containsKey('SUBJECT_ID')}">
+													<c:out value="${listError.get('SUBJECT_ID')}"></c:out>
+												</c:if>
+											</div>
 										</li>
 										<li>
 											<div class="input text">
 												<input type="text" name="subjectId" id="txtMamonhoc"
-													autofocus="autofocus" required="required"
+													autofocus="autofocus"
 													<c:if test="${subject.flag == 1}">readonly="readonly"</c:if>
 													value='<c:out value="${subject.id }"></c:out>' />
 											</div>
@@ -90,11 +96,16 @@
 												<label>Tên môn học(<font color="red">*</font>):
 												</label>
 											</div>
+											<div style="color: red" align="left">
+												<c:if test="${listError.containsKey('SUBJECT_NAME')}">
+													<c:out value="${listError.get('SUBJECT_NAME')}"></c:out>
+												</c:if>
+											</div>
 										</li>
 										<li>
 											<div class="input text">
 												<input type="text" name="subjectName" id="txtTenmonhoc"
-													autofocus="autofocus" required="required"
+													autofocus="autofocus"
 													value='<c:out value="${subject.name }"></c:out>' />
 											</div>
 										</li>
@@ -102,6 +113,11 @@
 											<div align="left">
 												<label>Giáo viên giảng dạy(<font color="red">*</font>):
 												</label>
+											</div>
+											<div style="color: red" align="left">
+												<c:if test="${listError.containsKey('SUBJECT_TEACHER')}">
+													<c:out value="${listError.get('SUBJECT_TEACHER')}"></c:out>
+												</c:if>
 											</div>
 										</li>
 										<li><label class="lbl-slb"> <select
@@ -135,11 +151,15 @@
 												<label>Nội dung(<font color="red">*</font>):
 												</label>
 											</div>
+											<div style="color: red" align="left">
+												<c:if test="${listError.containsKey('SUBJECT_CONTENT')}">
+													<c:out value="${listError.get('SUBJECT_CONTENT')}"></c:out>
+												</c:if>
+											</div>
 										</li>
 										<li>
 											<div class="input text">
-												<textarea required="required" placeholder=""
-													name="subjectContent">${subject.content}</textarea>
+												<textarea placeholder="" name="subjectContent">${subject.content}</textarea>
 											</div>
 										</li>
 										<li>

@@ -53,28 +53,22 @@ public class AddSubjectConfirmController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
-		String controller = "";
+		String url = "";
 		String ssid = req.getParameter("ssid");
 		Subject subject = (Subject) session.getAttribute(ssid);
 		SubjectLogicImpl subjectLogicImpl = new SubjectLogicImpl();
 		if (subject != null) {
 			if ("add".equals(req.getParameter("type"))) {
 				if (subjectLogicImpl.insertSubject(subject)) {
-					controller = "/listSubject.do";
-				} else {
-					controller = "/error.do";
+					url = "?check=success";
 				}
 			} else if ("edit".equals(req.getParameter("type"))) {
 				if (subjectLogicImpl.editSubject(subject)) {
-					controller = "/listSubject.do";
-				} else {
-					controller = "/error.do";
+					url = "?check=success";
 				}
 			}
 			session.removeAttribute(ssid);
-		} else {
-			controller = "/error.do";
 		}
-		resp.sendRedirect(req.getContextPath() + controller);
+		resp.sendRedirect(req.getContextPath() + "/error.do" + url);
 	}
 }

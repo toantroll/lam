@@ -30,14 +30,12 @@ public class DeleteSubjectController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		SubjectLogicImpl subjectLogicImpl = new SubjectLogicImpl();
 		Subject subject = subjectLogicImpl.getSubjectById(req.getParameter("subjectId"));
-		if (subject == null) {
-			resp.sendRedirect(req.getContextPath() + "/error.do");
-		} else {
+		String url = "";
+		if (subject != null) {
 			if (subjectLogicImpl.deleteSubject(subject)) {
-				resp.sendRedirect(req.getContextPath() + "/listSubject.do");
-			} else {
-				resp.sendRedirect(req.getContextPath() + "/error.do");
+				url = "?check=success";
 			}
 		}
+		resp.sendRedirect(req.getContextPath() + "/error.do" + url);
 	}
 }

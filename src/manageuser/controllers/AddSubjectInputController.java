@@ -3,6 +3,7 @@ package manageuser.controllers;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -37,7 +38,7 @@ public class AddSubjectInputController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
-		List<String> listError = new ArrayList<>();
+		HashMap<String, String> listError = new HashMap<String, String>();
 		Subject subject = new Subject();
 		setTeacher(req, resp);
 		subject = setValueSubject(req, resp);

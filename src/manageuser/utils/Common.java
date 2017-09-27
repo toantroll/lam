@@ -347,7 +347,7 @@ public class Common {
 	 * @return success nếu login thành công, failure nếu login thất bại
 	 */
 	public static String checkLogin(HttpSession session) {
-		if (session == null || session.getAttribute("loginName") == null) {
+		if (session == null || session.getAttribute("userNameSession") == null) {
 			return "failure";
 		}
 		return "success";

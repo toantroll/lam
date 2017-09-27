@@ -173,7 +173,7 @@
 										<li><a
 											style="background: rgb(14, 88, 130); color: rgb(255, 255, 255);"
 											href="./listSubject.do?type=paging&page=${listPaging[0] - pageLimit}">&lt;&lt;</a>
-											<!-- &nbsp; --></li>
+											&nbsp;</li>
 									</c:if>
 									<c:forEach items="${listPaging}" var="page">
 										<c:if test="${page == currentPage}">
@@ -190,7 +190,6 @@
 											style="background: rgb(14, 88, 130); color: rgb(255, 255, 255);"
 											href="./listSubject.do?type=paging&page=${listPaging[lengthPaging - 1] + 1}">&gt;&gt;</a>&nbsp;</li>
 									</c:if>
-									<!-- </tr> -->
 								</c:if>
 								<!-- <li><a href="javascript:void(0)"
 								style="background: rgb(14, 88, 130); color: rgb(255, 255, 255);">1</a></li>

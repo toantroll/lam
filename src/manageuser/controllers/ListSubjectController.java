@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 import manageuser.entities.Subject;
 import manageuser.logic.impl.SubjectLogicImpl;
 import manageuser.utils.Common;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(urlPatterns = "/listSubject.do")
@@ -57,6 +59,11 @@ public class ListSubjectController extends HttpServlet {
 			int offset = Common.getOffsetSubject(currentPage, limit);
 			List<Subject> listSubject = subjectLogicImpl.getListSubject(subjectId, subjectName, offset, limit);
 			List<Integer> listPaging = Common.getListPagingSubject(totalSubject, limit, currentPage);
+			List<Integer> listStt = new ArrayList<>();
+			for (int i = 0; i < totalSubject; i++) {
+				listStt.add(++i);
+			}
+			req.setAttribute("listStt", listStt);
 			req.setAttribute("listSubject", listSubject);
 			req.setAttribute("listPaging", listPaging);
 			req.setAttribute("totalPage", totalPage);

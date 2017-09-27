@@ -1,7 +1,6 @@
 package manageuser.validates;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import manageuser.dao.impl.SubjectDaoImpl;
 import manageuser.entities.Subject;
 import manageuser.logic.impl.TeacherDetailLogicImpl;
@@ -22,26 +21,26 @@ public class ValidateSubject {
 	 *            chứa thông tin cần kiểm tra
 	 * @return danh sách lỗi nếu có
 	 */
-	public static List<String> validateSubject(Subject subject) {
-		List<String> listError = new ArrayList<>();
+	public static HashMap<String, String> validateSubject(Subject subject) {
+		HashMap<String, String> listError = new HashMap<String, String>();
 		String error = null;
 		if (subject.getFlag() == 0) {
 			error = checkSubjectId(subject.getId());
 			if (error != null) {
-				listError.add(error);
+				listError.put("SUBJECT_ID", error);
 			}
 		}
 		error = checkSubjectName(subject.getName());
 		if (error != null) {
-			listError.add(error);
+			listError.put("SUBJECT_NAME", error);
 		}
 		error = checkTeacher(subject.getGiaoVienId());
 		if (error != null) {
-			listError.add(error);
+			listError.put("SUBJECT_TEACHER", error);
 		}
 		error = checkSubjectContent(subject.getContent());
 		if (error != null) {
-			listError.add(error);
+			listError.put("SUBJECT_CONTENT", error);
 		}
 		return listError;
 	}
