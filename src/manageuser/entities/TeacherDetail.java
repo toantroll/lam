@@ -74,5 +74,13 @@ public class TeacherDetail extends Users {
 	public void setDeleteFlag(int deleteFlag) {
 		this.deleteFlag = deleteFlag;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "TeacherDetail [teacherId=" + teacherId + ", fullName=" + fullName + ", email=" + email + ", tel=" + tel
+				+ ", deleteFlag=" + deleteFlag + "]";
+	}
 
 }

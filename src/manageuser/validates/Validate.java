@@ -168,7 +168,7 @@ public class Validate {
 		}
 		// kiểm tra email
 		String errEmail = validateEmail(teacher.getEmail());
-		if(listErr != null) {
+		if(errEmail != null) {
 			listErr.put(Constant.EMAIL, errEmail);
 		}
 		//Kiểm tra fullName
