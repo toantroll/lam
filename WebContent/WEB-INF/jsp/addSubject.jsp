@@ -20,7 +20,8 @@
 			<div class="db-breadcrums">
 				<ul>
 					<li><a href="/users/login">Dashboard </a></li>
-					<li><i class="fa fa-angle-double-right"> Thêm mới môn học</i></li>
+					<li><i class="fa fa-angle-double-right"> <c:out
+								value="${subject.flag != 1?'Thêm mới môn học':'Chỉnh sửa môn học'}"></c:out></i></li>
 				</ul>
 			</div>
 			<!-- .db-breadcrums -->
