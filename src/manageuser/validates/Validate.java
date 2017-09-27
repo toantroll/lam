@@ -168,7 +168,7 @@ public class Validate {
 		}
 		// kiểm tra email
 		String errEmail = validateEmail(teacher.getEmail());
-		if(listErr != null) {
+		if(errEmail != null) {
 			listErr.put(Constant.EMAIL, errEmail);
 		}
 		//Kiểm tra fullName
@@ -198,10 +198,13 @@ public class Validate {
 	 * @return null nếu không có lỗi , chuỗi lỗi nếu có lỗi
 	 */
 	private static String validateEmail(String email) {
+		StudentDetailLogicImpl studentDetailLogicImpl = new StudentDetailLogicImpl();
 		if(Common.isEmpty(email)){
 			return ErrorMessageProperties.getErrorMessage("ERR01_EMAIL");
 		} else if(!checkFormat(email,Constant.REGEX_MAIL)){
 			return ErrorMessageProperties.getErrorMessage("ERR02_EMAIL");
+		} else if(studentDetailLogicImpl.existEmail(email) != null) {
+			ErrorMessageProperties.getErrorMessage("ERR03_EMAIL");
 		}
 		return null;
 	}

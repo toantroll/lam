@@ -46,15 +46,14 @@ public class TeacherDetailDaoImpl extends BaseDaoImpl implements TeacherDetailDa
 	 */
 	@Override
 	public void insertTeacher(TeacherDetail teacherDetail) throws SQLException {
-		String sql ="INSERT INTO teacher_detail (teacher_id,full_name,email,tel,delete_flag) values (LAST_INSERT_ID(),?,?,?,?)";
+		String sql ="INSERT INTO teacher_detail (teacher_id,full_name,email,tel) values (LAST_INSERT_ID(),?,?,?)";
 		connTransaction = getConnectionTransaction();
 		PreparedStatement pstm = null;
 		pstm = connTransaction.prepareStatement(sql.toString());
 		int i = 0;
 		pstm.setString((++i), teacherDetail.getFullName());
 		pstm.setString((++i), teacherDetail.getEmail());
-		pstm.setString((++i), teacherDetail.getTel());
-		pstm.setInt(++i,teacherDetail.getDeleteFlag());
+		pstm.setString((++i), teacherDetail.getTel());		
 		pstm.executeUpdate();
 	}
 
@@ -92,12 +91,12 @@ public class TeacherDetailDaoImpl extends BaseDaoImpl implements TeacherDetailDa
 	@Override
 	public TeacherDetail getTeacherDetailById(int teacherId) throws SQLException {
 		TeacherDetail teacherDetail =null;
-		String sql = "SELECT * FROM teacher_detail WHERE teacher_id=? AND delete_flag = 1";		
+		String sql = "SELECT * FROM `teacher_detail` tcdt inner join users us ON tcdt.teacher_id=us.id WHERE teacher_id=? AND delete_flag = 1";		
 		PreparedStatement pstm= getConnection().prepareStatement(sql);
 		pstm.setInt(1, teacherId);
 		ResultSet rs= pstm.executeQuery();
 		if(rs.next()){		
-			teacherDetail= new TeacherDetail();
+			teacherDetail= new TeacherDetail();			
 			teacherDetail.setUserID(rs.getInt("id"));
 			teacherDetail.setUserName(rs.getString("username"));
 			teacherDetail.setFullName(rs.getString("full_name"));

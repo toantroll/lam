@@ -29,4 +29,10 @@ public interface StudentDetailDao {
 	 * @return
 	 */
 	public String existUser(String userName);
+	/**
+	 * kiểm tra tồn tại email
+	 * @param email email cần tìm kiếm 
+	 * @return tên email nếu đã tồn tại và null nếu chưa tồn tại
+	 */
+	public String existEmail(String email);
 }

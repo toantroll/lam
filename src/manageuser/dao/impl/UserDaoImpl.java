@@ -49,11 +49,12 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 	 */
 	@Override
 	public void insertUser(Users user) throws SQLException {
-		String sql = "INSERT INTO Users (username, password, role_id) Values (?,?,4)";
+		String sql = "INSERT INTO Users (username, password, role_id) Values (?,?,?)";
 		int count = 1;
 		PreparedStatement preparedStatement = getConnectionTransaction().prepareStatement(sql);
 		preparedStatement.setString(count++,user.getUserName());
 		preparedStatement.setString(count++, user.getPassword());
+		preparedStatement.setInt(count++, user.getRoleId());
 		System.out.println(preparedStatement);
 		preparedStatement.executeUpdate();
 	}

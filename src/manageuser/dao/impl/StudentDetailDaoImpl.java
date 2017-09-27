@@ -91,6 +91,24 @@ public class StudentDetailDaoImpl extends BaseDaoImpl implements StudentDetailDa
 		}
 		return null;
 	}
+	/* (non-Javadoc)
+	 * @see manageuser.dao.StudentDetailDao#existEmail(java.lang.String)
+	 */
+	@Override
+	public String existEmail(String email) {
+		String sql = "Select email from users where email = ?";
+		try {
+			PreparedStatement preparedStatement = getConnection().prepareStatement(sql);
+			preparedStatement.setString(1, email);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if(resultSet.next()) {
+				return resultSet.getString("email");
+			}
+		} catch (SQLException e) {
+			System.out.println("lỗi kiểm tra tồn tại user");
+		}
+		return null;
+	}
 	
 
 
