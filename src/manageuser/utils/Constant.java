@@ -30,4 +30,8 @@ public class Constant {
 	public static final String COURSEID = "courseid";
 	public static final String STATUS = "status";
 	public static final String REGEX_IDCARD="[0-9]{9,15}";
+	public static final String ERRJAPANLEVEL = "ERRO9.JAPANLEVEL";
+	public static final String ERRCOURSEID = "ERRO9.COURSEID";
+	public static final String ERRSTATUS = "ERRO9.STATUS";
+	public static final String ERR = "ERR";
 }

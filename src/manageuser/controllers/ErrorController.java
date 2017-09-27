@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import manageuser.utils.Common;
+import manageuser.utils.ErrorMessageProperties;
+
 /**
  * Class xử lý các trường hợp lỗi bất thường của dự án.
  * 
@@ -31,11 +34,20 @@ public class ErrorController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String check = req.getParameter("check");
+		System.out.println(check);
 		String message = "";
 		if ("success".equals(check) && check != null) {
+			String infor =  req.getParameter("idInfor");
 			message = "Thao tác thành công với hệ thống";
+			if(!Common.isEmpty(infor)) {
+				message = ErrorMessageProperties.getErrorMessage(infor);
+			}
 		} else {
+			String errloi = req.getParameter("iderr");
 			message = "Hệ thống đang có lỗi";
+			if(!Common.isEmpty(errloi)) {
+				message = ErrorMessageProperties.getErrorMessage(errloi);
+			}
 		}
 		req.setAttribute("message", message);
 		RequestDispatcher dispatcher = req.getRequestDispatcher("WEB-INF/jsp/error.jsp");

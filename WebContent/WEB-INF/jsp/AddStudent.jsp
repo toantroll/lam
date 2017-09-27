@@ -1,3 +1,4 @@
+<%@page import="manageuser.utils.Common"%>
 <%@page import="manageuser.utils.Constant"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
@@ -118,7 +119,7 @@
                                     <li>
                                         <div class="g-row">
                                             <div class="one-half no-pad">
-                                                <input type="text" id="txtBirthDay" name="birthday" placeholder="Ngày sinh (*)" style="height: 36px;" value = '<c:out value="${studentDetail.birthday }"></c:out>' >
+                                                <input type="text" id="txtBirthDay" name="birthday" placeholder="Ngày sinh (*)" style="height: 36px;" value = '<c:out value="${Common.convertDateToString(studentDetail.birthday) }"></c:out>' >
                                             </div>
                                             
                                             <div class="one-half no-pr">

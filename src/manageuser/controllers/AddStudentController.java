@@ -43,20 +43,39 @@ public class AddStudentController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		StudentDetail studentDetail = setDefaultValue(request, response);
+		JapanDetailLogicImpl japanDetailLogicImpl = new JapanDetailLogicImpl();
+		StatusStudentLogicImpl statusStudentLogicImpl = new StatusStudentLogicImpl();
+		CourseLogicImpl courseLogicImpl = new CourseLogicImpl();
 		StudentDetailLogicImpl studentDetailLogicImpl = new StudentDetailLogicImpl();
 		HashMap<String, String> listErr = Validate.validateStudent(studentDetail);
 		if(listErr.size() != 0){
 			setDataLogic(request, response);
 			request.setAttribute("listErr", listErr);
 			request.setAttribute("studentDetail", studentDetail);
+			System.out.println(Common.convertDateToString(studentDetail.getBirthday()));
 			RequestDispatcher dispatcher = request.getRequestDispatcher(Constant.ADDSTUDENT);
 			dispatcher.forward(request, response);
 		} else {
-			
-			
-			/*if(studentDetailLogicImpl.createStudent(studentDetail)) {
-				response.sendRedirect(request.getContextPath() + "/ErrorController");
-			}*/
+			StringBuilder url = new StringBuilder();
+			url.append(request.getContextPath()+"/error.do");
+			String japanLevel = studentDetail.getJapanLevel();
+			if(japanLevel != null && japanDetailLogicImpl.existJapanLevel(japanLevel)== null) {
+				url.append("?check=err&iderr=");
+				url.append(Constant.ERRJAPANLEVEL);
+			} else if(!courseLogicImpl.existCourse(studentDetail.getCourseId())) {
+				url.append("?check=err&iderr=");
+				url.append(Constant.ERRCOURSEID);
+			} else if(statusStudentLogicImpl.existStatus(studentDetail.getStatus())) {
+				url.append("?check=err&iderr=");
+				url.append(Constant.ERRSTATUS);
+			} else if(!studentDetailLogicImpl.createStudent(studentDetail)) {
+				url.append("?check=err&iderr=");
+				url.append(Constant.ERR);
+			} else {
+				url.append("?check=success&idInfor=INF_01");
+			}
+			System.out.println(url);
+			response.sendRedirect(url.toString());
 		}
 	}
 	

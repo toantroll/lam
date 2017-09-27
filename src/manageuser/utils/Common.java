@@ -191,6 +191,7 @@ public class Common {
 	public static Date convertStringToDate(String date) {
 		java.sql.Date dateSQl = null;
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		format.setLenient(false);
 		java.util.Date parsed;
 		try {
 			parsed = format.parse(date);
@@ -443,6 +444,7 @@ public class Common {
 		}
 		Date d = null;
 		SimpleDateFormat sdf = new SimpleDateFormat(regex);
+		sdf.setLenient(false);
 		try {
 			d = new Date(sdf.parse(date).getTime());
 		} catch (ParseException e) {
@@ -450,5 +452,14 @@ public class Common {
 		}
 		return d;
 	}
+	
+	public static String convertDateToString(Date date ){
+		if(date == null) {
+			return null;
+		}
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		return simpleDateFormat.format(date);
+	}
 
+	
 }
