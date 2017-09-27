@@ -6,7 +6,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Tìm kiếm môn học</title>
+<title>Quản lý môn học</title>
+<link rel="icon" type="favicon" href="img/logo-icon.png" />
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/font-awesome.min.css">
 <link rel="stylesheet" href="css/datepicker.css">

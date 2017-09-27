@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Thông báo hệ thống</title>
+<link rel="icon" type="favicon" href="img/logo-icon.png" />
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/font-awesome.min.css">
 <link rel="stylesheet" href="css/datepicker.css">
