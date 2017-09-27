@@ -72,6 +72,14 @@ public class TeacherDetailLogicImpl implements TeacherDetailLogic {
 	 * @see manageuser.logic.TeacherDetailLogic#getAllTeacherDetail()
 	 */
 	@Override
+	public List<TeacherDetail> getAllTeacherDetail(String name, int offset, int limit) throws SQLException {
+		return teacherDetailDaoImpl.getListTeacherDetail(name, offset, limit);
+	}
+
+	/* (non-Javadoc)
+	 * @see manageuser.logic.TeacherDetailLogic#getAllTeacherDetail()
+	 */
+	@Override
 	public List<TeacherDetail> getAllTeacherDetail() throws SQLException {
 		return teacherDetailDaoImpl.getAllTeacherDetail();
 	}
@@ -97,7 +105,9 @@ public class TeacherDetailLogicImpl implements TeacherDetailLogic {
 		return ketQua;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see manageuser.logic.TeacherDetailLogic#getTeacherDetailById(int)
 	 */
 	@Override
@@ -114,6 +124,7 @@ public class TeacherDetailLogicImpl implements TeacherDetailLogic {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * manageuser.logic.TeacherDetailLogic#checkExistedTeacherDetailById(int)
 	 */
@@ -127,6 +138,17 @@ public class TeacherDetailLogicImpl implements TeacherDetailLogic {
 			return false;
 		}
 		return false;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * manageuser.logic.TeacherDetailLogic#getTotalTeacher(java.lang.String)
+	 */
+	@Override
+	public int getTotalTeacher(String name) throws SQLException {
+		return teacherDetailDaoImpl.getTotalTeacher(name);
 	}
 
 }

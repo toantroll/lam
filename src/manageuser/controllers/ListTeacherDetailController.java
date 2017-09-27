@@ -9,14 +9,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import manageuser.entities.TeacherDetail;
 import manageuser.logic.impl.TeacherDetailLogicImpl;
+import manageuser.utils.Common;
 
 /**
  * @author HongTT
@@ -34,37 +37,54 @@ public class ListTeacherDetailController extends HttpServlet {
 	 */
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		List<TeacherDetail> listTeacherDetails = new ArrayList<TeacherDetail>();
+		HttpSession session = req.getSession();
+		TeacherDetailLogicImpl teacherDetailLogicImpl = new TeacherDetailLogicImpl();
+		String nameSearch = "";
+		int currentPage = 1;
+		int pageLimit = 3;
+		int limit = 3;
 		try {
-			List<TeacherDetail> listTeacherDetails= new ArrayList<TeacherDetail>();
-			TeacherDetailLogicImpl teacherDetailLogicImpl = new TeacherDetailLogicImpl();
-			TeacherDetail teacherDetail= new TeacherDetail();
-			teacherDetail.setFullName("Hồng");
-			teacherDetail.setUserName("ewrwerwer");
-			teacherDetail.setPassword("123425434");
-			teacherDetail.setRoleId(4);
-			teacherDetail.setDeleteFlag(1);
-			teacherDetail.setEmail("hong@gmail.com");
-			teacherDetail.setTel("398475893354");
-			//Thêm mới giáo viên:
-			if(teacherDetailLogicImpl.createTeacherDetail(teacherDetail)){
-				System.out.println("Thêm mới thành công");
-			}else{
-				System.out.println("Không thành công");
+			String type = req.getParameter("type");
+			if (type != null) {
+				if ("search".equals(type)) {
+					nameSearch = req.getParameter("nameSearch");
+				} else if ("paging".equals(type)) {
+					nameSearch = (String) session.getAttribute("nameSearch");
+					currentPage = Integer.parseInt((req.getParameter("page")));
+				}
 			}
-			
-			
-			
-			//Lấy ra danh sách thông tin giáo viên.
-			listTeacherDetails=teacherDetailLogicImpl.getAllTeacherDetail();
-			for (TeacherDetail teacher : listTeacherDetails) {
-				System.out.println(teacher.getFullName());
+			int totalTeacher = teacherDetailLogicImpl.getTotalTeacher(nameSearch);
+			if (totalTeacher == 0) {
+				req.setAttribute("checkNotFound", 0);
+				req.setAttribute("messageNotFound", "Không tìm thấy giáo viên!");
+			} else {
+				int totalPage = Common.getTotalPageSubject(totalTeacher, limit);
+				int offset = Common.getOffsetSubject(currentPage, limit);
+				listTeacherDetails = teacherDetailLogicImpl.getAllTeacherDetail(nameSearch, offset, limit);
+				List<Integer> listPaging = Common.getListPagingSubject(totalTeacher, limit, currentPage);
+				System.out.println(totalPage);
+				System.out.println(offset);
+				for(int a:listPaging){
+					System.out.println(a);
+				}
+				req.setAttribute("listTeacherDetails", listTeacherDetails);
+				req.setAttribute("listPaging", listPaging);
+				req.setAttribute("totalPage", totalPage);
+				req.setAttribute("currentPage", currentPage);
+				req.setAttribute("pageLimit", pageLimit);
+				req.setAttribute("messageDelete", "Xác nhận đồng ý xóa giáo viên?");
 			}
-			//Xét dữ liệu lên request
-			req.setAttribute("teacherDetailsLst", listTeacherDetails);
 		} catch (SQLException e) {
-			// Chuyển sang trang lỗi.
+			// Trang lỗi
 			e.printStackTrace();
 		}
-	}
+		session.setAttribute("currentPage", currentPage);
+		session.setAttribute("nameSearch", nameSearch);
 
+		req.setAttribute("teacherDetailsLst", listTeacherDetails);
+		RequestDispatcher requestDispatcher = req.getRequestDispatcher("WEB-INF/jsp/list-teacher.jsp");
+		requestDispatcher.forward(req, resp);
+
+	}
 }

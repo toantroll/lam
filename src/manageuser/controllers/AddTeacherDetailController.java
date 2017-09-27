@@ -40,7 +40,6 @@ public class AddTeacherDetailController extends HttpServlet {
 			TeacherDetailLogicImpl teacherDetailLogicImpl = new TeacherDetailLogicImpl();
 			req.setAttribute("teacherDetail", teacherDetailLogicImpl.getTeacherDetailById(id));
 		}
-
 		req.getRequestDispatcher("WEB-INF/jsp/add-teacher.jsp").forward(req, resp);
 	}
 

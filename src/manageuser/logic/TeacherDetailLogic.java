@@ -19,7 +19,7 @@ public interface TeacherDetailLogic {
 	 * @return danh sách thông tin giáo viên
 	 * @throws SQLException
 	 */
-	public List<TeacherDetail> getAllTeacherDetail() throws SQLException;
+	public List<TeacherDetail> getAllTeacherDetail( String name, int offset, int limit) throws SQLException;
 
 	/**
 	 * Thêm thông tin giáo viên vào DB
@@ -49,5 +49,7 @@ public interface TeacherDetailLogic {
 	 */
 	public boolean checkExistedTeacherDetailById(int teacherId);
 	public TeacherDetail getTeacherDetailById(int teacherId);
+	public int getTotalTeacher(String name) throws SQLException;
+	public List<TeacherDetail> getAllTeacherDetail() throws SQLException ;
 
 }

@@ -18,12 +18,19 @@ public interface TeacherDetailDao extends BaseDao {
 	 * @return danh sách thông tin giáo viên.
 	 * @throws SQLException 
 	 */
+	public List<TeacherDetail> getListTeacherDetail( String name, int offset, int limit) throws SQLException;
+	/**
+	 * Lấy danh sách thông tin giáo viên
+	 * @return danh sách thông tin giáo viên
+	 * @throws SQLException 
+	 */
 	public List<TeacherDetail> getAllTeacherDetail() throws SQLException;
 	/**
 	 * Thêm dữ liệu giáo viên vào cơ sơ dữ liệu.
 	 * @param teacher đối tượng thông tin giáo viên
 	 * @throws SQLException 
 	 */
+
 	public void insertTeacher(TeacherDetail teacherDetail) throws SQLException;
 	/**
 	 * Sửa thông tin giáo viên
@@ -44,4 +51,12 @@ public interface TeacherDetailDao extends BaseDao {
 	 * @throws SQLException 
 	 */
 	public TeacherDetail getTeacherDetailById(int teacherId) throws SQLException;
+	/**
+	 * Lấy tổng số giáo viên trong DB
+	 * @param id
+	 * @param name
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int getTotalTeacher(String name) throws SQLException;
 }
