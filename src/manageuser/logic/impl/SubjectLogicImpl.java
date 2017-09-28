@@ -1,5 +1,6 @@
 package manageuser.logic.impl;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import manageuser.dao.impl.SubjectDaoImpl;
@@ -100,5 +101,10 @@ public class SubjectLogicImpl implements SubjectLogic {
 		SubjectDaoImpl subjectDaoImpl = new SubjectDaoImpl();
 		subject = subjectDaoImpl.getSubjectById(id);
 		return subject;
+	}
+
+	@Override
+	public List<Subject> getAllSubject() throws SQLException {
+		return new SubjectDaoImpl().getAllSubject();
 	}
 }

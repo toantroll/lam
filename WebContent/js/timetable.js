@@ -1,8 +1,75 @@
 $(document)
 		.ready(
 				function() {
-					const ttid = $('#timetableid').val();
-					console.log(ttid);
+					var ttid = $('#timetableid').val();
+					function load_info(id){
+						$
+						.ajax({
+							url : "Ajax/getTableInfo?id="+id,
+							type : "GET"
+						})
+						.done(
+								function(result) {
+									if (result.code == 1) {
+										var data = result.data;
+										$('#cbxCourse').val(data.courseId);
+										$('#startDateTimeTable').val(data.startDateString);
+										$('#endDateTimeTable').val(data.endDateString);
+									}
+								}).fail(function(xhr) {
+							console.log('error common back', xhr);
+						});
+						
+					}
+					function get_subjects() {
+						$
+								.ajax({
+									url : "Ajax/getSubject",
+									type : "GET"
+								})
+								.done(
+										function(result) {
+											if (result.code == 1) {
+												var data = [] = result.data;
+												var html = '<option selected="selected" value="0">--Chọn Môn học--</option>';
+												for (var i = 0; i < data.length; i++) {
+													html += '<option value="'
+															+ data[i].id + '">'
+															+ data[i].name
+															+ '</option>'
+												}
+												$('#cbxSubject').html(html);
+											}
+										}).fail(function(xhr) {
+									console.log('error common back', xhr);
+								});
+					}
+					
+					function get_courses() {
+						$
+								.ajax({
+									url : "Ajax/getCourses",
+									type : "GET"
+								})
+								.done(
+										function(result) {
+											if (result.code == 1) {
+												var data = [] = result.data;
+												var html = '<option selected="selected" value="0">--Chọn lớp--</option>';
+												for (var i = 0; i < data.length; i++) {
+													html += '<option value="'
+															+ data[i].id + '">'
+															+ data[i].courser_name
+															+ '</option>'
+												}
+												$('#cbxCourse').html(html);
+												load_info(ttid);
+											}
+										}).fail(function(xhr) {
+									console.log('error common back', xhr);
+								});
+					}
+
 					function get_time_table(id) {
 						$.ajax({
 							url : "Ajax/getTimeTable?id=" + id,
@@ -68,7 +135,7 @@ $(document)
 										+ e['timeTableInfoId']
 										+ '" data-hoursperday="'
 										+ e['hoursPerDay'] + '" data-istest="'
-										+ e['status'] + '"><div>';
+										+ e['status'] + '"><div class="text-center">';
 								html += '<p>' + e['startDateString'] + '</p>';
 								if (e['subjectId'] != 0) {
 									html += '<p>' + e['subjectName'] + '</p>';
@@ -123,6 +190,52 @@ $(document)
 										});
 					}
 
+					$('#timeTableInfoForm')
+							.submit(
+									function(e) {
+										e.preventDefault();
+										const data = $(this).serializeArray();
+										var formData = {};
+										for (var i = 0; i < data.length; i++) {
+											formData[data[i].name] = data[i].value;
+										}
+										$
+												.ajax(
+														{
+															url : "AddTimeTableInfoController",
+															type : "POST",
+															data : formData
+														})
+												.done(
+														function(result) {
+															if (result.code === 0) {
+																$('#timeTableInfoFormMessage')
+																		.html(
+																				createErrorMessage(result['data']));
+															} else if(result.code === 3) {
+																get_time_table(result.id);
+																ttid = result.id;
+																window.location.href= result['data'];
+																$('#timeTableInfoFormMessage')
+																		.html(
+																				createSuccessMessage(result['data']));
+															} else{
+																get_time_table(ttid);
+																$('#timeTableInfoFormMessage')
+																		.html(
+																				createSuccessMessage(result['data']));
+															}
+
+														})
+												.fail(
+														function(xhr) {
+															console
+																	.log(
+																			'error common back',
+																			xhr);
+														});
+									});
+
 					$('#timeTableDetailForm')
 							.submit(
 									function(e) {
@@ -151,7 +264,7 @@ $(document)
 																		.html(
 																				createSuccessMessage(result['data']));
 															}
-															
+
 														})
 												.fail(
 														function(xhr) {
@@ -169,40 +282,54 @@ $(document)
 					function createSuccessMessage(text) {
 						return '<p class="text-info">' + text + '</p>'
 					}
-					
-					
-					$('#deleteDetail').click(function(){
-						var i  = confirm("bạn có muốn xóa không?");
-						if(i==1){
-							var formData = {};
-							formData['idDetail'] = $('#idDetail').val();
-							formData['idtimeTable'] = $('#idtimeTable').val();
-							$.ajax(
-									{
-										url : "DeleteTimeTableDetailController",
-										type : "POST",
-										data : formData
-									})
-							.done(function(result){
-								if (result.code === 0) {
-									$('.message')
-											.html(
-													createErrorMessage(result['data']));
-								} else {
-									$('.message')
-											.html(
-													createSuccessMessage(result['data']));
-									get_time_table(ttid);
-								}
-								
-								
-							})
-							.fail(function(xhr) {
-										console.log('error common back',xhr);
-									});;
-						}
-					});
-					
-					get_time_table(ttid);
 
+					$('#deleteDetail')
+							.click(
+									function() {
+										var i = confirm("bạn có muốn xóa không?");
+										if (i == 1) {
+											var formData = {};
+											formData['idDetail'] = $(
+													'#idDetail').val();
+											formData['idtimeTable'] = $(
+													'#idtimeTable').val();
+											$
+													.ajax(
+															{
+																url : "DeleteTimeTableDetailController",
+																type : "POST",
+																data : formData
+															})
+													.done(
+															function(result) {
+																if (result.code === 0) {
+																	$(
+																			'.message')
+																			.html(
+																					createErrorMessage(result['data']));
+																} else {
+																	$(
+																			'.message')
+																			.html(
+																					createSuccessMessage(result['data']));
+																	get_time_table(ttid);
+																}
+
+															})
+													.fail(
+															function(xhr) {
+																console
+																		.log(
+																				'error common back',
+																				xhr);
+															});
+											;
+										}
+									});
+
+					get_time_table(ttid);
+					get_subjects();
+					get_courses();
+					
+					
 				});

@@ -216,4 +216,29 @@ public class SubjectDaoImpl extends BaseDaoImpl implements SubjectDao {
 		}
 		return listSubject;
 	}
+
+	@Override
+	public List<Subject> getAllSubject() throws SQLException {
+		List<Subject> listSubject = new ArrayList<Subject>();
+		Subject e;
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT id, teacher_id, name, content FROM subjects WHERE status = 1");
+		
+		PreparedStatement ps = getConnection().prepareStatement(sql.toString());
+		ResultSet rs = ps.executeQuery();
+		if(rs != null){
+			while(rs.next()){
+				int i = 1;
+				e = new Subject();
+				
+				e.setId(rs.getString(i++));
+				e.setGiaoVienId(rs.getInt(i++));
+				e.setName(rs.getString(i++));
+				e.setContent(rs.getString(i++));
+				listSubject.add(e);
+			}
+		}
+		
+		return listSubject;
+	}
 }

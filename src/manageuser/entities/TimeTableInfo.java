@@ -20,6 +20,24 @@ public class TimeTableInfo {
 	private Date updatedAt;
 	private Date deletedAt;
 	private String courseName;
+	private String startDateString;
+	private String endDateString;
+	
+	public String getStartDateString() {
+		return startDateString;
+	}
+
+	public void setStartDateString(String startDateString) {
+		this.startDateString = startDateString;
+	}
+
+	public String getEndDateString() {
+		return endDateString;
+	}
+
+	public void setEndDateString(String endDateString) {
+		this.endDateString = endDateString;
+	}
 	
 	public String getCourseName() {
 		return courseName;

@@ -81,4 +81,15 @@ public interface TimeTableDetailDao {
 	 * @throws SQLException
 	 */
 	public boolean isExistDetail(int id, Date startDate) throws SQLException;
+	
+
+	/**
+	 * check exist
+	 * @param id time table info id
+	 * @param startDate start date
+	 * @param endDate end date
+	 * @return true if exist
+	 * @throws SQLException SQLException
+	 */
+	public boolean isExistDetailByInfoIdInRange(int id, Date startDate, Date endDate) throws SQLException;
 }

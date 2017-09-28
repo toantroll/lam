@@ -1,6 +1,8 @@
 package manageuser.dao;
 
 import manageuser.entities.Subject;
+
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -75,4 +77,11 @@ public interface SubjectDao {
 	 * @return danh sách môn học
 	 */
 	public List<Subject> getListSubject(String id, String name, int offset, int limit);
+	
+	/**
+	 * get all subject
+	 * @return list subject
+	 * @throws SQLException SQLException
+	 */
+	public List<Subject> getAllSubject() throws SQLException;
 }

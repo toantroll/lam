@@ -36,25 +36,26 @@ public class TimeTableInfoDaoImpl extends BaseDaoImpl implements TimeTableInfoDa
 	 * @see manageuser.dao.TimeTableInfoDao#createTimeTableInfo()
 	 */
 	@Override
-	public void insertTimeTableInfo(TimeTableInfo e) throws SQLException {
+	public int insertTimeTableInfo(TimeTableInfo e) throws SQLException {
 		StringBuilder sql = new StringBuilder();
 		sql.append("INSERT INTO `timetables_info`")
-				.append("(`course_id`, `start_date`, `end_date`, `content`, `note`, `created_at`,")
-				.append("`place`, `status`)").append("VALUES(?,?,?,?,?,now(),?,?)");
+				.append("(`course_id`, `start_date`, `end_date`, `created_at`,")
+				.append("`status`)").append("VALUES(?,?,?,now(),1)");
 
 		Connection con = getConnection();
-		PreparedStatement ps = con.prepareStatement(sql.toString());
+		PreparedStatement ps = con.prepareStatement(sql.toString(), PreparedStatement.RETURN_GENERATED_KEYS);
 		int i = 1;
 		ps.setInt(i++, e.getCourseId());
 		ps.setDate(i++, e.getStartDate());
 		ps.setDate(i++, e.getEndDate());
-		ps.setString(i++, e.getContent());
-		ps.setString(i++, e.getNote());
-		ps.setString(i++, e.getPlace());
-		ps.setInt(i++, e.getStatus());
 
 		ps.executeUpdate();
-		ps.close();
+		ResultSet rs = ps.getGeneratedKeys();
+		int id = 0;
+		if(rs != null && rs.next()){
+			id = rs.getInt(1);
+		}
+		return id;
 	}
 
 	/*
@@ -67,7 +68,7 @@ public class TimeTableInfoDaoImpl extends BaseDaoImpl implements TimeTableInfoDa
 		StringBuilder sql = new StringBuilder();
 		sql.append("UPDATE `timetables_info`")
 				.append("SET `start_date` = ?,`end_date` = ?, `course_id` = ?,`content` = ?,")
-				.append("`note` =?,	`updated_at` = now(),	`place` = ?").append("WHERE `id` = ?");
+				.append("`note` =?,	`updated_at` = now(),	`place` = ?").append(" WHERE id = ?");
 
 		PreparedStatement ps = getConnection().prepareStatement(sql.toString());
 		int i = 1;
@@ -95,7 +96,7 @@ public class TimeTableInfoDaoImpl extends BaseDaoImpl implements TimeTableInfoDa
 				.append("SET `status` = ?, `deleted_at` = now()")
 				.append("WHERE `id` = ?");
 		
-		PreparedStatement ps = getConnection().prepareStatement(sql.toString());
+		PreparedStatement ps = getConnectionTransaction().prepareStatement(sql.toString());
 		int i = 1;
 		ps.setInt(i++, Constant.STATUS_DELETE);
 		ps.setInt(i++, id);
@@ -125,7 +126,7 @@ public class TimeTableInfoDaoImpl extends BaseDaoImpl implements TimeTableInfoDa
 		.append("`status`,")
 		.append("`place`")
 		.append("FROM `timetables_info`")
-		.append("WHERE `status` = 1 ORDER BY ");
+		.append("WHERE `status` = 1");
 
 		PreparedStatement ps = getConnection().prepareStatement(sql.toString());
 
@@ -162,19 +163,19 @@ public class TimeTableInfoDaoImpl extends BaseDaoImpl implements TimeTableInfoDa
 	public TimeTableInfo getTimeTableInfoById(int id) throws SQLException {
 		TimeTableInfo timeTableInfo = new TimeTableInfo();
 		StringBuilder sql = new StringBuilder();
-		sql.append("SELECT `timetables_info`.`id`,")
-		.append("`timetables_info`.`start_date`,")
-		.append("`timetables_info`.`end_date`,")
-		.append("`timetables_info`.`course_id`,")
-		.append("`timetables_info`.`content`,")
-		.append("`timetables_info`.`note`,")
-		.append("`timetables_info`.`created_at`,")
-		.append(" `timetables_info`.`updated_at`,")
-		.append("`timetables_info`.`deleted_at`,")
-		.append("`timetables_info`.`status`,")
-		.append("`timetables_info`.`place`")
+		sql.append("SELECT `id`,")
+		.append("`start_date`,")
+		.append("`end_date`,")
+		.append("`course_id`,")
+		.append("`content`,")
+		.append("`note`,")
+		.append("`created_at`,")
+		.append(" `updated_at`,")
+		.append("`deleted_at`,")
+		.append("`status`,")
+		.append("`place`")
 		.append("FROM `timetables_info`")
-		.append("WHERE `timetables_info`.`status` = 1 AND `timetables_info`.`id` = ?");
+		.append("WHERE `status` = 1 AND `id` = ?");
 
 		PreparedStatement ps = getConnection().prepareStatement(sql.toString());
 		int i = 1;
@@ -225,38 +226,88 @@ public class TimeTableInfoDaoImpl extends BaseDaoImpl implements TimeTableInfoDa
 		return array;
 	}
 
-	public static void main(String[] args) {
-		try {
-			Date[] array = new TimeTableInfoDaoImpl().getStartDateAndEndDateTimeTableInfoById(11);
-			LocalDate startDate = LocalDate.parse(array[0].toString());
-			LocalDate endDate = LocalDate.parse(array[1].toString());
-			List<TimeTableDetail> list = new ArrayList<TimeTableDetail>();
-			List<TimeTableDetail> listDetail = new TimeTableDetailDaoImpl().getAllDetailByTimeTableInfoId(11);
-			TimeTableDetail t;
-			int size = listDetail.size();
-			int i = 0;
-			while(!startDate.isAfter(endDate)){
-				t = listDetail.get(i);
-				if(t.getStartDate().equals(Date.valueOf(startDate))){
-					if(i < size-1){
-						list.add(t);
-						i++;
-					}
-				} else {
-					t = new TimeTableDetail();
-					t.setStartDate(Date.valueOf(startDate));
-					list.add(t);
-				}
-				startDate = startDate.plusDays(1);
-			}
-			ResponseData data = new ResponseData();
-			data.setCode(ResponseData.SUCCESS);
-			data.setData(list);
-			JSONObject jsonObject = new JSONObject(data);
-			System.out.println(jsonObject.toString());
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+	@Override
+	public List<TimeTableInfo> getListTimeTableInfo(Date startDate, Date endDate, int offset, int limit)
+			throws SQLException {
+		List<TimeTableInfo> list = new ArrayList<TimeTableInfo>();
+		TimeTableInfo e;
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT t.id, c.course_name, t.start_date, t.end_date, t.place ")
+		.append("FROM timetables_info t ")
+		.append("INNER JOIN course c ")
+		.append("ON c.id = t.course_id ");
+		
+		if(startDate != null){
+			sql.append("WHERE t.start_date >= ? ");
 		}
+		sql.append("ORDER BY t.start_date ASC ");
+		sql.append("LIMIT ?, ? ");
+		
+		PreparedStatement ps = getConnection().prepareStatement(sql.toString());
+		int i = 1;
+		if(startDate != null){
+			ps.setDate(i++, startDate);
+		}
+		
+		ps.setInt(i++, offset);
+		ps.setInt(i++, limit);
+		
+		ResultSet rs = ps.executeQuery();
+		if(rs != null){
+			while(rs.next()){
+				i = 1;
+				e = new TimeTableInfo();
+				e.setId(rs.getInt(i++));
+				e.setCourseName(rs.getString(i++));
+				e.setStartDate(rs.getDate(i++));
+				e.setEndDate(rs.getDate(i++));
+				e.setPlace(rs.getString(i++));
+				list.add(e);
+			}
+		}
+		
+		return list;
+	}
+
+	@Override
+	public int getCount(Date startDate, Date endDate) throws SQLException {
+		int count = 0;
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT COUNT(id) FROM timetables_info ");
+		if(startDate != null){
+			sql.append("WHERE start_date > ? ");
+		}
+		
+		PreparedStatement ps = getConnection().prepareStatement(sql.toString());
+		int i = 1;
+		if(startDate != null){
+			ps.setDate(i++, startDate);
+		}
+		
+		
+		ResultSet rs = ps.executeQuery();
+		if(rs != null && rs.next()){
+			count = rs.getInt(1);
+		}
+		
+		return count;
+	}
+
+	@Override
+	public boolean isExistsTimeTableInfoById(int id) throws SQLException {
+		int count = 0;
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT COUNT(id) FROM timetables_info WHERE id = ? AND status = 1");
+		
+		PreparedStatement ps = getConnection().prepareStatement(sql.toString());
+		int i = 1;
+		ps.setInt(i++, id);
+		
+		ResultSet rs = ps.executeQuery();
+		if(rs != null && rs.next()){
+			count = rs.getInt(1);
+		}
+		return count > 0 ? true: false;
 	}
 }
