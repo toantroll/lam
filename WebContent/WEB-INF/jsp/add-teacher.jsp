@@ -87,9 +87,11 @@
 								<hr />
 								<form id="reg-form" action="addTeacher.do" method="post">
 									<ul>
-										<!--            <li class="hidden">-->
-										<!--                -->
-										<!--            </li>-->
+										<c:if test="${teacherDetail.userID > 0 }">
+											<li class="input text"><input type="text" name="id"
+												value="${teacherDetail.userID}"></li>
+
+										</c:if>
 										<li>
 											<div class="err text-danger text-left">
 												<c:if test="${listErr.containsKey(Constant.FULLNAME)}">${listErr.get(Constant.FULLNAME)}</c:if>
@@ -98,7 +100,8 @@
 										<li>
 											<div class="input text">
 												<input type="text" name="full_name" id="txtHoTen"
-													placeholder="Họ và tên (*)" value="${teacherDetail.fullName }" />
+													placeholder="Họ và tên (*)"
+													value="${teacherDetail.fullName }" />
 											</div>
 										</li>
 										<li>
@@ -109,7 +112,8 @@
 										<li>
 											<div class="input text">
 												<input type="text" name="username" id="txtUsername"
-													placeholder="Tên đăng nhập (*)" value="${teacherDetail.userName }" />
+													placeholder="Tên đăng nhập (*)"
+													value="${teacherDetail.userName }" />
 											</div>
 										</li>
 										<li>

@@ -82,7 +82,7 @@ public class TeacherDetailDaoImpl extends BaseDaoImpl implements TeacherDetailDa
 	 */
 	@Override
 	public void insertTeacher(TeacherDetail teacherDetail) throws SQLException {
-		String sql = "INSERT INTO teacher_detail (teacher_id,full_name,email,tel) values (LAST_INSERT_ID(),?,?,?)";
+		String sql = "INSERT INTO teacher_detail (teacher_id,full_name,email,tel,delete_flag) values (LAST_INSERT_ID(),?,?,?,?)";
 		connTransaction = getConnectionTransaction();
 		PreparedStatement pstm = null;
 		pstm = connTransaction.prepareStatement(sql.toString());
@@ -90,6 +90,7 @@ public class TeacherDetailDaoImpl extends BaseDaoImpl implements TeacherDetailDa
 		pstm.setString((++i), teacherDetail.getFullName());
 		pstm.setString((++i), teacherDetail.getEmail());
 		pstm.setString((++i), teacherDetail.getTel());
+		pstm.setInt((++i), teacherDetail.getDeleteFlag());
 		pstm.executeUpdate();
 	}
 
@@ -119,10 +120,11 @@ public class TeacherDetailDaoImpl extends BaseDaoImpl implements TeacherDetailDa
 	 */
 	@Override
 	public void deleteTeacher(int teacherId) throws SQLException {
-		String sql = "UPDATE teacher_detail SET delete_flag= ? ";
+		String sql = "UPDATE teacher_detail SET delete_flag= ? WHERE teacher_id=? ";
 		connTransaction = getConnectionTransaction();
 		PreparedStatement pstm = connTransaction.prepareStatement(sql);
 		pstm.setInt(1, 0);
+		pstm.setInt(2, teacherId);
 		pstm.executeUpdate();
 	}
 
@@ -148,12 +150,12 @@ public class TeacherDetailDaoImpl extends BaseDaoImpl implements TeacherDetailDa
 		}
 		return teacherDetail;
 	}
-
 	/* (non-Javadoc)
 	 * @see manageuser.dao.TeacherDetailDao#getTotalTeacher(java.lang.String)
 	 */
 	@Override
 	public int getTotalTeacher(String name) throws SQLException {
+		name= name.trim();
 		int total=0;		
 		String sql = "SELECT COUNT(id) FROM `teacher_detail` tcdt inner join users us ON tcdt.teacher_id=us.id WHERE tcdt.full_name like ? AND delete_flag = 1";
 		PreparedStatement pstm = getConnection().prepareStatement(sql);

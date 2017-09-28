@@ -32,6 +32,18 @@ public class ListTeacherDetailController extends HttpServlet {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.
+	 * HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(req, resp);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.
 	 * HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
@@ -44,6 +56,7 @@ public class ListTeacherDetailController extends HttpServlet {
 		int currentPage = 1;
 		int pageLimit = 3;
 		int limit = 3;
+		System.out.println("listTeacher");
 		try {
 			String type = req.getParameter("type");
 			if (type != null) {
@@ -54,7 +67,9 @@ public class ListTeacherDetailController extends HttpServlet {
 					currentPage = Integer.parseInt((req.getParameter("page")));
 				}
 			}
+			System.out.println(nameSearch);
 			int totalTeacher = teacherDetailLogicImpl.getTotalTeacher(nameSearch);
+			System.out.println(totalTeacher);
 			if (totalTeacher == 0) {
 				req.setAttribute("checkNotFound", 0);
 				req.setAttribute("messageNotFound", "Không tìm thấy giáo viên!");
@@ -65,7 +80,7 @@ public class ListTeacherDetailController extends HttpServlet {
 				List<Integer> listPaging = Common.getListPagingSubject(totalTeacher, limit, currentPage);
 				System.out.println(totalPage);
 				System.out.println(offset);
-				for(int a:listPaging){
+				for (int a : listPaging) {
 					System.out.println(a);
 				}
 				req.setAttribute("listTeacherDetails", listTeacherDetails);
@@ -81,7 +96,6 @@ public class ListTeacherDetailController extends HttpServlet {
 		}
 		session.setAttribute("currentPage", currentPage);
 		session.setAttribute("nameSearch", nameSearch);
-
 		req.setAttribute("teacherDetailsLst", listTeacherDetails);
 		RequestDispatcher requestDispatcher = req.getRequestDispatcher("WEB-INF/jsp/list-teacher.jsp");
 		requestDispatcher.forward(req, resp);
