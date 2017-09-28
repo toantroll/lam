@@ -1,6 +1,8 @@
 package manageuser.logic;
 
 import manageuser.entities.Subject;
+
+import java.sql.SQLException;
 import java.util.List;
 
 public interface SubjectLogic {
@@ -70,4 +72,12 @@ public interface SubjectLogic {
 	 * @return môn học
 	 */
 	public Subject getSubjectById(String id);
+	
+	/**
+	 * get all subject
+	 * @return list subject
+	 * @throws SQLException SQLException
+	 */
+	public List<Subject> getAllSubject() throws SQLException;
 }
+

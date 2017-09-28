@@ -105,7 +105,7 @@ public class TimeTableDetailDaoImpl extends BaseDaoImpl implements TimeTableDeta
 		StringBuilder sql = new StringBuilder();
 		sql.append("DELETE FROM `timetables_detail`").append("WHERE `timetable_id` = ?");
 
-		PreparedStatement ps = getConnection().prepareStatement(sql.toString());
+		PreparedStatement ps = getConnectionTransaction().prepareStatement(sql.toString());
 		int i = 1;
 		ps.setInt(i++, id);
 
@@ -240,5 +240,25 @@ public class TimeTableDetailDaoImpl extends BaseDaoImpl implements TimeTableDeta
 			count = rs.getInt(1);
 		}
 		return count > 0 ? true : false;
+	}
+
+	@Override
+	public boolean isExistDetailByInfoIdInRange(int id, Date startDate, Date endDate) throws SQLException {
+		int count = 0;
+		StringBuilder sql = new StringBuilder();
+		sql.append("select count(id) from timetables_detail ")
+		.append("WHERE timetable_id = ? AND (start_date < ? OR start_date > ?)");
+		
+		PreparedStatement ps = getConnection().prepareStatement(sql.toString());
+		int i = 1;
+		ps.setInt(i++, id);
+		ps.setDate(i++, startDate);
+		ps.setDate(i++, endDate);
+		
+		ResultSet rs = ps.executeQuery();
+		if(rs != null && rs.next()){
+			count = rs.getInt(1);
+		}
+		return count > 0? true: false;
 	}
 }
