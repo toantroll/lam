@@ -34,6 +34,7 @@ public class AddStudentController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		setDataLogic(request, response);
+		// để test man hình do chưa có màn hình đến 
 		request.getRequestDispatcher("WEB-INF/jsp/AddStudent.jsp").forward(request, response);
 		
 	}
