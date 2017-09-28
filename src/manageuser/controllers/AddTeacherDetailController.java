@@ -52,14 +52,13 @@ public class AddTeacherDetailController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		TeacherDetail teacherDetail = new TeacherDetail();
-		TeacherDetailLogicImpl teacherDetailLogicImpl = new TeacherDetailLogicImpl();
-		String type = "add";
-		String template = "";
+		TeacherDetailLogicImpl teacherDetailLogicImpl = new TeacherDetailLogicImpl();		
 		// type = req.getParameter("type");
+		teacherDetail.setUserID(Integer.parseInt(req.getParameter("id")));
 		teacherDetail.setUserName(req.getParameter("username"));
 		teacherDetail.setPassword(req.getParameter("password"));
 		teacherDetail.setFullName(req.getParameter("full_name"));
-
+		teacherDetail.setDeleteFlag(1);
 		teacherDetail.setTel(req.getParameter("phone"));
 		teacherDetail.setEmail(req.getParameter("email"));
 		teacherDetail.setRoleId(3);
@@ -76,12 +75,11 @@ public class AddTeacherDetailController extends HttpServlet {
 		} else {
 			if (teacherDetail.getUserID()==0) {
 				System.out.println("Thanhf coong");
-				teacherDetailLogicImpl.createTeacherDetail(teacherDetail);
-				template = "thanh cong";
+				teacherDetailLogicImpl.createTeacherDetail(teacherDetail);			
 
 			} else if (teacherDetail.getUserID()>0) {
 				teacherDetailLogicImpl.updateTeacherDetail(teacherDetail);
-				template = "edit thành công";
+				
 			}
 
 		}

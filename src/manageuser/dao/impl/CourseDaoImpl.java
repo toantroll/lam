@@ -65,5 +65,23 @@ public class CourseDaoImpl extends BaseDaoImpl implements CourseDao {
 		}
 		return false;
 	}
+	
+	@Override
+	public boolean isExistCourseById(int id) throws SQLException {
+		int count = 0;
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT COUNT(id) FROM course WHERE id = ?");
+		
+		PreparedStatement ps = getConnection().prepareStatement(sql.toString());
+		int i = 1;
+		ps.setInt(i++, id);
+		
+		ResultSet rs = ps.executeQuery();
+		if(rs != null && rs.next()){
+			count = rs.getInt(1);
+		}
+		
+		return count > 0 ? true: false;
+	}
 
 }

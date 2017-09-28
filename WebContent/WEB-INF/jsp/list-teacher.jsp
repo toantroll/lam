@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Tìm kiếm môn học</title>
+<title>Danh sách giáo viên</title>
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/font-awesome.min.css">
 <link rel="stylesheet" href="css/datepicker.css">
@@ -18,7 +18,6 @@
 <script src="js/la-management.js"></script>
 </head>
 <body>
-
 	<div class="wrapper">
 		<div class="db-container">
 			<div class="db-head">
@@ -54,36 +53,41 @@
 				</ul>
 			</div>
 			<!-- .db-breadcrums -->
-
 			<div class="db-main">
 				<div class="db-main-search-form">
-					<form id="search-form" action="search" method="GET">
-						<div class="g-row">
-							<div class="one-half">
-								<div class="input-component">
-									<div class="one-quarter no-pad">
-										<label for="txtSubject">Tên giáo viên: </label>
-									</div>
-									<div class="three-quarters no-pad">
-										<input type="text" name="txtSubject" id="txtSubject" value="">
-									</div>
-									<div class="clear"></div>
-								</div>
-
-								<div class="input-component">
-									<div class="one-third no-pad">&nbsp</div>
-									<div class="two-thirds no-pad addSubject">
-										<button class="btnSubmit btn" type="button"
+					<form id="search-form" action="ListTeacherDetail" method="post">
+						<div>
+							<input type="hidden" name="type" value="search">
+						</div>						
+						 <div class="g-row">
+                        <div class="one-half">
+                            <div class="input-component">
+                                <div class="one-quarter no-pad">
+                                    <label for="txtTeacher">Tên giáo viên: </label>
+                                </div>
+                                <div class="three-quarters no-pad">
+                                    <input type="text" name="nameSearch" id="nameSearch" value="${nameSearch}">
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                          
+                        </div>
+                        <div class="one-half">
+                            <div class="input-component">
+                                <div class="one-half no-pad" style="width: 40%;">
+                                    <button class="btnSubmit btn" type="submit"><span>Tìm kiếm</span></button>
+                                </div> 
+                                <div class="inline">
+                                    <button class="btnSubmit btn" type="button"
 											onclick="window.location.href='addTeacher.do'">
 											<span>Thêm mới giáo viên</span>
 										</button>
-									</div>
-									<div class="clear"></div>
-								</div>
-							</div>
-
-							<div class="clear"></div>
-						</div>
+                                </div>                               
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
 					</form>
 				</div>
 				<!-- .db-main-search-form -->
@@ -113,9 +117,12 @@
 									<td>${teacher.tel }</td>
 									<td>
 										<ul class="tbl-actions">
-											<li><a href="#" id="btnEdit" class="btnedit"><i
-													class="fa fa-edit"></i></a></li>
-											<li><a id="btnDelUser" class="btndelete"><i
+											<li><a
+												href="./editTeacher.do?id=${teacher.userID}&type=edit"
+												id="btnEdit" class="btnedit"><i class="fa fa-edit"></i></a></li>
+											<li><a href="./deleteTeacher.do?id=${teacher.userID}"
+												id="btnDelUser" class="btndelete"
+												onclick="return confirm('${messageDelete}');"><i
 													class="fa fa-trash-o"></i></a></li>
 										</ul>
 									</td>
@@ -125,40 +132,40 @@
 					</table>
 
 					<div class="pagination">
-							<!-- Hiá»n thá» káº¿t quáº£ tá»« 1 Äáº¿n 2<span
+						<!-- Hiá»n thá» káº¿t quáº£ tá»« 1 Äáº¿n 2<span
 							class="divider-vertical">|</span><strong>Trang: </strong><span
 							class="page-number current-page">1 cá»§a 2</span> -->
-							<ul>
-								<c:set var="lengthPaging" value="${fn:length(listPaging)}" />
-								<c:if test="${lengthPaging >= 1}">
-									<!-- <tr class="lbl_paging"> -->
-									<c:if test="${listPaging[0] != 1}">
-										<li><a
-											style="background: rgb(14, 88, 130); color: rgb(255, 255, 255);"
-											href="./ListTeacherDetail?type=paging&page=${listPaging[0] - pageLimit}">&lt;&lt;</a>
-											&nbsp;</li>
-									</c:if>
-									<c:forEach items="${listPaging}" var="page">
-										<c:if test="${page == currentPage}">
-											<li>${page}&nbsp;</li>
-										</c:if>
-										<c:if test="${page != currentPage}">
-											<li><a
-												style="background: rgb(14, 88, 130); color: rgb(255, 255, 255);"
-												href="./ListTeacherDetail?type=paging&page=${page}">${page}</a>&nbsp;</li>
-										</c:if>
-									</c:forEach>
-									<c:if test="${listPaging[lengthPaging - 1] < totalPage}">
-										<li><a
-											style="background: rgb(14, 88, 130); color: rgb(255, 255, 255);"
-											href="./ListTeacherDetail?type=paging&page=${listPaging[lengthPaging - 1] + 1}">&gt;&gt;</a>&nbsp;</li>
-									</c:if>
+						<ul>
+							<c:set var="lengthPaging" value="${fn:length(listPaging)}" />
+							<c:if test="${lengthPaging >= 1}">
+								<!-- <tr class="lbl_paging"> -->
+								<c:if test="${listPaging[0] != 1}">
+									<li><a
+										style="background: rgb(14, 88, 130); color: rgb(255, 255, 255);"
+										href="./ListTeacherDetail?type=paging&page=${listPaging[0] - pageLimit}">&lt;&lt;</a>
+										&nbsp;</li>
 								</c:if>
-								<!-- <li><a href="javascript:void(0)"
+								<c:forEach items="${listPaging}" var="page">
+									<c:if test="${page == currentPage}">
+										<li>${page}&nbsp;</li>
+									</c:if>
+									<c:if test="${page != currentPage}">
+										<li><a
+											style="background: rgb(14, 88, 130); color: rgb(255, 255, 255);"
+											href="./ListTeacherDetail?type=paging&page=${page}">${page}</a>&nbsp;</li>
+									</c:if>
+								</c:forEach>
+								<c:if test="${listPaging[lengthPaging - 1] < totalPage}">
+									<li><a
+										style="background: rgb(14, 88, 130); color: rgb(255, 255, 255);"
+										href="./ListTeacherDetail?type=paging&page=${listPaging[lengthPaging - 1] + 1}">&gt;&gt;</a>&nbsp;</li>
+								</c:if>
+							</c:if>
+							<!-- <li><a href="javascript:void(0)"
 								style="background: rgb(14, 88, 130); color: rgb(255, 255, 255);">1</a></li>
 							<li><a href="#">2</a></li> -->
-							</ul>
-						</div>
+						</ul>
+					</div>
 				</div>
 				<!-- .db-main-table-results -->
 
