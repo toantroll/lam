@@ -113,7 +113,6 @@ public class AddStudentController extends HttpServlet {
 		if(Common.isNumBer(IQScore)) {
 		studentDetail.setScoreIQ( Integer.parseInt(IQScore));
 		}
-		studentDetail.setNote(request.getParameter(request.getParameter("note")));
 		String japanlevel = request.getParameter("japanese_level");
 		if(!"".equals(japanlevel))
 			studentDetail.setJapanLevel(japanlevel);

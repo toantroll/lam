@@ -33,6 +33,7 @@ public class StudentDetailDaoImpl extends BaseDaoImpl implements StudentDetailDa
 			pre.setString(i++, studentInfor.getJapanLevel());
 			pre.setInt(i++, studentInfor.getScoreInterview());
 			pre.setInt(i++, studentInfor.getStatus());
+			System.out.println(pre);
 			pre.executeUpdate();
 		}
 	@Override

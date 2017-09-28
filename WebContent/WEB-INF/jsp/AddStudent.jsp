@@ -125,17 +125,17 @@
                                             <div class="one-half no-pr">
                                                 <label class="lbl-slb">
                                                     <select name="gender">
+                                                     <c:if test="${studentDetail.gender == 1 }">
+                                                    <option value="1" selected="selected">Nam</option>
+                                                    </c:if>
+                                                     <c:if test="${studentDetail.gender != 1 }">
+                                                    <option value="1">Nam</option>
+                                                    </c:if>
                                                     <c:if test="${studentDetail.gender == 0 }">
                                                     <option value="0" selected="selected">Nữ</option>
                                                     </c:if>
                                                      <c:if test="${studentDetail.gender != 0 }">
                                                     <option value="0">Nữ</option>
-                                                    </c:if>
-                                                    <c:if test="${studentDetail.gender == 1 }">
-                                                    <option value="1" selected="selected">Nam</option>
-                                                    </c:if>
-                                                     <c:if test="${studentDetail.gender != 1 }">
-                                                    <option value="1">Nam</option>
                                                     </c:if>
                                                     </select>     
                                                     </label>
