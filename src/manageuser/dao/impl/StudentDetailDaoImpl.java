@@ -15,7 +15,7 @@ public class StudentDetailDaoImpl extends BaseDaoImpl implements StudentDetailDa
 			String sql = "INSERT INTO `student_detail` (`student_id`, `course_id`, `name`, `email`, `tel`, `id_card`, `address`, `school`, `major`, `graduated_year`, `gender`, `birthday`, `IQ`, `note`, `japan_level`, `interview`, `status`, `created_at`) VALUES (LAST_INSERT_ID(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now()) ";
 			PreparedStatement pre;
 			Connection con = this.getConnectionTransaction();
-			int i = 1;
+			int i = 1;	
 			pre = con.prepareStatement(sql);
 			pre.setInt(i++, studentInfor.getCourseId());
 			pre.setString(i++, studentInfor.getName());

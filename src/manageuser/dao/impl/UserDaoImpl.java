@@ -55,7 +55,6 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 		preparedStatement.setString(count++,user.getUserName());
 		preparedStatement.setString(count++, user.getPassword());
 		preparedStatement.setInt(count++, user.getRoleId());
-		System.out.println(preparedStatement);
 		preparedStatement.executeUpdate();
 	}
 

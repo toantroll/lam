@@ -52,8 +52,8 @@ public class AddStudentController extends HttpServlet {
 		if(listErr.size() != 0){
 			setDataLogic(request, response);
 			request.setAttribute("listErr", listErr);
+			listErr.clear();
 			request.setAttribute("studentDetail", studentDetail);
-			System.out.println(Common.convertDateToString(studentDetail.getBirthday()));
 			RequestDispatcher dispatcher = request.getRequestDispatcher(Constant.ADDSTUDENT);
 			dispatcher.forward(request, response);
 		} else {
@@ -66,7 +66,7 @@ public class AddStudentController extends HttpServlet {
 			} else if(!courseLogicImpl.existCourse(studentDetail.getCourseId())) {
 				url.append("?check=err&iderr=");
 				url.append(Constant.ERRCOURSEID);
-			} else if(statusStudentLogicImpl.existStatus(studentDetail.getStatus())) {
+			} else if(!statusStudentLogicImpl.existStatus(studentDetail.getStatus())) {
 				url.append("?check=err&iderr=");
 				url.append(Constant.ERRSTATUS);
 			} else if(!studentDetailLogicImpl.createStudent(studentDetail)) {
@@ -75,7 +75,6 @@ public class AddStudentController extends HttpServlet {
 			} else {
 				url.append("?check=success&idInfor=INF_01");
 			}
-			System.out.println(url);
 			response.sendRedirect(url.toString());
 		}
 	}
@@ -110,7 +109,7 @@ public class AddStudentController extends HttpServlet {
 		studentDetail.setMajor(request.getParameter("major"));
 		studentDetail.setGraduatedYear(request.getParameter("gra_year"));
 		studentDetail.setNote(request.getParameter("note"));
-		studentDetail.setRoleId(3);
+		studentDetail.setRoleId(4);
 		if(Common.isNumBer(IQScore)) {
 		studentDetail.setScoreIQ( Integer.parseInt(IQScore));
 		}

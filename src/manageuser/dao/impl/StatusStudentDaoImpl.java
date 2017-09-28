@@ -50,7 +50,7 @@ public class StatusStudentDaoImpl extends BaseDaoImpl implements StatusStudentDa
 	 */
 	@Override
 	public boolean existStatus(int statusID) {
-		String sql = "select id from status_detail where id = ?";
+		String sql = "select id from status_student where id = ?";
 		try {
 			PreparedStatement preparedStatement = getConnection().prepareStatement(sql);
 			preparedStatement.setInt(1, statusID);
@@ -59,7 +59,7 @@ public class StatusStudentDaoImpl extends BaseDaoImpl implements StatusStudentDa
 				return true;
 			}
 		} catch (SQLException e) {
-			System.out.println("lỗi kiểm tra tồn tại trạng thái ");
+			System.out.println("lỗi kiểm tra tồn tại trạng thái " +e);
 		} finally {
 			closeConnection();
 		}

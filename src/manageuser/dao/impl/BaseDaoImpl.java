@@ -22,7 +22,7 @@ public class BaseDaoImpl implements BaseDao{
 	private String user;
 	private String pass;
 	private Connection conn = null;
-	protected Connection connTransaction = null; 
+	protected static Connection connTransaction = null; 
 	
 	/**
 	 *  Khởi tạo contructor
@@ -87,8 +87,16 @@ public class BaseDaoImpl implements BaseDao{
 	 */
 	@Override
 	public Connection getConnectionTransaction() throws SQLException {
-		if(connTransaction == null) {			
-			connTransaction = getConnection();
+		if(connTransaction == null || connTransaction.isClosed()) {
+			try {		
+				Class.forName(dirver);
+				connTransaction = DriverManager.getConnection(url, user, pass);
+				
+			} catch (ClassNotFoundException e) {
+				System.out.println("Có lỗi xảy ra ClassNotFoundException");
+			} catch (SQLException e) {
+				System.out.println("Có lỗi xảy ra SQLException");
+			}
 			connTransaction.setAutoCommit(false);
 		}
 		return connTransaction;
@@ -110,6 +118,7 @@ public class BaseDaoImpl implements BaseDao{
 		if(connTransaction != null) {	
 			try {
 				connTransaction.close();
+				
 			} catch (SQLException e) {
 				System.out.println("Loi sql closeConnectionTrasaction" + e.getMessage());
 			}
