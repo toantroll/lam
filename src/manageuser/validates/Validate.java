@@ -164,7 +164,9 @@ public class Validate {
 				listErr.put(Constant.USERNAME, errUserName);
 			}
 		}
-		
+		if(Common.isEmpty(teacher.getPassword())) {
+			listErr.put(Constant.PASSWORD, ErrorMessageProperties.getErrorMessage("ERR01_PASS"));
+		}
 		// kiển tra số điện thoại 
 		String errTel = validateTel(teacher.getTel());
 		if(errTel != null) {

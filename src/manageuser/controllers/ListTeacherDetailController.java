@@ -65,8 +65,9 @@ public class ListTeacherDetailController extends HttpServlet {
 					nameSearch = (String) session.getAttribute("nameSearch");
 					currentPage = Integer.parseInt((req.getParameter("page")));
 				}
-			}		
-			int totalTeacher = teacherDetailLogicImpl.getTotalTeacher(nameSearch);
+			}
+			String nameSearchEscape=Common.escapeCharacter(nameSearch);
+			int totalTeacher = teacherDetailLogicImpl.getTotalTeacher(nameSearchEscape);
 			System.out.println(totalTeacher);
 			if (totalTeacher == 0) {
 				req.setAttribute("checkNotFound", 0);
@@ -74,7 +75,7 @@ public class ListTeacherDetailController extends HttpServlet {
 			} else {
 				int totalPage = Common.getTotalPageSubject(totalTeacher, limit);
 				int offset = Common.getOffsetSubject(currentPage, limit);
-				listTeacherDetails = teacherDetailLogicImpl.getAllTeacherDetail(nameSearch, offset, limit);
+				listTeacherDetails = teacherDetailLogicImpl.getAllTeacherDetail(nameSearchEscape, offset, limit);
 				List<Integer> listPaging = Common.getListPagingSubject(totalTeacher, limit, currentPage);	
 				req.setAttribute("listTeacherDetails", listTeacherDetails);
 				req.setAttribute("listPaging", listPaging);

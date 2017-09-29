@@ -460,6 +460,18 @@ public class Common {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		return simpleDateFormat.format(date);
 	}
-
+	/**
+	 * Escape kí tự % , ! và _ 
+	 * @param str Chuỗi cần escape
+	 * @return String 
+	 */
+	public static String escapeCharacter(String str){
+		String fullNameSearch = str;
+		if (fullNameSearch.length() > 0) {
+			fullNameSearch = fullNameSearch.trim();
+			fullNameSearch = fullNameSearch.replace("!", "!!").replace("%", "!%").replace("_", "!_");
+		}
+		return fullNameSearch;
+	}
 	
 }

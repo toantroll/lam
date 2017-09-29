@@ -59,32 +59,25 @@ public class AddTeacherDetailController extends HttpServlet {
 		} else {
 			teacherDetail.setUserID(0);
 		}
-
 		teacherDetail.setUserName(req.getParameter("username"));
 		teacherDetail.setPassword(req.getParameter("password"));
 		teacherDetail.setFullName(req.getParameter("full_name"));
 		teacherDetail.setDeleteFlag(1);
 		teacherDetail.setTel(req.getParameter("phone"));
 		teacherDetail.setEmail(req.getParameter("email"));
-		teacherDetail.setRoleId(3);
-		System.out.println(teacherDetail.toString());
-		HashMap<String, String> listErr = Validate.validateTeacherDetail(teacherDetail);
-		System.out.println("asdmans");
+		teacherDetail.setRoleId(3);		
+		HashMap<String, String> listErr = Validate.validateTeacherDetail(teacherDetail);	
 		System.out.println(listErr.size());
-		if (listErr.size() != 0) {
-			System.out.println("Loi");
+		if (listErr.size() != 0) {			
 			req.setAttribute("listErr", listErr);
 			req.setAttribute("teacherDetail", teacherDetail);
 			RequestDispatcher dispatcher = req.getRequestDispatcher("WEB-INF/jsp/add-teacher.jsp");
 			dispatcher.forward(req, resp);
 		} else {
-			if (teacherDetail.getUserID() == 0) {
-				System.out.println("Thanhf coong");
+			if (teacherDetail.getUserID() == 0) {			
 				teacherDetailLogicImpl.createTeacherDetail(teacherDetail);
-
 			} else if (teacherDetail.getUserID() > 0) {
 				teacherDetailLogicImpl.updateTeacherDetail(teacherDetail);
-
 			}
 
 		}

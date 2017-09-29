@@ -59,8 +59,13 @@
 				<div class="wrapper">
 					<div class="reg-container">
 						<div class="reg-content">
-							<div class="reg-heading">
-								<h2>Thêm mới giáo viên</h2>
+							<div class="reg-heading">								
+								<c:if test="${teacherDetail.userID == null }">
+									<h2>Thêm mới giáo viên</h2>
+								</c:if>
+								<c:if test="${teacherDetail.userID > 0 }">
+									<h2>Thêm mới giáo viên</h2>
+								</c:if>
 							</div>
 							<!-- .reg-heading -->
 							<div class="reg-inner">
@@ -110,11 +115,12 @@
 											</div>
 										</li>
 										<li>
-										
+
 											<div class="input text">
 												<input type="text" name="username" id="txtUsername"
 													placeholder="Tên đăng nhập (*)"
-													value="${teacherDetail.userName }" <c:if test="${teacherDetail.userID > 0}">readonly</c:if> />
+													value="${teacherDetail.userName }"
+													<c:if test="${teacherDetail.userID > 0}">readonly</c:if> />
 											</div>
 										</li>
 										<li>
@@ -149,7 +155,12 @@
 
 										<li>
 											<button class="btnSubmit btn" type="submit">
-												<span>Thêm mới</span>
+												<span><c:if test="${teacherDetail.userID == null }">
+									Thêm mới
+								</c:if>
+								<c:if test="${teacherDetail.userID > 0 }">
+									Lưu
+								</c:if></span>
 											</button>
 										</li>
 									</ul>

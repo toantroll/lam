@@ -26,7 +26,7 @@ public class TeacherDetailDaoImpl extends BaseDaoImpl implements TeacherDetailDa
 	@Override
 	public List<TeacherDetail> getListTeacherDetail( String name, int offset, int limit) throws SQLException {
 		List<TeacherDetail> teacherDetailsLst = new ArrayList<TeacherDetail>();
-		String sql = "SELECT * FROM `teacher_detail` tcdt inner join users us ON tcdt.teacher_id=us.id WHERE tcdt.full_name like ? AND delete_flag = 1 LIMIT ? OFFSET ? ";
+		String sql = "SELECT * FROM `teacher_detail` tcdt inner join users us ON tcdt.teacher_id=us.id WHERE tcdt.full_name like ? ESCAPE '!'  AND delete_flag = 1 LIMIT ? OFFSET ? ";
 		PreparedStatement pstm = getConnection().prepareStatement(sql);
 		int i = 0;
 		pstm.setString(++i, "%" + name + "%");
@@ -157,7 +157,7 @@ public class TeacherDetailDaoImpl extends BaseDaoImpl implements TeacherDetailDa
 	public int getTotalTeacher(String name) throws SQLException {
 		name= name.trim();
 		int total=0;		
-		String sql = "SELECT COUNT(id) FROM `teacher_detail` tcdt inner join users us ON tcdt.teacher_id=us.id WHERE tcdt.full_name like ? AND delete_flag = 1";
+		String sql = "SELECT COUNT(id) FROM `teacher_detail` tcdt inner join users us ON tcdt.teacher_id=us.id WHERE tcdt.full_name like ? ESCAPE '!'  AND delete_flag = 1";
 		PreparedStatement pstm = getConnection().prepareStatement(sql);
 		int i = 0;
 		pstm.setString(++i, "%" + name + "%");
