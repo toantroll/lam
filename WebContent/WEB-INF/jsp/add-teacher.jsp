@@ -89,7 +89,7 @@
 									<ul>
 										<c:if test="${teacherDetail.userID > 0 }">
 											<li class="input text"><input type="text" name="id"
-												value="${teacherDetail.userID}"></li>
+												value="${teacherDetail.userID}" readonly></li>
 
 										</c:if>
 										<li>
@@ -110,10 +110,11 @@
 											</div>
 										</li>
 										<li>
+										
 											<div class="input text">
 												<input type="text" name="username" id="txtUsername"
 													placeholder="Tên đăng nhập (*)"
-													value="${teacherDetail.userName }" />
+													value="${teacherDetail.userName }" <c:if test="${teacherDetail.userID > 0}">readonly</c:if> />
 											</div>
 										</li>
 										<li>

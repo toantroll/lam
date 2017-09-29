@@ -157,10 +157,14 @@ public class Validate {
 	public static HashMap<String,String> validateTeacherDetail(TeacherDetail teacher){
 		HashMap<String, String> listErr = new HashMap<>();
 		// kiểm tra user name
-		String errUserName = validateUserName(teacher.getUserName());
-		if(errUserName != null) {
-			listErr.put(Constant.USERNAME, errUserName);
+		
+		if(teacher.getUserID()==0){
+			String errUserName = validateUserName(teacher.getUserName());
+			if(errUserName != null) {
+				listErr.put(Constant.USERNAME, errUserName);
+			}
 		}
+		
 		// kiển tra số điện thoại 
 		String errTel = validateTel(teacher.getTel());
 		if(errTel != null) {

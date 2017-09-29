@@ -52,9 +52,14 @@ public class AddTeacherDetailController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		TeacherDetail teacherDetail = new TeacherDetail();
-		TeacherDetailLogicImpl teacherDetailLogicImpl = new TeacherDetailLogicImpl();		
+		TeacherDetailLogicImpl teacherDetailLogicImpl = new TeacherDetailLogicImpl();
 		// type = req.getParameter("type");
-		teacherDetail.setUserID(Integer.parseInt(req.getParameter("id")));
+		if (req.getParameter("id") != null) {
+			teacherDetail.setUserID(Integer.parseInt(req.getParameter("id")));
+		} else {
+			teacherDetail.setUserID(0);
+		}
+
 		teacherDetail.setUserName(req.getParameter("username"));
 		teacherDetail.setPassword(req.getParameter("password"));
 		teacherDetail.setFullName(req.getParameter("full_name"));
@@ -73,13 +78,13 @@ public class AddTeacherDetailController extends HttpServlet {
 			RequestDispatcher dispatcher = req.getRequestDispatcher("WEB-INF/jsp/add-teacher.jsp");
 			dispatcher.forward(req, resp);
 		} else {
-			if (teacherDetail.getUserID()==0) {
+			if (teacherDetail.getUserID() == 0) {
 				System.out.println("Thanhf coong");
-				teacherDetailLogicImpl.createTeacherDetail(teacherDetail);			
+				teacherDetailLogicImpl.createTeacherDetail(teacherDetail);
 
-			} else if (teacherDetail.getUserID()>0) {
+			} else if (teacherDetail.getUserID() > 0) {
 				teacherDetailLogicImpl.updateTeacherDetail(teacherDetail);
-				
+
 			}
 
 		}

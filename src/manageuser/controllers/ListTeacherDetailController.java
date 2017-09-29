@@ -55,8 +55,7 @@ public class ListTeacherDetailController extends HttpServlet {
 		String nameSearch = "";
 		int currentPage = 1;
 		int pageLimit = 3;
-		int limit = 3;
-		System.out.println("listTeacher");
+		int limit = 3;	
 		try {
 			String type = req.getParameter("type");
 			if (type != null) {
@@ -66,8 +65,7 @@ public class ListTeacherDetailController extends HttpServlet {
 					nameSearch = (String) session.getAttribute("nameSearch");
 					currentPage = Integer.parseInt((req.getParameter("page")));
 				}
-			}
-			System.out.println(nameSearch);
+			}		
 			int totalTeacher = teacherDetailLogicImpl.getTotalTeacher(nameSearch);
 			System.out.println(totalTeacher);
 			if (totalTeacher == 0) {
@@ -77,12 +75,7 @@ public class ListTeacherDetailController extends HttpServlet {
 				int totalPage = Common.getTotalPageSubject(totalTeacher, limit);
 				int offset = Common.getOffsetSubject(currentPage, limit);
 				listTeacherDetails = teacherDetailLogicImpl.getAllTeacherDetail(nameSearch, offset, limit);
-				List<Integer> listPaging = Common.getListPagingSubject(totalTeacher, limit, currentPage);
-				System.out.println(totalPage);
-				System.out.println(offset);
-				for (int a : listPaging) {
-					System.out.println(a);
-				}
+				List<Integer> listPaging = Common.getListPagingSubject(totalTeacher, limit, currentPage);	
 				req.setAttribute("listTeacherDetails", listTeacherDetails);
 				req.setAttribute("listPaging", listPaging);
 				req.setAttribute("totalPage", totalPage);
